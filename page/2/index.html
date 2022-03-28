@@ -339,6 +339,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/02/HTML入门笔记1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/02/HTML入门笔记1/" itemprop="url">HTML入门笔记1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-02T17:06:38+08:00">
+                2022-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  598
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="HTML简介"><a href="#HTML简介" class="headerlink" title="HTML简介"></a>HTML简介</h2><ul>
+<li>全称：超文本标记语言（HyperText Markup Language）</li>
+<li>发明者：由物理学家蒂姆·伯纳斯-李（Tim Berners-Lee）发明</li>
+<li>特点：支持超链接，点击链接就可以跳转到其他网页，构成整个互联网</li>
+</ul>
+<h2 id="HTML起手写什么"><a href="#HTML起手写什么" class="headerlink" title="HTML起手写什么"></a>HTML起手写什么</h2><p>!+tab键生成HTML模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;  &lt;!-- 禁止缩放 --&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="全局属性"><a href="#全局属性" class="headerlink" title="全局属性"></a>全局属性</h2><h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>全局属性是所有 HTML 元素共有的属性，它们可以用于所有元素，即使属性可能对某些元素不起作用。</p>
+<h3 id="常见的全局属性："><a href="#常见的全局属性：" class="headerlink" title="常见的全局属性："></a>常见的全局属性：</h3><ol>
+<li>class：以空格分隔元素的类名，CSS 和 Javascript 通过类选择器 (class selectors) 或 DOM 方法 ( document.getElementsByClassName) 来选择和访问特定的元素。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;mainMessage middle&quot;&gt;</span><br><span class="line">    这里是页面中间的信息</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>通过.mainMessage 或 .middle都可以为这个div添加样式</li>
+</ul>
+<ol start="2">
+<li>id：定义唯一标识符，该标识符在整个文档中必须是唯一的。但不推荐使用，因为id不能命名为window上已有的全局变量，限制太多，不方便新手起名</li>
+<li>style：规定元素的行内样式（inline style），它是Html的属性，而非CSS。样式展示的优先级行内样式&gt;CSS<br><img src="https://s2.loli.net/2022/03/02/RLQp7KXBFNr4cyP.png" alt="HTML-style.png"></li>
+<li>tabindex：设置元素的 Tab 键控制次序，参数包括正数（按数字顺序访问）、0（最最最后一个访问）、负数（别来访问我）</li>
+</ol>
+<h2 id="章节标签🏷"><a href="#章节标签🏷" class="headerlink" title="章节标签🏷"></a>章节标签🏷</h2><p><img src="https://s2.loli.net/2022/03/02/NnXAbS7gZJjdO91.png" alt="HTML-章节标签.png"></p>
+<h2 id="常用内容标签🏷"><a href="#常用内容标签🏷" class="headerlink" title="常用内容标签🏷"></a>常用内容标签🏷</h2><ol>
+<li><p>加入强调</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">斜体强调&lt;em&gt;强调内容&lt;/em&gt;</span><br><span class="line">加粗强调&lt;strong&gt;强调内容&lt;/strong&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加入代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">加入一行代码&lt;code&gt; &lt;/code&gt;</span><br><span class="line">加入多行代码&lt;pre&gt; &lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>水平横线与回车（无结束标签）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">回车&lt;/br&gt;</span><br><span class="line">水平横线&lt;/hr&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无序列表&amp;有序列表&amp;自定义标签</p>
+</li>
+</ol>
+<p>新闻信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;新闻1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;新闻2&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<p>豆瓣电影排行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt;肖申克的救赎&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;教父&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure></p>
+<p>自定义标签（只能有一个dt，但可以有多个dd）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;自定义列表title&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;自定义列表信息&lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>a标签</li>
+</ol>
+<p>创建一个可点击的图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://www.imooc.com&quot; target=&quot;_blank&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;https://s2.loli.net/2022/03/02/8xgcYprTRe1ZnEk.png&quot; &gt;</span><br><span class="line">&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/浏览器缓存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1676,156 +1856,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/面试题总结（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/面试题总结（一）/" itemprop="url">面试题总结（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-27T18:46:21+08:00">
-                2018-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  428
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>考察了一些基础知识点<br>
-
-
-        
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/面试题总结（一）/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1882,7 +1912,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

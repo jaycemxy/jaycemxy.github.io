@@ -339,6 +339,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/28/jQuery设计思想与实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/28/jQuery设计思想与实践/" itemprop="url">jQuery设计思想与实践</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-28T14:19:36+08:00">
+                2022-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,180
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>jQuery设计思想：选择某个网页元素，然后对其进行操作</li>
+<li>jQuery(css选择器)用于获取对应元素，但它不返回这些元素，而是返回一个对象api(这个对象可以直接操作对应的元素)</li>
+<li>使用jQuery的第一步，将一个选择表达式，放进构造函数jQuery()，得到被选中的元素</li>
+</ul>
+<h2 id="选择网页元素"><a href="#选择网页元素" class="headerlink" title="选择网页元素"></a>选择网页元素</h2><p>选择表达式可以是CSS选择器<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>) <span class="comment">// 整个文档对象</span></span><br><span class="line">$(<span class="string">'#myId'</span>)  <span class="comment">// 选择ID为myId的网页元素</span></span><br><span class="line">$(<span class="string">'div.myClass'</span>)  <span class="comment">// 选择class为myClass的 div 元素</span></span><br><span class="line">$(<span class="string">'input[name=first]'</span>)  <span class="comment">// 选择name属性=first的 input 元素</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以是jQuery特有表达式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a:first'</span>)  <span class="comment">// 选择网页中第一个a元素</span></span><br><span class="line">$(<span class="string">'tr:odd'</span>)  <span class="comment">// 选择表格的奇数行</span></span><br><span class="line">$(<span class="string">'#myForm: input'</span>)  <span class="comment">// 选择表单中的input元素</span></span><br><span class="line">$(<span class="string">'div:visible'</span>)  <span class="comment">// 选择可见的div元素</span></span><br><span class="line">$(<span class="string">'div:gt(2)'</span>)  <span class="comment">// 选择所有的div元素，除了前三个</span></span><br><span class="line">$(<span class="string">'div:animated'</span>)  <span class="comment">// 选择当前处于动画状态的div元素</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="改变结果集"><a href="#改变结果集" class="headerlink" title="改变结果集"></a>改变结果集</h2><p>提供各种强大的过滤器，对结果集进行筛选，缩小选择结果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>).has(<span class="string">'p'</span>)  <span class="comment">// 选择包含p元素的div</span></span><br><span class="line">$(<span class="string">'div'</span>).not(<span class="string">'.myClass'</span>)  <span class="comment">// 选择class不等于myClass的div元素</span></span><br><span class="line">$(<span class="string">'div'</span>).filter(<span class="string">'.myClass'</span>)  <span class="comment">// 选择class等于myClass的div元素</span></span><br><span class="line">$(<span class="string">'div'</span>).first()  <span class="comment">// 选择第一个div元素</span></span><br><span class="line">$(<span class="string">'div'</span>).eq(<span class="number">5</span>) <span class="comment">// 选择第6个div元素</span></span><br></pre></td></tr></table></figure></p>
+<p>有时需要从结果集出发，移动到附近的相关元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>).next(<span class="string">'p'</span>)  <span class="comment">// 选择div元素后面的第一个p元素</span></span><br><span class="line">$(<span class="string">'div'</span>).parent()  <span class="comment">// 选择div元素的父元素</span></span><br><span class="line">$(<span class="string">'div'</span>).closest(<span class="string">'form'</span>)  <span class="comment">// 选择离div最近的form元素</span></span><br><span class="line">$(<span class="string">'div'</span>).children()  <span class="comment">// 选择div的所有子元素</span></span><br><span class="line">$(<span class="string">'div'</span>).siblings()  <span class="comment">// 选择div的同级元素</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h2><p>选中网页元素后，对它进行一系列操作，操作可以像链条一样连接起来。原理在于每次jQuery操作返回的都是一个jQuery对象，而不是元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.test'</span>).find(<span class="string">'span'</span>).addClass(<span class="string">'.yellow'</span>).text(<span class="string">'hi，我是新加的内容'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拆分开</span></span><br><span class="line">$(<span class="string">'.test'</span>) <span class="comment">// 找到div元素，不返回元素们，而是返回一个api对象</span></span><br><span class="line">    .find(<span class="string">'span'</span>)  <span class="comment">// 选择其中的span元素</span></span><br><span class="line">    .addClass(<span class="string">'.yellow'</span>)  <span class="comment">// 遍历所有刚才获取到的span元素，添加'.yellow'</span></span><br><span class="line">    .text(<span class="string">'hi，我是新加的内容'</span>)  <span class="comment">// 将文本内容进行替换</span></span><br></pre></td></tr></table></figure></p>
+<p>jQuery 还提供了 end() 方法，可使结果集后退一步<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>)</span><br><span class="line">    .find(<span class="string">'h3'</span>)</span><br><span class="line">    .eq(<span class="number">2</span>)</span><br><span class="line">    .html(<span class="string">'Hello'</span>)</span><br><span class="line">    .end()  <span class="comment">//退回到选中所有的h3元素的那一步</span></span><br><span class="line">    .eq(<span class="number">0</span>)  <span class="comment">//选中第一个h3元素</span></span><br><span class="line">    .html(<span class="string">'World'</span>);  <span class="comment">//将它的内容改为World</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="取值getter-和-赋值setter"><a href="#取值getter-和-赋值setter" class="headerlink" title="取值getter 和 赋值setter"></a>取值getter 和 赋值setter</h2><p>jQuery使用同一个函数，完成取值和赋值，这是由函数的参数来决定<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'h1'</span>).html()  <span class="comment">// html没有参数，表明是取值</span></span><br><span class="line">$(<span class="string">'h1'</span>).html(<span class="string">'hi'</span>)  <span class="comment">// html有参数，表明是赋值</span></span><br></pre></td></tr></table></figure></p>
+<p>常见的取值和赋值函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.html() <span class="comment">//取出或设置html内容</span></span><br><span class="line">.text() <span class="comment">//取出或设置text内容</span></span><br><span class="line">.attr() <span class="comment">//取出或设置某个属性的值</span></span><br><span class="line">.width()  <span class="comment">//取出或设置某个元素的宽度</span></span><br><span class="line">.height() <span class="comment">//取出或设置某个元素的高度</span></span><br><span class="line">.val() <span class="comment">//取出某个表单元素的值</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ul>
+<li><p>如果结果集包含多个元素，赋值时，将对其中所有元素赋值；取值时，则只取出第一个元素的值</p>
+</li>
+<li><p>.text()例外，它取出所有元素的text内容</p>
+</li>
+</ul>
+<h2 id="移动元素"><a href="#移动元素" class="headerlink" title="移动元素"></a>移动元素</h2><p>提供两组方法，操作元素在网页中的位置移动。一是直接移动该元素，二是移动其他元素，使目标元素到达我们想要的位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 已经选中了一个div元素，要将它移动到p元素后</span></span><br><span class="line">$(<span class="string">'div'</span>).insertAfter($(<span class="string">'p'</span>));  <span class="comment">// 把div元素移到p元素后</span></span><br><span class="line">$(<span class="string">'p'</span>).after($(<span class="string">'div'</span>));  <span class="comment">// 把p元素加到div元素前</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 看似效果一样，但操作视角不同，返回的元素也不相同。第一种方法返回div元素，第二种方法返回p元素。</span></span><br></pre></td></tr></table></figure></p>
+<p>使用该模式的操作方法一共有四对</p>
+<ol>
+<li>.insertAfter()和.after()：在现存元素的外部，从后面插入元素</li>
+<li>.insertBefore()和.before()：在现存元素的外部，从前面插入元素</li>
+<li>.appendTo()和.append()：在现存元素的内部，从后面插入元素</li>
+<li>.prependTo()和.prepend()：在现存元素的内部，从前面插入元素</li>
+</ol>
+<h2 id="复制、删除、创建元素"><a href="#复制、删除、创建元素" class="headerlink" title="复制、删除、创建元素"></a>复制、删除、创建元素</h2><ol>
+<li>复制元素.clone()</li>
+<li>删除元素.remove()和.detach()，区别在于前者不保留被删除元素的事件，后者保留，有利于重新插入文档时使用</li>
+<li>清空元素内容，但不删除该元素.empty()</li>
+<li>创建新元素，将新元素直接传入jQuery的构造函数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;p&gt;Hello&lt;/p&gt;'</span>);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'&lt;li class="new"&gt;new list item&lt;/li&gt;'</span>);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'ul'</span>).append(<span class="string">'&lt;li&gt;list item&lt;/li&gt;'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/16/JS函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2031,186 +2206,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/02/HTML入门笔记1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/02/HTML入门笔记1/" itemprop="url">HTML入门笔记1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-02T17:06:38+08:00">
-                2022-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  598
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="HTML简介"><a href="#HTML简介" class="headerlink" title="HTML简介"></a>HTML简介</h2><ul>
-<li>全称：超文本标记语言（HyperText Markup Language）</li>
-<li>发明者：由物理学家蒂姆·伯纳斯-李（Tim Berners-Lee）发明</li>
-<li>特点：支持超链接，点击链接就可以跳转到其他网页，构成整个互联网</li>
-</ul>
-<h2 id="HTML起手写什么"><a href="#HTML起手写什么" class="headerlink" title="HTML起手写什么"></a>HTML起手写什么</h2><p>!+tab键生成HTML模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;  &lt;!-- 禁止缩放 --&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="全局属性"><a href="#全局属性" class="headerlink" title="全局属性"></a>全局属性</h2><h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>全局属性是所有 HTML 元素共有的属性，它们可以用于所有元素，即使属性可能对某些元素不起作用。</p>
-<h3 id="常见的全局属性："><a href="#常见的全局属性：" class="headerlink" title="常见的全局属性："></a>常见的全局属性：</h3><ol>
-<li>class：以空格分隔元素的类名，CSS 和 Javascript 通过类选择器 (class selectors) 或 DOM 方法 ( document.getElementsByClassName) 来选择和访问特定的元素。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;mainMessage middle&quot;&gt;</span><br><span class="line">    这里是页面中间的信息</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>通过.mainMessage 或 .middle都可以为这个div添加样式</li>
-</ul>
-<ol start="2">
-<li>id：定义唯一标识符，该标识符在整个文档中必须是唯一的。但不推荐使用，因为id不能命名为window上已有的全局变量，限制太多，不方便新手起名</li>
-<li>style：规定元素的行内样式（inline style），它是Html的属性，而非CSS。样式展示的优先级行内样式&gt;CSS<br><img src="https://s2.loli.net/2022/03/02/RLQp7KXBFNr4cyP.png" alt="HTML-style.png"></li>
-<li>tabindex：设置元素的 Tab 键控制次序，参数包括正数（按数字顺序访问）、0（最最最后一个访问）、负数（别来访问我）</li>
-</ol>
-<h2 id="章节标签🏷"><a href="#章节标签🏷" class="headerlink" title="章节标签🏷"></a>章节标签🏷</h2><p><img src="https://s2.loli.net/2022/03/02/NnXAbS7gZJjdO91.png" alt="HTML-章节标签.png"></p>
-<h2 id="常用内容标签🏷"><a href="#常用内容标签🏷" class="headerlink" title="常用内容标签🏷"></a>常用内容标签🏷</h2><ol>
-<li><p>加入强调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">斜体强调&lt;em&gt;强调内容&lt;/em&gt;</span><br><span class="line">加粗强调&lt;strong&gt;强调内容&lt;/strong&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>加入代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">加入一行代码&lt;code&gt; &lt;/code&gt;</span><br><span class="line">加入多行代码&lt;pre&gt; &lt;/pre&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>水平横线与回车（无结束标签）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">回车&lt;/br&gt;</span><br><span class="line">水平横线&lt;/hr&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>无序列表&amp;有序列表&amp;自定义标签</p>
-</li>
-</ol>
-<p>新闻信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;新闻1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;新闻2&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<p>豆瓣电影排行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt;肖申克的救赎&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;教父&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure></p>
-<p>自定义标签（只能有一个dt，但可以有多个dd）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;自定义列表title&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;自定义列表信息&lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br></pre></td></tr></table></figure></p>
-<ol start="5">
-<li>a标签</li>
-</ol>
-<p>创建一个可点击的图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://www.imooc.com&quot; target=&quot;_blank&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;https://s2.loli.net/2022/03/02/8xgcYprTRe1ZnEk.png&quot; &gt;</span><br><span class="line">&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2267,7 +2262,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
