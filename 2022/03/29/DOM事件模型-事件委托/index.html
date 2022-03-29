@@ -126,17 +126,19 @@
 
 
 
-<meta name="description" content="归纳ES6的常考问题">
+<meta name="description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6常用知识点">
-<meta property="og:url" content="http://yoursite.com/2019/03/02/ES6常用知识点/index.html">
+<meta property="og:title" content="DOM事件模型&amp;事件委托">
+<meta property="og:url" content="http://yoursite.com/2022/03/29/DOM事件模型-事件委托/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="归纳ES6的常考问题">
+<meta property="og:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.226Z">
+<meta property="og:image" content="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png">
+<meta property="og:updated_time" content="2022-03-29T09:12:08.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6常用知识点">
-<meta name="twitter:description" content="归纳ES6的常考问题">
+<meta name="twitter:title" content="DOM事件模型&amp;事件委托">
+<meta name="twitter:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png">
 
 
 
@@ -166,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/02/ES6常用知识点/">
+  <link rel="canonical" href="http://yoursite.com/2022/03/29/DOM事件模型-事件委托/">
 
 
 
 
 
-  <title>ES6常用知识点 | Joyce</title>
+  <title>DOM事件模型&事件委托 | Joyce</title>
   
 
 
@@ -342,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/ES6常用知识点/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/29/DOM事件模型-事件委托/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joyce">
@@ -359,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ES6常用知识点</h1>
+          <h1 class="post-title" itemprop="name headline">DOM事件模型&事件委托</h1>
         
 
         <div class="post-meta">
@@ -371,8 +373,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-02T19:10:15+08:00">
-                2019-03-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-29T14:10:54+08:00">
+                2022-03-29
               </time>
             
 
@@ -405,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,679
+                  1,172
                 </span>
               
 
@@ -430,57 +432,59 @@
       
 
       
-        <p>归纳ES6的常考问题<br><a id="more"></a></p>
-<h3 id="var-let及const"><a href="#var-let及const" class="headerlink" title="var,let及const"></a>var,let及const</h3><p>我们都知道使用var声明的变量会被提升到作用域顶部，举个例子来看看三者的区别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">let b = 1</span><br><span class="line">const c = 1</span><br><span class="line">console.log(window.b) // undefined</span><br><span class="line">console.log(window. c) // undefined</span><br><span class="line"></span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">  let a</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure></p>
-<p>在全局作用域下声明let和const不会被挂载到window上，再者如果我们在声明了a之前使用了a，会报错。报错的原因是存在暂时性死区，我们不能在声明前就使用一个变量。那么为什么会存在变量提升这个事情呢？其实它的存在是为了解决函数间互相调用的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function test1() &#123;</span><br><span class="line">    test2()</span><br><span class="line">&#125;</span><br><span class="line">function test2() &#123;</span><br><span class="line">    test1()</span><br><span class="line">&#125;</span><br><span class="line">test1()</span><br></pre></td></tr></table></figure></p>
-<p>假如不存在提升这个情况，那么就实现不了上述的代码，因为不可能存在 test1 在 test2 前面然后 test2 又在 test1 前面。</p>
-<p>总结几点：</p>
-<ol>
-<li>函数提升优于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部；</li>
-<li>var存在提升，我们可以在声明之前使用；let和const存在暂时性死区，不能在声明前使用；</li>
-<li>var在全局作用域下声明变量会导致变量挂载到window上，其他两者不会；</li>
-<li>let和const的作用基本一致，但const声明的变量不能被再次赋值；</li>
-</ol>
-<h3 id="原型继承-amp-amp-ES6的Class继承"><a href="#原型继承-amp-amp-ES6的Class继承" class="headerlink" title="原型继承&amp;&amp;ES6的Class继承"></a>原型继承&amp;&amp;ES6的Class继承</h3><ol>
-<li><p>原型继承</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">子类：</span><br><span class="line">function Human(name) &#123;</span><br><span class="line">    this.name = name  // 自有属性</span><br><span class="line">&#125;</span><br><span class="line">Human.prototype.run = function() &#123;  // 原型上的共有属性</span><br><span class="line">    console.log(&quot;我叫&quot; + this.name + &quot;，我在跑步&quot;)</span><br><span class="line">    return undefined</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">孙类：</span><br><span class="line">function Man(name) &#123;</span><br><span class="line">    Human.call(this.name)  // ①调用，即call一下父类</span><br><span class="line">    this.gender = &apos;男&apos;  // 自有属性</span><br><span class="line">&#125;</span><br><span class="line">Man.prototype.__proto__ = Human.prototype  // ②将Man的原型链到Human的原型上</span><br><span class="line">Man.prototype.fight = function() &#123;</span><br><span class="line">    console.log(&apos;捶你胸口&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Class继承</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Human &#123;</span><br><span class="line">    constructor(name) &#123;</span><br><span class="line">        this.name = name  // 自有属性</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123;  // 公有属性，直接写在prototype即原型链上</span><br><span class="line">        console.log(&quot;我叫&quot; + this.name + &quot;，我在跑步&quot;);</span><br><span class="line">        return undefined</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Man extends Human &#123;  // 等价于 Man.prototype.__proto__ = Human.prototype</span><br><span class="line">    constructor(name) &#123;</span><br><span class="line">        super(name)  // 调用父类，等价于Human.call(this,name)，使子类拥有this.name = name</span><br><span class="line">        this.gender = &apos;男&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    fight() &#123;</span><br><span class="line">        console.log(&apos;捶你&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>class 实现继承的核心在于使用 extends 表明继承自哪个父类，并且在子类构造函数中必须调用 super，因为这段代码可以看成 Parent.call(this, value)，但JS中并不存在类，所以 class 的本质就是函数</p>
-<h3 id="模块化（待补充）"><a href="#模块化（待补充）" class="headerlink" title="模块化（待补充）"></a>模块化（待补充）</h3><h3 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h3><p>在Vue3.0中，将通过proxy替代原本的Object.defineProperty来实现数据响应式，Proxy是ES6中的新增功能，它可以用来自定义对象中的操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let p = new Proxy(target,handler)  // target 代表需要添加代理的对象，handler 用来自定义对象中的操作，比如可以用来自定义 set 或者 get 函数。</span><br></pre></td></tr></table></figure></p>
-<p>下面通过Proxy来实现一个数据响应式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">let onWatch = (obj, setBind, getLogger) =&gt; &#123;</span><br><span class="line">  let handler = &#123;</span><br><span class="line">    get(target, property, receiver) &#123;</span><br><span class="line">      getLogger(target, property)</span><br><span class="line">      return Reflect.get(target, property, receiver)</span><br><span class="line">    &#125;,</span><br><span class="line">    set(target, property, value, receiver) &#123;</span><br><span class="line">      setBind(value, property)</span><br><span class="line">      return Reflect.set(target, property, value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return new Proxy(obj, handler)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj = &#123; a: 1 &#125;</span><br><span class="line">let p = onWatch(</span><br><span class="line">  obj,</span><br><span class="line">  (v, property) =&gt; &#123;</span><br><span class="line">    console.log(`监听到属性$&#123;property&#125;改变为$&#123;v&#125;`)</span><br><span class="line">  &#125;,</span><br><span class="line">  (target, property) =&gt; &#123;</span><br><span class="line">    console.log(`&apos;$&#123;property&#125;&apos; = $&#123;target[property]&#125;`)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">p.a = 2 // 监听到属性a改变</span><br><span class="line">p.a // &apos;a&apos; = 2</span><br></pre></td></tr></table></figure></p>
-<p>我们通过自定义 set 和 get 函数的方式，在原本的逻辑中插入了我们的函数逻辑，实现了在对对象任何属性进行读写时发出通知。</p>
-<p>如果需要实现一个 Vue 中的响应式，需要在 get 中收集依赖，set 派发更新，之所以要使用 Proxy 替换原本的 API 原因在于 Proxy 无需一层层递归为每个属性添加代理，一次即可完成以上操作，性能上更好，并且原本的实现有一些数据更新不能监听到，但是 Proxy 可以完美监听到任何方式的数据改变，唯一缺陷是浏览器兼容不好。</p>
-<h3 id="map、filter、reduce"><a href="#map、filter、reduce" class="headerlink" title="map、filter、reduce"></a>map、filter、reduce</h3><ol>
-<li>map 作用是生成一个新数组，遍历原数组，将每个元素拿出来做一些变化然后放入到新的数组中。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">[1, 2, 3].map(v =&gt; v + 1) // -&gt; [2, 3, 4]</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>实现原理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.map = function(fn)&#123;</span><br><span class="line">    let result = [];</span><br><span class="line">    for(let i=0; i &lt; this.length; i++) &#123;</span><br><span class="line">        if(i in this) &#123;</span><br><span class="line">            result[i] = fn.call(undefined,this[i],i,this)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li>filter 有条件地放入map，是真值就push进去，不是真值就不push<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">a = [1,2,3,4,5]</span><br><span class="line">a.filter( (value) =&gt; &#123;return value % 2 === 0&#125;)  // [2,4]</span><br><span class="line">a.filter( (value) =&gt; &#123;return value % 2 !== 0&#125;)  // [1,3,5]</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>实现原理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.filter = function(fn)&#123;</span><br><span class="line">    let result = [];</span><br><span class="line">    let temp;</span><br><span class="line">    for(let i = 0; i&lt;this.length; i++) &#123;</span><br><span class="line">        if(i in this) &#123;</span><br><span class="line">            if(temp = fn.call(undefined,this[i],i,this))&#123;</span><br><span class="line">                result.push(temp)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ol start="3">
-<li>reduce 可以将数组中的元素通过回调函数最终转换为一个值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">如果我们想实现一个功能将函数里的元素全部相加得到一个值，可能会这样写代码：</span><br><span class="line">const arr = [1, 2, 3]</span><br><span class="line">let total = 0</span><br><span class="line">for (let i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">  total += arr[i]</span><br><span class="line">&#125;</span><br><span class="line">console.log(total) //6 </span><br><span class="line"></span><br><span class="line">如果用reduce可以一行实现：</span><br><span class="line">const arr = [1, 2, 3]</span><br><span class="line">const sum = arr.reduce((acc, current) =&gt; acc + current, 0)</span><br><span class="line">console.log(sum)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>reduce 接受两个参数，分别是回调函数和初始值</p>
+        <h2 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h2><p>一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段</p>
 <ul>
-<li>首先初始值为 0，该值会在执行第一次回调函数时作为第一个参数传入；</li>
-<li>回调函数接受四个参数，分别为累计值、当前元素、当前索引、原数组；</li>
-<li>在一次执行回调函数时，当前值和初始值相加得出结果 1，该结果会在第二次执行回调函数时当做第一个参数传入；</li>
-<li>所以在第二次执行回调函数时，相加的值就分别是 1 和 2，以此类推，循环结束后得到结果 6；</li>
+<li>捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层）</li>
+<li>目标阶段（target phase）：在目标节点上触发</li>
+<li>冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）</li>
 </ul>
-<p>实现原理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.reduce = function(fn,init) &#123;</span><br><span class="line">    let result = init;</span><br><span class="line">    for(let i = 0; i &lt; this.length; i++)&#123;</span><br><span class="line">        if(i in this) &#123;</span><br><span class="line">            result = fn.call(undefined,result,this[i],i,this)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ol start="4">
-<li>用reduce实现map和filter<br>reduce -&gt; map<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">array2 = array.map( (v) =&gt; v+1)  // 给数组每一项加1</span><br><span class="line"></span><br><span class="line">可以写成：</span><br><span class="line">array2 = array.reduce( (result,v) =&gt; &#123;</span><br><span class="line">    result.push(v+1);</span><br><span class="line">    return result</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
-</li>
+<p><img src="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png" alt="dom.png"></p>
+<h3 id="冒泡（bubbling-phase）"><a href="#冒泡（bubbling-phase）" class="headerlink" title="冒泡（bubbling phase）"></a>冒泡（bubbling phase）</h3><p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素的处理程序，一直向上到其他祖先</p>
+<p>假设我们有 3 层嵌套 FORM &gt; DIV &gt; P，它们各自拥有一个处理程序：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">  <span class="selector-tag">body</span> * &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form onclick=<span class="string">"alert('form')"</span>&gt;FORM</span><br><span class="line">  &lt;div onclick=<span class="string">"alert('div')"</span>&gt;DIV</span><br><span class="line">    &lt;p onclick=<span class="string">"alert('p')"</span>&gt;P&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/form&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当你点击内部的p标签会首先运行 onclick：</p>
+<ol>
+<li>在该 p标签 上的。</li>
+<li>然后是外部 div标签 上的。</li>
+<li>然后是外部 form标签 上的。</li>
+<li>以此类推，直到最后的 document 对象。</li>
 </ol>
-<p>reduce  -&gt; filter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">array2 = array.filter( (v) =&gt; v%2 === 0)</span><br><span class="line"></span><br><span class="line">可以写成：</span><br><span class="line">array2 = array.reduce( (result,v) =&gt; &#123;</span><br><span class="line">    if( v%2 === 0) &#123;</span><br><span class="line">        result.push(v)</span><br><span class="line">    &#125;</span><br><span class="line">    return result</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure></p>
+<p>点击 p标签，那么我们将看到 3 个 alert：p → div → form。</p>
+<p>这个过程称为冒泡，因为事件是从内部冒泡到所有父级元素，就像水里的气泡一样</p>
+<h3 id="event-target-与-event-currentTarget"><a href="#event-target-与-event-currentTarget" class="headerlink" title="event.target 与 event.currentTarget"></a>event.target 与 event.currentTarget</h3><ul>
+<li>引发事件的那个嵌套层级最深的元素被称为目标元素,可以通过 event.target 访问。</li>
+<li>event.target —— 是引发事件的“目标”元素，也就是用户操作的元素</li>
+<li>this(=event.currentTarget) —— 是“当前”元素，也就是程序员监听的元素</li>
+</ul>
+<p>🌰举个例子🌰</p>
+<p>如果我们有一个处理程序 form.onclick，它可以“捕获”表单内的所有点击。无论用户点击发生在哪里，它都会冒泡到 form 并运行处理程序。</p>
+<p>在 form.onclick 处理程序中：</p>
+<ul>
+<li>this（=event.currentTarget）是 <form> 元素，因为处理程序在它上面运行（程序员监听的元素）</form></li>
+<li>event.target 是表单中实际被用户点击的元素</li>
+<li>event.target 等于 event.currentTarget的情况：当点击事件发生在 form 元素上时</li>
+</ul>
+<h3 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h3><p>用于停止冒泡的方法是event.stopPropagation()，下面这个例子中，点击button元素，body.onclick不会生效<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onclick</span>=<span class="string">"alert(`the bubbling doesn't reach here`)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"event.stopPropagation()"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="捕获（capture-phase）"><a href="#捕获（capture-phase）" class="headerlink" title="捕获（capture phase）"></a>捕获（capture phase）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.addEventListener(<span class="string">'click'</span>, fn, bool)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bool 不传 或为 falsy(默认值)，则在 <strong>冒泡阶段</strong> 设置处理程序fn（一般默认情况就是冒泡）</li>
+<li>bool 为 true，则在 <strong>捕获阶段</strong> 设置处理程序fn（true 是 {capture: true} 的简写形式）</li>
+</ul>
+<p>在现实世界中，当事故发生时，当地警方会最先做出反应。他们最了解发生这件事的地方。然后，如果需要，上级主管部门再进行处理。</p>
+<p>事件处理程序也是如此。特定于 td元素 的处理程序可能恰好适合于该 td元素，这个处理程序知道关于该元素的所有信息。所以该处理程序应该首先获得机会。然后，它的直接父元素也了解相关上下文，但了解的内容会少一些，以此类推，直到处理一般性概念并运行最后一个处理程序的最顶部的元素为止。</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><ul>
+<li>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个处理程序 —— 而是将单个处理程序放在它们的共同祖先上</li>
+<li>这种方式是基于事件传播过程中，逐层冒泡总能被祖先节点捕获</li>
+<li>在处理程序中，我们获取 event.target 以查看事件实际发生的位置并进行处理</li>
+</ul>
+<h3 id="事件委托的优点"><a href="#事件委托的优点" class="headerlink" title="事件委托的优点"></a>事件委托的优点</h3><ol>
+<li>节省监听数，也就是节省了内存</li>
+</ol>
+<p>当你想要监听100个按钮的点击事件，在每个按钮上添加onclick事件显然是笨拙的做法。用事件委托我们可以监听100个按钮的祖先元素，等到冒泡阶段，再判断 event.target 是不是这100个按钮中的一个<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div.addEventListener(<span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> t = event.target</span><br><span class="line">    <span class="keyword">if</span>(t.tagName.toLowerCase() === <span class="string">'button'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button被点击了'</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button data-id是'</span>+ t.dataset.id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>可以动态监听元素</li>
+</ol>
+<p>当我们想要监听一个暂时还不存在的元素时，可以监听它的祖先，在用户点击了后看是不是我想要监听的元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> button = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>)</span><br><span class="line">    button.textContent = <span class="string">'click me'</span></span><br><span class="line">    div1.appendChild(button)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">div1.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> t = e.target</span><br><span class="line">    <span class="keyword">if</span>(t.targetName.toLowerCase() === <span class="string">'button'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button被click'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -505,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/02/深拷贝-浅拷贝/" rel="next" title="深拷贝&&浅拷贝">
-                <i class="fa fa-chevron-left"></i> 深拷贝&&浅拷贝
+              <a href="/2022/03/28/jQuery设计思想与实践/" rel="next" title="jQuery设计思想与实践">
+                <i class="fa fa-chevron-left"></i> jQuery设计思想与实践
               </a>
             
           </div>
@@ -514,10 +518,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/03/浏览器缓存机制/" rel="prev" title="浏览器缓存机制">
-                浏览器缓存机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -697,7 +697,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#var-let及const"><span class="nav-number">1.</span> <span class="nav-text">var,let及const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型继承-amp-amp-ES6的Class继承"><span class="nav-number">2.</span> <span class="nav-text">原型继承&amp;&amp;ES6的Class继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化（待补充）"><span class="nav-number">3.</span> <span class="nav-text">模块化（待补充）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy"><span class="nav-number">4.</span> <span class="nav-text">proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map、filter、reduce"><span class="nav-number">5.</span> <span class="nav-text">map、filter、reduce</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件模型"><span class="nav-number">1.</span> <span class="nav-text">事件模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡（bubbling-phase）"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡（bubbling phase）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-target-与-event-currentTarget"><span class="nav-number">1.2.</span> <span class="nav-text">event.target 与 event.currentTarget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止冒泡"><span class="nav-number">1.3.</span> <span class="nav-text">阻止冒泡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获（capture-phase）"><span class="nav-number">1.4.</span> <span class="nav-text">捕获（capture phase）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件委托"><span class="nav-number">2.</span> <span class="nav-text">事件委托</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件委托的优点"><span class="nav-number">2.1.</span> <span class="nav-text">事件委托的优点</span></a></li></ol></li></ol></div>
             
 
           </div>

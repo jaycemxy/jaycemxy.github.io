@@ -339,6 +339,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/29/DOM事件模型-事件委托/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/29/DOM事件模型-事件委托/" itemprop="url">DOM事件模型&事件委托</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-29T14:10:54+08:00">
+                2022-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,172
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h2><p>一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段</p>
+<ul>
+<li>捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层）</li>
+<li>目标阶段（target phase）：在目标节点上触发</li>
+<li>冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png" alt="dom.png"></p>
+<h3 id="冒泡（bubbling-phase）"><a href="#冒泡（bubbling-phase）" class="headerlink" title="冒泡（bubbling phase）"></a>冒泡（bubbling phase）</h3><p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素的处理程序，一直向上到其他祖先</p>
+<p>假设我们有 3 层嵌套 FORM &gt; DIV &gt; P，它们各自拥有一个处理程序：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">  <span class="selector-tag">body</span> * &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form onclick=<span class="string">"alert('form')"</span>&gt;FORM</span><br><span class="line">  &lt;div onclick=<span class="string">"alert('div')"</span>&gt;DIV</span><br><span class="line">    &lt;p onclick=<span class="string">"alert('p')"</span>&gt;P&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/form&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当你点击内部的p标签会首先运行 onclick：</p>
+<ol>
+<li>在该 p标签 上的。</li>
+<li>然后是外部 div标签 上的。</li>
+<li>然后是外部 form标签 上的。</li>
+<li>以此类推，直到最后的 document 对象。</li>
+</ol>
+<p>点击 p标签，那么我们将看到 3 个 alert：p → div → form。</p>
+<p>这个过程称为冒泡，因为事件是从内部冒泡到所有父级元素，就像水里的气泡一样</p>
+<h3 id="event-target-与-event-currentTarget"><a href="#event-target-与-event-currentTarget" class="headerlink" title="event.target 与 event.currentTarget"></a>event.target 与 event.currentTarget</h3><ul>
+<li>引发事件的那个嵌套层级最深的元素被称为目标元素,可以通过 event.target 访问。</li>
+<li>event.target —— 是引发事件的“目标”元素，也就是用户操作的元素</li>
+<li>this(=event.currentTarget) —— 是“当前”元素，也就是程序员监听的元素</li>
+</ul>
+<p>🌰举个例子🌰</p>
+<p>如果我们有一个处理程序 form.onclick，它可以“捕获”表单内的所有点击。无论用户点击发生在哪里，它都会冒泡到 form 并运行处理程序。</p>
+<p>在 form.onclick 处理程序中：</p>
+<ul>
+<li>this（=event.currentTarget）是 <form> 元素，因为处理程序在它上面运行（程序员监听的元素）</form></li>
+<li>event.target 是表单中实际被用户点击的元素</li>
+<li>event.target 等于 event.currentTarget的情况：当点击事件发生在 form 元素上时</li>
+</ul>
+<h3 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h3><p>用于停止冒泡的方法是event.stopPropagation()，下面这个例子中，点击button元素，body.onclick不会生效<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onclick</span>=<span class="string">"alert(`the bubbling doesn't reach here`)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"event.stopPropagation()"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="捕获（capture-phase）"><a href="#捕获（capture-phase）" class="headerlink" title="捕获（capture phase）"></a>捕获（capture phase）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.addEventListener(<span class="string">'click'</span>, fn, bool)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bool 不传 或为 falsy(默认值)，则在 <strong>冒泡阶段</strong> 设置处理程序fn（一般默认情况就是冒泡）</li>
+<li>bool 为 true，则在 <strong>捕获阶段</strong> 设置处理程序fn（true 是 {capture: true} 的简写形式）</li>
+</ul>
+<p>在现实世界中，当事故发生时，当地警方会最先做出反应。他们最了解发生这件事的地方。然后，如果需要，上级主管部门再进行处理。</p>
+<p>事件处理程序也是如此。特定于 td元素 的处理程序可能恰好适合于该 td元素，这个处理程序知道关于该元素的所有信息。所以该处理程序应该首先获得机会。然后，它的直接父元素也了解相关上下文，但了解的内容会少一些，以此类推，直到处理一般性概念并运行最后一个处理程序的最顶部的元素为止。</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><ul>
+<li>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个处理程序 —— 而是将单个处理程序放在它们的共同祖先上</li>
+<li>这种方式是基于事件传播过程中，逐层冒泡总能被祖先节点捕获</li>
+<li>在处理程序中，我们获取 event.target 以查看事件实际发生的位置并进行处理</li>
+</ul>
+<h3 id="事件委托的优点"><a href="#事件委托的优点" class="headerlink" title="事件委托的优点"></a>事件委托的优点</h3><ol>
+<li>节省监听数，也就是节省了内存</li>
+</ol>
+<p>当你想要监听100个按钮的点击事件，在每个按钮上添加onclick事件显然是笨拙的做法。用事件委托我们可以监听100个按钮的祖先元素，等到冒泡阶段，再判断 event.target 是不是这100个按钮中的一个<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div.addEventListener(<span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> t = event.target</span><br><span class="line">    <span class="keyword">if</span>(t.tagName.toLowerCase() === <span class="string">'button'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button被点击了'</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button data-id是'</span>+ t.dataset.id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>可以动态监听元素</li>
+</ol>
+<p>当我们想要监听一个暂时还不存在的元素时，可以监听它的祖先，在用户点击了后看是不是我想要监听的元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> button = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>)</span><br><span class="line">    button.textContent = <span class="string">'click me'</span></span><br><span class="line">    div1.appendChild(button)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">div1.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> t = e.target</span><br><span class="line">    <span class="keyword">if</span>(t.targetName.toLowerCase() === <span class="string">'button'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button被click'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/28/jQuery设计思想与实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2024,188 +2217,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/03/HTML难点标签/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/03/HTML难点标签/" itemprop="url">HTML难点标签</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-03T20:01:01+08:00">
-                2022-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1,023
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>打开html文件的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-server -c-1 或简写为 hs -c-1</span><br><span class="line">parcel index.html</span><br></pre></td></tr></table></figure></p>
-<h2 id="a标签"><a href="#a标签" class="headerlink" title="a标签"></a>a标签</h2><h3 id="href属性"><a href="#href属性" class="headerlink" title="href属性"></a>href属性</h3><ol>
-<li><p>网址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">三种写法（推荐第三种）</span><br><span class="line">http://baidu.com</span><br><span class="line">https://baidu.com</span><br><span class="line">//baidu.com  可自动选择用http或https协议</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/a/b/c 或 a/b/c</span><br><span class="line">index.html 或 ./index.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:;&quot;&gt;点击后什么也不发生&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;#ddd&quot;&gt;找到id为ddd的标签&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;mailto:jayce_ma.xa@foxmail.com&quot;&gt;给某人发邮件&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;tel=&quot;18912345678&quot;&gt;打电话给某人&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="target属性"><a href="#target属性" class="headerlink" title="target属性"></a>target属性</h3><ol>
-<li><p>内置名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_blank 在新窗口打开</span><br><span class="line">_top 在最顶层打开</span><br><span class="line">_parent 在当前页面的上一层打开</span><br><span class="line">_self 在当前页面加载</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>给窗口命名（作用是可重复利用窗口）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;//baidu.com&quot; target=&quot;sss&quot;&gt;baidu&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;//bilibili.com&quot; target=&quot;sss&quot;&gt;b站&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">若有window.name=sss的窗口，就用它打开，若没有就创建一个</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="与iframe一起的用法-在网页中内嵌窗口"><a href="#与iframe一起的用法-在网页中内嵌窗口" class="headerlink" title="与iframe一起的用法(在网页中内嵌窗口)"></a>与iframe一起的用法(在网页中内嵌窗口)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;//bing.com&quot; target=&quot;xxx&quot;&gt;必应&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;//bilibili.com&quot; target=&quot;xxx&quot;&gt;b站&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;hr/&gt;</span><br><span class="line"></span><br><span class="line">&lt;iframe style=&quot;border:none; width:100%; height:500px;&quot; name=&quot;xxx&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="table标签"><a href="#table标签" class="headerlink" title="table标签"></a>table标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>英文<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>中文<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>target<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>目标<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>document<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>文件<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>device<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>设备<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tfoot</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>空<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>空<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tfoot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/03/03/1nixO6kIXC9Z2Jh.png" alt="WechatIMG2311.png"></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>Petter<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>Tom<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>Micky<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>语文<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>44<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>44<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>44<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>数学<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>55<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>55<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>55<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>英语<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>66<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>66<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>66<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tfoot</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>总分<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>166<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>166<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>166<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>排名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>123<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tfoot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">    <span class="selector-tag">table</span> &#123; </span><br><span class="line">        <span class="attribute">width</span>:<span class="number">500px</span>;</span><br><span class="line">        <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">        table-layout:auto;  //自动调整表格布局，表头信息多就宽一些</span><br><span class="line">        <span class="selector-tag">border-collapse</span>: <span class="selector-tag">collapse</span>;  </span><br><span class="line">        border-spacing: 0;  //修改border默认样式，即合并border并使border间距为0</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">tr</span>,<span class="selector-tag">td</span>,<span class="selector-tag">th</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>:<span class="number">2px</span> solid pink;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/03/03/4TvReQAsSqaHnEp.png" alt="WX20220303-211724@2x.png"></p>
-<hr>
-<h2 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h2><p>作用：发出get请求，展示一张图片<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"ccc"</span> <span class="attr">src</span>=<span class="string">"/brown-cat.jpeg"</span> <span class="attr">alt</span>=<span class="string">"棕色小猫"</span> <span class="attr">width</span>=<span class="string">"800"</span>&gt;</span>  //width和height是img标签的属性，！！切记只需设置一项，另外一个会自适应</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    ccc.onload = function()&#123;</span><br><span class="line">        console.log("恭喜加载成功啦~")</span><br><span class="line">    &#125;   //监听图片是否加载成功</span><br><span class="line"></span><br><span class="line">    ccc.onerror = function()&#123;</span><br><span class="line">        console.log("抱歉图片不见啦~");</span><br><span class="line">        ccc.src= "/404.png";</span><br><span class="line">    &#125;  //监听图片是否加载失败</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">        box-sizing: border-box;  //重置默认样式</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">img</span> &#123;</span><br><span class="line">        max-width: 100%;  //自适应宽度</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="form标签"><a href="#form标签" class="headerlink" title="form标签"></a>form标签</h2><p>作用：发出一个get或post请求，然后刷新页面<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/yyy"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">autocomplete</span>&gt;</span>  </span><br><span class="line">    //action用于控制请求哪个页面，method控制是POST还是GET</span><br><span class="line">    //autocomplete的用法：在form标签上加autocomplete，在input标签上加name=""</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>  //默认是提交，给value赋值改变默认</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span>  //form标签里必须含有一个type=submit的标签，这样表单才能提交</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="input标签"><a href="#input标签" class="headerlink" title="input标签"></a>input标签</h2><ul>
-<li><p>input与button标签的区别</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"搞起"</span> /&gt;</span>  //input标签里只能是纯文本</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>搞起<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span>  //button标签里还可以有其他标签</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>input标签里type属性的取值</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">required</span> /&gt;</span>  //required意为必须填写，否则不能提交</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> /&gt;</span>男  //单选</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> /&gt;</span>女</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"hobby"</span> /&gt;</span>养猫  //多选</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"hobby"</span> /&gt;</span>听歌</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"hobby"</span> /&gt;</span>写代码</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> /&gt;</span>  //选择单个文件</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">multiple</span> /&gt;</span>  //选择多个文件</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h2 id="其他输入标签"><a href="#其他输入标签" class="headerlink" title="其他输入标签"></a>其他输入标签</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">style</span>=<span class="string">"resize:none; width:50%; height:300px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>- 请选择 -<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span>星期一<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"2"</span>&gt;</span>星期二<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2262,7 +2273,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
