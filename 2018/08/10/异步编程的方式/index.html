@@ -134,7 +134,7 @@
 <meta property="og:site_name" content="Joyce">
 <meta property="og:description" content="Promise的用法">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.232Z">
+<meta property="og:updated_time" content="2022-04-08T08:29:44.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异步编程的方式">
 <meta name="twitter:description" content="Promise的用法">
@@ -444,7 +444,7 @@
 <h2 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h2><p>定义：（参考阮一峰教程）</p>
 <p>Promise 是一个对象，对象里存储一个状态，这个状态是可以随着内部的执行转化的，为以下三种状态之一：等待态(Pending)、完成态(Fulfilled)、拒绝态(Rejected)。</p>
 <p>一开始，我们先设置好等状态从 pending 变成 fulfilled 和 rejected 的预案（当成功后我们做什么，失败时我们做什么）。</p>
-<p>Promise 启动之后，当满足成功的条件时我们让状态从 pending 变成 fullfilled （执行 resolve）；当满足失败的条件，我们让状态从 pending 变成 rejected（执行 reject）</p>
+<p>Promise 启动之后，当满足成功的条件时我们让状态从 pending 变成 fulfilled （执行 resolve）；当满足失败的条件，我们让状态从 pending 变成 rejected（执行 reject）</p>
 <p>promise是回调的一种形式，同时也是一个事务管理器。他的作用是将各种内嵌回调的事务用流水形式表达，其目的是为了简化编程，让代码逻辑更加清晰。</p>
 <h3 id="1、then的链式用法（结合jQuery的写法）"><a href="#1、then的链式用法（结合jQuery的写法）" class="headerlink" title="1、then的链式用法（结合jQuery的写法）"></a>1、then的链式用法（结合jQuery的写法）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url:&apos;/xxx&apos;,</span><br><span class="line">&#125;).then(successFn,errorFn).then(successFn2,errorFn2)</span><br></pre></td></tr></table></figure>
 <h3 id="2、自己生成一个Promise对象"><a href="#2、自己生成一个Promise对象" class="headerlink" title="2、自己生成一个Promise对象"></a>2、自己生成一个Promise对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function returnPromise()&#123;</span><br><span class="line">    return new Promise(function(resolve, reject)&#123;</span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">            resolve()  // 成功后调用</span><br><span class="line">            reject()  // 失败后调用</span><br><span class="line">        &#125;, 5000)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">returnPromise().then(result)</span><br></pre></td></tr></table></figure>
