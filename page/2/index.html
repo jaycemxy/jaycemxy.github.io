@@ -339,6 +339,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/08/CSS知识小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/08/CSS知识小结/" itemprop="url">CSS知识小结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-08T13:44:37+08:00">
+                2022-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  520
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器渲染原理"><a href="#浏览器渲染原理" class="headerlink" title="浏览器渲染原理"></a>浏览器渲染原理</h2><ol>
+<li>解析html文档并构建DOM树</li>
+<li>解析CSS标签并构建CSSOM树</li>
+<li>结合DOM树和CSSOM树成一颗渲染树（render tree）</li>
+<li>布局渲染树（layout），将所有渲染树的所有节点进行平面合成</li>
+<li>绘制渲染树（painting），将布局绘制在屏幕上</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/03/08/ryYILf5aVwxQ9u1.png" alt="1480597-08e6f204c42595ae.png"></p>
+<p>第4、5步合称为渲染，网页生成的时候至少会渲染一次，用户访问过程中还会不断重新渲染</p>
+<p>重新渲染就是要重新生成布局和重新绘制，分别称为“重排”和“重绘”。重绘不一定重排，但重排必然导致重绘。</p>
+<p>参考文章：<br><a href="https://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html" target="_blank" rel="noopener">https://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/How_browsers_work" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/Performance/How_browsers_work</a></p>
+<h2 id="CSS动画–transform"><a href="#CSS动画–transform" class="headerlink" title="CSS动画–transform"></a>CSS动画–transform</h2><ol>
+<li>位移translate<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">translateX(2em); translateY(-50px); translate(12px, 50%);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>用translate(-50%, -50%)做元素绝对居中<br><a href="http://js.jirengu.com/sisefaxuzo/2/edit?html,css,output" target="_blank" rel="noopener">http://js.jirengu.com/sisefaxuzo/2/edit?html,css,output</a></p>
+<ol start="2">
+<li><p>缩放scale</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scaleX(2); scaleY(0.5); scale(2, 0.5);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>旋转rotate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rotateX(10deg); rotateY(10deg); rotate(45deg);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>倾斜skew</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skewX(30deg); skewY(1.07rad); skew(30deg, 20deg);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>一般配合transition使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transition: 属性名 | 时长 | 过渡方式 | 延迟 </span><br><span class="line">eg：transition：left 200ms ease</span><br><span class="line"></span><br><span class="line">过渡方式：linear | ease | ease-in | ease-out | ease-in-out | step-start | step-end</span><br></pre></td></tr></table></figure></p>
+<p>tips：</p>
+<ul>
+<li>可用逗号分隔两个属性<br>transition：left 200ms,top 400ms;</li>
+<li>可用all代表所有属性<br>transition：all 2s;</li>
+</ul>
+<p>举个栗子🌰<br><a href="http://js.jirengu.com/veceporavo/1/edit?html,css,output" target="_blank" rel="noopener">http://js.jirengu.com/veceporavo/1/edit?html,css,output</a></p>
+<h2 id="CSS动画–animation"><a href="#CSS动画–animation" class="headerlink" title="CSS动画–animation"></a>CSS动画–animation</h2><p>第一步：声明关键帧@keyframes xxx，有两种语法from…to…和百分数<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> xxx &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">0%</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">100%</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> yyy &#123;</span><br><span class="line">  0% &#123; <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">left</span>: <span class="number">0</span>; &#125;</span><br><span class="line">  30% &#123; <span class="attribute">top</span>: <span class="number">50px</span>; &#125;</span><br><span class="line">  68%, 72% &#123; <span class="attribute">left</span>: <span class="number">50px</span>; &#125;</span><br><span class="line">  100% &#123; <span class="attribute">top</span>: <span class="number">100px</span>; <span class="attribute">left</span>: <span class="number">100%</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二步：添加动画animation<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">animation: 动画名 | 时长 | 过渡方式 | 延迟 | 次数 | 方向 | 填充模式 | 是否暂停</span><br><span class="line"></span><br><span class="line">时长：1<span class="selector-tag">s</span>或1000<span class="selector-tag">ms</span></span><br><span class="line">过渡方式：linear | ease | ease-in | ease-out | ease-in-out | step-start | step-end </span><br><span class="line">次数：1 | 10 | infinite</span><br><span class="line">方向：reverse | alternate | alternate-reverse</span><br><span class="line">填充模式：none | forwards | backwards | both </span><br><span class="line">是否暂停：paused | running</span><br></pre></td></tr></table></figure></p>
+<p>举个栗子🌰<br><a href="http://js.jirengu.com/bivavexere/1/edit?html,css,output" target="_blank" rel="noopener">http://js.jirengu.com/bivavexere/1/edit?html,css,output</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/03/HTML难点标签/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1738,161 +1916,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/搭建简易服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/搭建简易服务器/" itemprop="url">搭建简易服务器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-29T11:15:25+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  241
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Node.js简易服务器<br>
-
-
-        
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/29/搭建简易服务器/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1944,7 +1972,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
