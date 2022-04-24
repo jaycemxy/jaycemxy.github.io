@@ -339,6 +339,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/21/浅析MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/21/浅析MVC/" itemprop="url">浅析MVC</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-21T16:26:18+08:00">
+                2022-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,358
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是MVC"><a href="#什么是MVC" class="headerlink" title="什么是MVC"></a>什么是MVC</h2><p>MVC包括三个对象，分别是Model、View、Controller，通过将代码进行模块化的分离，以便于提高代码的灵活性和复用性。</p>
+<ul>
+<li>M-model数据模型，负责与数据相关的任务（包括增删改查），会有一个或多个视图监听该模型，一旦数据发生改变，模型将通知相关视图</li>
+<li>V-view视图层，是提供给用户操作的界面，当model层的数据发生改变，视图也会相应的进行更新</li>
+<li>C-controller控制器，起到在不同层面的组织作用。通过监听用户事件，来处理用户行为和数据上的改变</li>
+</ul>
+<h4 id="Model层：负责操作数据"><a href="#Model层：负责操作数据" class="headerlink" title="Model层：负责操作数据"></a>Model层：负责操作数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Model = &#123;</span><br><span class="line">    data: &#123;&#125;,</span><br><span class="line">    create: &#123;&#125;,</span><br><span class="line">    <span class="keyword">delete</span>: &#123;&#125;,</span><br><span class="line">    update(data)&#123;</span><br><span class="line">        <span class="built_in">Object</span>.assign(m.data, data)  <span class="comment">// 更新数据</span></span><br><span class="line">        eventBus.trigger(<span class="string">'m:update'</span>)  <span class="comment">// 触发'm:update'并通知view更新</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">get</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="View层：负责视图"><a href="#View层：负责视图" class="headerlink" title="View层：负责视图"></a>View层：负责视图</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> View = &#123;</span><br><span class="line">    el: el,  <span class="comment">// 需要更新的元素</span></span><br><span class="line">    html: <span class="string">``</span>,  <span class="comment">// 显示在页面中的内容</span></span><br><span class="line">    init()&#123;</span><br><span class="line">        v.el: <span class="comment">// 初始化需要更新的元素</span></span><br><span class="line">    &#125;,</span><br><span class="line">    render()&#123;&#125;  <span class="comment">// 重新渲染</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Controller层：负责其他"><a href="#Controller层：负责其他" class="headerlink" title="Controller层：负责其他"></a>Controller层：负责其他</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Controller = &#123;</span><br><span class="line">    init()&#123;</span><br><span class="line">        v.init(),  <span class="comment">// 初始化view</span></span><br><span class="line">        v.render(),  <span class="comment">// 第一次渲染页面</span></span><br><span class="line">        c.autoBindEvents(),  <span class="comment">// 事件绑定</span></span><br><span class="line">        eventBus.on(<span class="string">'m:update'</span>, ()=&gt;&#123;  <span class="comment">// 当eventBus触发'm:update'时，刷新view</span></span><br><span class="line">            v.render()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    events: &#123;  <span class="comment">// 用哈希表储存事件信息</span></span><br><span class="line">        <span class="string">'click #add1'</span> : <span class="string">'add'</span>,</span><br><span class="line">        <span class="string">'click #minus'</span>: <span class="string">'minus'</span>,</span><br><span class="line">        <span class="string">'click #mul2'</span>: <span class="string">'mul'</span>,</span><br><span class="line">        <span class="string">'click #divide2'</span>: <span class="string">'div'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    add()&#123;</span><br><span class="line">        m.update(&#123;<span class="attr">n</span>: m.data.n + <span class="number">1</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    minus()&#123;</span><br><span class="line">        m.update(&#123;<span class="attr">n</span>: m.data.n - <span class="number">1</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    mul()&#123;</span><br><span class="line">        m.update(&#123;<span class="attr">n</span>: m.data.n * <span class="number">2</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    div()&#123;</span><br><span class="line">        m.update(&#123;<span class="attr">n</span>: m.data.n / <span class="number">2</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    methods()&#123;</span><br><span class="line">        data=新数据</span><br><span class="line">        m.update(data)  <span class="comment">// 通知model更新数据</span></span><br><span class="line">    &#125;,</span><br><span class="line">    autoBindEvents()&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> c.events)&#123;  <span class="comment">// 遍历events表，自动绑定事件</span></span><br><span class="line">            <span class="keyword">const</span> value = c[c.events[key]]</span><br><span class="line">            <span class="keyword">const</span> spaceIndex = key.indexOf(<span class="string">''</span>)</span><br><span class="line">            <span class="keyword">const</span> part1 = key.slice(<span class="number">0</span>, spaceIndex)  <span class="comment">// 拿到'click'</span></span><br><span class="line">            <span class="keyword">const</span> part2 = key.slice(spaceIndex + <span class="number">1</span>)  <span class="comment">// 拿到对应元素'#add1'、'#minus'、'#mul2'、'#div2'</span></span><br><span class="line">            v.el.on(part1, part2, value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h2><p>EventBus用于模块间通讯，常用的api包括事件触发（trigger）、事件监听（on）、取消监听（off）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">'jquery'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventBus</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>._eventBus = $(<span class="built_in">window</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    on(eventName,fn)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._eventBus.on(eventName,fn)</span><br><span class="line">    &#125;</span><br><span class="line">    trigger(eventName,data)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._eventBus.trigger(eventName,data)</span><br><span class="line">    &#125;</span><br><span class="line">    off()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._eventBus.off(eventName,fn)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> EventBus</span><br><span class="line"></span><br><span class="line"><span class="comment">// new.js</span></span><br><span class="line"><span class="keyword">import</span> EventBus <span class="keyword">from</span> <span class="string">'EventBus.js'</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> EventBus()</span><br><span class="line">e.on()</span><br><span class="line">e.trigger()</span><br><span class="line">e.off()</span><br></pre></td></tr></table></figure></p>
+<h2 id="表驱动编程"><a href="#表驱动编程" class="headerlink" title="表驱动编程"></a>表驱动编程</h2><p>表驱动是一种编程模式，从哈希表里查找信息而不是重复使用if…else语句。对于简单的情况，使用逻辑语句更加轻松直白，但对于复杂的逻辑链来说，表驱动有着更稳定的复杂度。下面这段代码有着极高的相似度和重复性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$button1.on(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="built_in">parseInt</span>($number.text())</span><br><span class="line">    n += <span class="number">1</span></span><br><span class="line">    localStorage.setItem(<span class="string">'n'</span>,n)</span><br><span class="line">    $number.text(n)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$button2.on(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="built_in">parseInt</span>($number.text())</span><br><span class="line">    n -= <span class="number">1</span></span><br><span class="line">    localStorage.setItem(<span class="string">'n'</span>,n)</span><br><span class="line">    $number.text(n)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$button3.on(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="built_in">parseInt</span>($number.text())</span><br><span class="line">    n *= <span class="number">2</span></span><br><span class="line">    localStorage.setItem(<span class="string">'n'</span>,n)</span><br><span class="line">    $number.text(n)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$button4.on(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="built_in">parseInt</span>($number.text())</span><br><span class="line">    n /= <span class="number">2</span></span><br><span class="line">    localStorage.setItem(<span class="string">'n'</span>,n)</span><br><span class="line">    $number.text(n)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>用事件委托<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c = &#123;</span><br><span class="line">    init(container) &#123;</span><br><span class="line">        v.init(container)</span><br><span class="line">        v.render(m.data.n)</span><br><span class="line">        c.bindEvents()</span><br><span class="line">    &#125;</span><br><span class="line">    bindEvents() &#123;</span><br><span class="line">        v.el.on(<span class="string">'click'</span>,<span class="string">'#add1'</span>,()=&gt;&#123;</span><br><span class="line">            m.data.n += <span class="number">1</span></span><br><span class="line">            v.render(m.data.n)</span><br><span class="line">        &#125;)</span><br><span class="line">        v.el.on(<span class="string">'click'</span>,<span class="string">'#minus1'</span>,()=&gt;&#123;</span><br><span class="line">            m.data.n -= <span class="number">1</span></span><br><span class="line">            v.render(m.data.n)</span><br><span class="line">        &#125;)</span><br><span class="line">        v.el.on(<span class="string">'click'</span>,<span class="string">'#mul2'</span>,()=&gt;&#123;</span><br><span class="line">            m.data.n *= <span class="number">2</span></span><br><span class="line">            v.render(m.data.n)</span><br><span class="line">        &#125;)</span><br><span class="line">        v.el.on(<span class="string">'click'</span>,<span class="string">'#divide2'</span>,()=&gt;&#123;</span><br><span class="line">            m.data.n /= <span class="number">2</span></span><br><span class="line">            v.render(m.data.n)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用哈希表存储&lt;按钮&gt;及按下按钮对应的&lt;事件&gt;，这样使得数据和事件清晰的分离<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c = &#123;</span><br><span class="line">    events:&#123;</span><br><span class="line">        <span class="string">'click #add1'</span>:<span class="string">'add'</span>,</span><br><span class="line">        <span class="string">'click #minus1'</span>:<span class="string">'minus'</span>,</span><br><span class="line">        <span class="string">'click #mul2'</span>:<span class="string">'mul'</span>,</span><br><span class="line">        <span class="string">'click #divide2'</span>:<span class="string">'div'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    add()&#123;</span><br><span class="line">        m.update( data: &#123;<span class="attr">n</span>:m.data.n + <span class="number">1</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    minus()&#123;</span><br><span class="line">        m.update( data:&#123;<span class="attr">n</span>:m.data.n - <span class="number">1</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    mul()&#123;</span><br><span class="line">        m.update( data: &#123;<span class="attr">n</span>:m.data.n * <span class="number">2</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    div()&#123;</span><br><span class="line">        m.update(data: &#123;<span class="attr">n</span>:m.data.n / <span class="number">2</span>&#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    autoBindEvents()&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> c.events)&#123;</span><br><span class="line">            <span class="keyword">const</span> value = c[c.events[key]]</span><br><span class="line">            <span class="keyword">const</span> spaceIndex = key.indexOf(<span class="string">' '</span>)</span><br><span class="line">            <span class="keyword">const</span> part1 = key.slice(<span class="number">0</span>,spaceIndex)</span><br><span class="line">            <span class="keyword">const</span> part2 = key.slice(spaceIndex + <span class="number">1</span>)</span><br><span class="line">            v.el.on(part1,part2,value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><ul>
+<li>将一段复杂的代码依据一定的规则抽取成一个个较小规模的块，块与块之间相对独立</li>
+<li>“块”可以理解为实现特定功能的一组方法</li>
+<li>块的内部数据(变量)与实现(函数)是私有的，只是向外部暴露了一些接口使其与外部其它模块通讯</li>
+<li>ES6语法中引入import和export来导入和导出模块<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> c  <span class="comment">// 默认导出方式</span></span><br><span class="line"><span class="keyword">export</span> &#123;name, draw, reportArea, reportPerimeter&#125;  <span class="comment">// 导出所有想要导出的模块，使用花括号并用逗号分隔</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入</span></span><br><span class="line"><span class="keyword">import</span> xxx <span class="keyword">from</span> <span class="string">'./app1.js'</span></span><br><span class="line"><span class="keyword">import</span> &#123;name, draw, reportArea, reportPerimeter&#125; <span class="keyword">from</span> <span class="string">'/js-examples/modules/basic-modules/modules/square.mjs'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="事不过三抽象思维"><a href="#事不过三抽象思维" class="headerlink" title="事不过三抽象思维"></a>事不过三抽象思维</h3><ul>
+<li>同样的代码写三遍，就应该抽成一个函数</li>
+<li>同样的属性写的三遍，就应该做成共用属性（原型或类）</li>
+<li>同样的原型写三遍，就应该用继承<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">        [<span class="string">'data'</span>,<span class="string">'update'</span>,<span class="string">'create'</span>,<span class="string">'get'</span>].forEach(key)=&gt;&#123;</span><br><span class="line">            <span class="keyword">if</span>(key <span class="keyword">in</span> options)&#123;</span><br><span class="line">                <span class="keyword">this</span>[key] = options[key]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    create()&#123;</span><br><span class="line">        <span class="built_in">console</span> &amp;&amp; <span class="built_in">console</span>.error &amp;&amp; <span class="built_in">console</span>.error(<span class="string">'还没实现 create'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>()&#123;</span><br><span class="line">        <span class="built_in">console</span> &amp;&amp; <span class="built_in">console</span>.error &amp;&amp; <span class="built_in">console</span>.error(<span class="string">'还没实现 delete'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    update()&#123;</span><br><span class="line">        <span class="built_in">console</span> &amp;&amp; <span class="built_in">console</span>.error &amp;&amp; <span class="built_in">console</span>.error(<span class="string">'还没实现 update'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        <span class="built_in">console</span> &amp;&amp; <span class="built_in">console</span>.error &amp;&amp; <span class="built_in">console</span>.error(<span class="string">'还没实现 get'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/11/this指向及绑定方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2047,174 +2213,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/浅析URL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/浅析URL/" itemprop="url">浅析URL</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-09T11:28:24+08:00">
-                2022-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  315
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p>含义：统一资源定位符(Uniform Resource Locator)，URL=协议+域名或IP+端口号（默认的不显示）+路径+查询参数+锚点<br><img src="https://s2.loli.net/2022/03/09/p7I2Hr3CWZuQTom.png" alt="4158026B-FDAA-400D-B35A-C568BEA9F806.png"></p>
-<ul>
-<li>通过改变<strong>路径</strong>可以请求不同的页面</li>
-</ul>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTML</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS</a></p>
-<ul>
-<li>通过改变<strong>查询参数</strong>可以访问同一个页面不同内容</li>
-</ul>
-<p><a href="https://www.baidu.com/s?wd=hello" target="_blank" rel="noopener">https://www.baidu.com/s?wd=hello</a></p>
-<p><a href="https://www.baidu.com/s?wd=parent" target="_blank" rel="noopener">https://www.baidu.com/s?wd=parent</a></p>
-<ul>
-<li>通过改变<strong>锚点</strong>可以看到同一页面同一内容的不同位置</li>
-</ul>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS#%E6%95%99%E7%A8%8B#教程" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS#%E6%95%99%E7%A8%8B#教程</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS#%E5%8F%82%E8%80%83%E4%B9%A6#参考书" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS#%E5%8F%82%E8%80%83%E4%B9%A6#参考书</a></p>
-<p>注意：</p>
-<p>锚点不支持中文，所以会把中文变成#%E6%95%99%E7%A8%8B</p>
-<p>锚点不会发送给服务器，所以在开发者工具的Network面板看不到</p>
-<hr>
-<p>IP网际协议（Internet Protocol）也叫域名，是一串字符串，用来定位一台设备</p>
-<p>端口（80、443等）用来定位一个设备的服务，IP和端口缺一不可</p>
-<p>使用<strong>ping</strong>命令<strong>获取IP地址</strong><br><img src="https://s2.loli.net/2022/03/09/pcKEJ3QUFZBYmuh.png" alt="6A8E48A0-D484-47E6-A982-A91EE7CA601D.png"></p>
-<p>使用<strong>nslookup</strong>命令<strong>解析域名</strong></p>
-<p><img src="https://s2.loli.net/2022/03/09/bBQvkqshZ4CGVnx.png" alt="E08CB706-EBF4-4C29-AEE1-E7283D5E4D30.png"></p>
-<hr>
-<p>DNS域名系统（Domain Name System），将域名（baidu.com）和它的IP地址（220.181.38.148）对应起来</p>
-<p>用<strong>curl</strong>命令<strong>发HTTP请求</strong><br><img src="https://s2.loli.net/2022/03/09/6astOqfmZX7v12N.png" alt="B6748EB5-3697-43BD-8D77-19A693C08EF9.png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2271,7 +2269,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
