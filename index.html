@@ -339,6 +339,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/29/vue数据响应式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/29/vue数据响应式/" itemprop="url">vue数据响应式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-29T12:34:34+08:00">
+                2022-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,050
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="问题引入：Vue对data做了什么"><a href="#问题引入：Vue对data做了什么" class="headerlink" title="问题引入：Vue对data做了什么"></a>问题引入：Vue对data做了什么</h2><h4 id="data值变了，例子中-myData-在传入前和传入后，两次log出的结果不一样"><a href="#data值变了，例子中-myData-在传入前和传入后，两次log出的结果不一样" class="headerlink" title="data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样"></a>data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myData = &#123;</span><br><span class="line">    n: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(myData)  <span class="comment">// 第一次log出的结果为 &#123; n: 0 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">    data: myData,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123; n &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="add"&gt; +10 &lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        add() &#123;</span><br><span class="line">            <span class="keyword">this</span>.n += <span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    myData.n += <span class="number">10</span></span><br><span class="line">    <span class="built_in">console</span>.log(myData)  <span class="comment">// 第二次log出的结果为 &#123; n:(...) &#125;</span></span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter"><a href="#为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter" class="headerlink" title="为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter"></a>为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj0 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求一：拿到姓名</span></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名;</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1.姓名());  <span class="comment">// 姓名() 是一个函数，后面的括号不能省略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求二：函数后面的括号如何去掉</span></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    <span class="keyword">get</span> 姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj2.姓名);  <span class="comment">// 在函数名前加上get，在调用时函数可以不加括号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求三：函数可以被“写”</span></span><br><span class="line"><span class="keyword">let</span> obj3 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    <span class="keyword">get</span> 姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> 姓名(xxx) &#123;</span><br><span class="line">        <span class="keyword">this</span>.姓 = xxx[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">this</span>.名 = xxx.slice(<span class="number">1</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line">obj3.姓名 = <span class="string">"高媛媛"</span>  <span class="comment">// set的用法</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`姓 <span class="subst">$&#123;obj3.姓&#125;</span>，名 <span class="subst">$&#123;obj3.名&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(obj3)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s3.bmp.ovh/imgs/2022/04/29/1f06e0e511399430.png" alt></p>
+<ul>
+<li>虽然在声明obj3时并未声明 姓名 这样的属性，但你确实可以对它进行读、写的操作，打印出的结果为 <strong><em>姓名: (…)</em></strong></li>
+<li>n: (…) 的意思就是并不存在n这样的属性，但是它身上有一个 get n 和 set n 来模拟对n的读写操作</li>
+</ul>
+<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h2><ul>
+<li>定义完一个对象后，想要在它身上再添加额外的getter和setter时使用Object.defineProperty()</li>
+<li>可以给对象添加属性value，也可以添加getter、setter</li>
+<li>getter、setter用于对属性的读写进行监控<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _xxx = <span class="number">0</span>  <span class="comment">// 声明一个容器，用来存放 xxx 的值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj1, <span class="string">'xxx'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> _xxx</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value) &#123;</span><br><span class="line">        _xxx = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)  <span class="comment">// 给obj1增加了一个名为 xxx 的属性，值为0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用Object-defineProperty-完成几个需求"><a href="#使用Object-defineProperty-完成几个需求" class="headerlink" title="使用Object.defineProperty()完成几个需求"></a>使用Object.defineProperty()完成几个需求</h3><h4 id="需求一：用Object-defineProperty-定义n的值"><a href="#需求一：用Object-defineProperty-定义n的值" class="headerlink" title="需求一：用Object.defineProperty()定义n的值"></a>需求一：用Object.defineProperty()定义n的值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data0 = &#123;</span><br><span class="line">    n: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data1 = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data1, <span class="string">'n'</span>, &#123;</span><br><span class="line">    value: <span class="number">0</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求1：<span class="subst">$&#123;data1.n&#125;</span>`</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="需求二：n不能小于0，即data2-n-1-无效，data2-n-1有效"><a href="#需求二：n不能小于0，即data2-n-1-无效，data2-n-1有效" class="headerlink" title="需求二：n不能小于0，即data2.n = -1 无效，data2.n = 1有效"></a>需求二：n不能小于0，即data2.n = -1 无效，data2.n = 1有效</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data2 = &#123;&#125;</span><br><span class="line"></span><br><span class="line">data2._n = <span class="number">0</span>  <span class="comment">// 用来存储 n 的值</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data2, <span class="string">'n'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._n</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(value &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">this</span>._n = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line">data2.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span> 设置为-1 失败`</span>)</span><br><span class="line"></span><br><span class="line">data2.n = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span> 设置为 1 成功`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 问题：虽然这样可以满足需求，但如果有人直接修改data2._n的值怎么办？</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用代理，解决上述问题"><a href="#使用代理，解决上述问题" class="headerlink" title="使用代理，解决上述问题"></a>使用代理，解决上述问题</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data3 = proxy(&#123;  <span class="comment">// 括号里是匿名对象，无法访问</span></span><br><span class="line">    data: &#123;<span class="attr">n</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy</span>(<span class="params">&#123;data&#125;</span>)</span>&#123;  <span class="comment">/* 解构赋值 */</span></span><br><span class="line">    <span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj,<span class="string">'n'</span>, &#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">            <span class="keyword">return</span> data.n</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            <span class="keyword">if</span>(value &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">            data.n = value</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> obj  <span class="comment">// obj就是代理：对obj做什么，就会同样作用在 data3 身上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// data3 就是 obj</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3： <span class="subst">$&#123;data3.n&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">data3.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3 ： <span class="subst">$&#123;data3.n&#125;</span> 设置为-1 失败`</span>);</span><br><span class="line"></span><br><span class="line">data3.n = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3 ： <span class="subst">$&#123;data3.n&#125;</span> 设置为1 成功`</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他"><a href="#需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他" class="headerlink" title="需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他"></a>需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他</h4><p>下面是可以被用户修改的myData<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myData = &#123; <span class="attr">n</span>:<span class="number">0</span> &#125;  <span class="comment">// 声明一个引用，这样就可以绕过代理，直接修改myData</span></span><br><span class="line"><span class="keyword">let</span> data4 = proxy(&#123; <span class="attr">data</span>: myData &#125;)  <span class="comment">// 括号里是匿名对象，无法访问</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`杠精：<span class="subst">$&#123;data4.n&#125;</span>`</span>)</span><br><span class="line">myData.n = <span class="number">-1</span>  <span class="comment">// 绕过代理，成功修改了myData</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`杠精：<span class="subst">$&#123;data4.n&#125;</span>, 设置为-1成功了`</span>)</span><br></pre></td></tr></table></figure></p>
+<p>解决绕过代理的问题，不要让用户擅自修改myData<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myData5 = &#123;<span class="attr">n</span>:<span class="number">0</span>&#125;</span><br><span class="line"><span class="keyword">let</span> data5 = proxy2(&#123; <span class="attr">data</span>:myData5 &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy2</span>(<span class="params">&#123;data&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = data.n</span><br><span class="line">    <span class="comment">// 省略了delete.data.n，使用Object.defineProperty时会覆盖掉</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, <span class="string">'n'</span>, &#123;</span><br><span class="line">        <span class="keyword">get</span>() &#123;</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue)&#123;</span><br><span class="line">            <span class="keyword">if</span>(newValue &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">            value = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;  <span class="comment">// 上面几句，可以监听 data</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'n'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> data.n</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(value&lt;<span class="number">0</span>)<span class="keyword">return</span></span><br><span class="line">        data.n = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> obj  <span class="comment">// 用 obj 对 data 进行代理</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line">myData5.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span> 设置为 -1 失败`</span>)</span><br><span class="line"></span><br><span class="line">myData5.n = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span> 设置为 1 成功`</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="什么是代理"><a href="#什么是代理" class="headerlink" title="什么是代理"></a>什么是代理</h4><ul>
+<li>对 myData 对象的属性进行读写，全权由另一个对象vm来负责</li>
+<li>那么，vm 就是 myData 的代理</li>
+<li><p>不用 myData.n 偏偏用 this.n 或 vm.n</p>
+<h3 id="new-Vue做了什么"><a href="#new-Vue做了什么" class="headerlink" title="new Vue做了什么"></a>new Vue做了什么</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 看着很相似的两行代码</span></span><br><span class="line"><span class="keyword">let</span> data4 = proxy(&#123;<span class="attr">data</span>: myData4&#125;)</span><br><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;<span class="attr">data</span>: myData&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会让vm成为myData的代理，可以通过 this.myData 访问到 myData</p>
+</li>
+<li>会监听 myData 的所有属性（赋值给value，再通过getter、setter添加虚拟属性）</li>
+<li>监听的目的是防止 myData 属性改变，vm不知道</li>
+<li>当vm监测到myData发生改变，就调用render(data)，刷新视图<br><img src="https://s3.bmp.ovh/imgs/2022/04/29/fb62a7959d5ff0ff.png" alt></li>
+</ul>
+<h2 id="Vue的数据响应式"><a href="#Vue的数据响应式" class="headerlink" title="Vue的数据响应式"></a>Vue的数据响应式</h2><h3 id="Vue-的-data-是响应式的"><a href="#Vue-的-data-是响应式的" class="headerlink" title="Vue 的 data 是响应式的"></a>Vue 的 data 是响应式的</h3><ul>
+<li>const vm = new Vue({data: {n:0}})</li>
+<li>如果修改 vm.n ，那么UI中的n就会进行响应</li>
+<li>Vue是通过 Object.defineProperty 来实现数据响应式的<h3 id="Vue-的-data-的bug"><a href="#Vue-的-data-的bug" class="headerlink" title="Vue 的 data 的bug"></a>Vue 的 data 的bug</h3>问题：如果一开始在data中并未对 b 进行赋值，Vue就不能对它进行代理或监听<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        obj: &#123;</span><br><span class="line">            a: <span class="number">0</span>  <span class="comment">// obj.a 会被Vue监听和代理</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123; obj.b &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="setB"&gt;set b&lt;/button&gt;</span></span><br><span class="line"><span class="string">            &lt;button @click="addB"&gt;b+1&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        setB()&#123;</span><br><span class="line">            <span class="keyword">this</span>.obj.b = <span class="number">1</span>  <span class="comment">// 这种写法页面中不会显示b的值，因为Vue没办法监听一开始就未设置在data中的obj.b</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 解决方法，使用Vue.set 或 this.$set</span></span><br><span class="line">            <span class="built_in">console</span>.log(Vue.set === <span class="keyword">this</span>.$<span class="keyword">set</span>)  // 下面两种写法等价</span><br><span class="line">            Vue.<span class="keyword">set</span>(this.obj, 'b', 1)  </span><br><span class="line">            this.$<span class="keyword">set</span>(this.obj, 'b', 1)</span><br><span class="line">        &#125;,</span><br><span class="line">        addB() &#123;</span><br><span class="line">            <span class="keyword">this</span>.obj.b += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>解决方法：使用 Vue.set 或 this.$set，作用是：</p>
+<ul>
+<li>新增key</li>
+<li>自动创建监听和代理</li>
+<li>触发ui进行更新(但并不是立即更新)</li>
+</ul>
+<p>eg：this.$set(this.object, ‘m’, 10)</p>
+<h3 id="如果data是一个数组呢？"><a href="#如果data是一个数组呢？" class="headerlink" title="如果data是一个数组呢？"></a>如果data是一个数组呢？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        array: [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]  <span class="comment">// array: &#123;0:'a', 1:'b', 2:'c'&#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123;array&#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="setD"&gt;setD&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        setD() &#123;  <span class="comment">// 3种 setD 的方法</span></span><br><span class="line">            <span class="keyword">this</span>.array[<span class="number">3</span>] = <span class="string">'d'</span>  <span class="comment">// 页面中不会出现'd' Vue不能监测到新增的d</span></span><br><span class="line">            <span class="keyword">this</span>.$<span class="keyword">set</span>(this.array, 3, 'd')  // 可以用$<span class="keyword">set</span>的方法，但每次都用<span class="keyword">set</span>会不会很麻烦</span><br><span class="line">            this.array.push('d')  // 这个push方法被尤雨溪篡改了，有两个作用：一是调用以前的push方法，二是增加代理和监听</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当你将一个数组传给Vue的data，Vue会对这个数组进行篡改，它会在原来数组对象中间增加一层原型，这个原型上有7个方法</p>
+<p>来看看push是如何被篡改的？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VueArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123;</span><br><span class="line">    push(...args) &#123;</span><br><span class="line">        <span class="keyword">const</span> oldLength = <span class="keyword">this</span>.length  <span class="comment">// this就是当前数组</span></span><br><span class="line">        <span class="keyword">super</span>.push(...args)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'你 push 了'</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = oldLength; i&lt;<span class="keyword">this</span>.length; i++)&#123;  <span class="comment">// i为所有push的元素的下标，遍历旧数组到新数组的下标</span></span><br><span class="line">            Vue.set(<span class="keyword">this</span>, i, <span class="keyword">this</span>[i])  <span class="comment">// 在当前数组this上，添加i项，每项i的值为this[i]，并将每个新增的key通过Vue.set告知给Vue</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="对象中新增的key"><a href="#对象中新增的key" class="headerlink" title="对象中新增的key"></a>对象中新增的key</h3><ul>
+<li>Vue没办法事先监听和代理</li>
+<li>要使用 Vue.set / this.$set 来新增key，创建监听和代理、更新ui</li>
+<li>最好的方式是将属性都写出来，不要新增key。但数组没办法做到不新增key<h3 id="数组中新增的key"><a href="#数组中新增的key" class="headerlink" title="数组中新增的key"></a>数组中新增的key</h3></li>
+<li>可以用 Vue.set / this.$set 来新增key，创建监听和代理、更新ui</li>
+<li>但尤玉溪篡改了数组的7个API方便对数组进行增删</li>
+<li>这7个API会自动处理监听和代理、更新ui</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/vue起步/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1960,239 +2154,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/13/JS基本语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/13/JS基本语法/" itemprop="url">JS基本语法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-13T16:47:15+08:00">
-                2022-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1,545
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="表达式与语句"><a href="#表达式与语句" class="headerlink" title="表达式与语句"></a>表达式与语句</h2><ul>
-<li>表达式（expression），指一个为了得到返回值的计算式</li>
-</ul>
-<ol>
-<li>1+2表达式的值为3</li>
-<li>add(1,2)表达式的值为函数的返回值</li>
-<li>console.log表达式的值为函数本身</li>
-<li>console.log(3)表达式的值为undefined，3是控制台打印出来的</li>
-</ol>
-<ul>
-<li>语句（statement）是为了完成某种任务而进行的操作，下面是两行赋值语句。语句以分号结尾，一个分号就表示一个语句结束，多个语句可以写在一行内。</li>
-</ul>
-<ol>
-<li>var a = 1; </li>
-<li>var b = ‘abc’;</li>
-</ol>
-<ul>
-<li>语句和表达式的区别</li>
-</ul>
-<ol>
-<li>语句主要为了进行某种操作，一般情况下不需要返回值</li>
-<li>表达式是为了得到返回值，一定会返回一个值</li>
-<li>语句一般会改变环境（声明、赋值）</li>
-</ol>
-<hr>
-<h2 id="大小写敏感"><a href="#大小写敏感" class="headerlink" title="大小写敏感"></a>大小写敏感</h2><ul>
-<li>var a 与 var A 是不同的</li>
-<li>object 与 Object 是不同的</li>
-</ul>
-<hr>
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><ul>
-<li>大部分空格没有实际意义</li>
-<li>加回车大部分时候也不影响，只有在<strong>return</strong>后面不能加回车</li>
-</ul>
-<p><img src="https://s2.loli.net/2022/03/13/Q5X7VzRblZKP61f.png" alt="WechatIMG2334.png"></p>
-<hr>
-<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul>
-<li>第一个字符，可以是unicode字母 $ _ 中文（但不可以以数字开头）</li>
-<li>变量名是标识符<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> $ = <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> _____ = <span class="number">6</span></span><br><span class="line"><span class="keyword">var</span> 你好 = ‘hi’</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h2 id="区块block"><a href="#区块block" class="headerlink" title="区块block"></a>区块block</h2><p>将代码包裹在一起，且常与if/for/while合用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">let</span> b = <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><ul>
-<li>语法</li>
-</ul>
-<ol>
-<li>if(表达式) {语句1}else{语句2}</li>
-<li>{}在语句只有一句的时候可以省略，但不建议这样做</li>
-</ol>
-<ul>
-<li>变态情况</li>
-</ul>
-<ol>
-<li>表达式里可以很变态，如 a = 1</li>
-<li>语句1里可以非常变态，如嵌套if else</li>
-<li>语句2里可以非常变态，如嵌套 if else</li>
-<li>缩进也可以很变态，如面试题常常下套<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span></span><br><span class="line"><span class="keyword">if</span>(a = <span class="number">1</span>)&#123; <span class="comment">// a = 1，指将1赋值给a </span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a是1'</span>)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a不是1'</span>)</span><br><span class="line">    <span class="comment">// 会打印出 a是1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span>(a === <span class="number">2</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a等于2'</span>)</span><br><span class="line">    <span class="comment">// 会打印出 a等于2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span>(a === <span class="number">2</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>); <span class="built_in">console</span>.log(<span class="string">'b'</span>)</span><br><span class="line">    <span class="comment">// 会打印出b</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span>(a === <span class="number">2</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>),<span class="built_in">console</span>.log(<span class="string">'b'</span>)</span><br><span class="line">    <span class="comment">// 什么也不打印</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>推荐写法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(表达式) &#123;</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span>(表达式)&#123;</span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>次推荐写法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(表达式) &#123;</span><br><span class="line">        <span class="keyword">return</span> 表达式</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(表达式) &#123;</span><br><span class="line">        <span class="keyword">return</span> 表达式</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> 表达式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (fruit)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"banana"</span>:</span><br><span class="line">        执行语句<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span>:<span class="string">"apple"</span>:</span><br><span class="line">        执行语句<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        执行语句<span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据变量fruit的值，选择执行相应的case。如果所有case都不符合，则执行最后的default部分</span></span><br><span class="line"><span class="comment">// 不要省略break，否则不会退出switch，并且会继续执行下一个case</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="问号冒号表达式"><a href="#问号冒号表达式" class="headerlink" title="问号冒号表达式"></a>问号冒号表达式</h2><p>语法：条件? 表达式1:表达式2<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> even = (n % <span class="number">2</span> === <span class="number">0</span>) ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
-<p>等同于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> even;</span><br><span class="line"><span class="keyword">if</span>(n % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    even = <span class="literal">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    even = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可视为if…else…的简写形式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> msg = <span class="string">'数字'</span> + n + <span class="string">'是'</span> + (n%<span class="number">2</span> === <span class="number">0</span> ? <span class="string">'偶数'</span> : <span class="string">'奇数'</span>);</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="amp-amp-短路逻辑"><a href="#amp-amp-短路逻辑" class="headerlink" title="&amp;&amp;短路逻辑"></a>&amp;&amp;短路逻辑</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.f1 &amp;&amp; <span class="built_in">console</span>.log(<span class="string">'f1存在'</span>);</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.f1)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'f1存在'</span>);</span><br><span class="line">&#125; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fn &amp;&amp; fn() <span class="comment">// 表示fn若存在，就调用fn()</span></span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (fn) &#123;</span><br><span class="line">    fn();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>‘A &amp;&amp; B’: 若A为真，就执行B，若A为假，就不执行后面的</li>
-<li>‘A &amp;&amp; B &amp;&amp; C &amp;&amp; D’: 取第一个假值或D</li>
-</ul>
-<hr>
-<h2 id="短路逻辑"><a href="#短路逻辑" class="headerlink" title="||短路逻辑"></a>||短路逻辑</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a || b</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( !a )&#123;</span><br><span class="line">    b</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>常常用于给a设定一个兜底值</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a = a || <span class="number">100</span></span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a)&#123;</span><br><span class="line">    a = a</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>&#123;</span><br><span class="line">    a = <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!a) &#123;  <span class="comment">// 若a不存在，就给a赋值为100</span></span><br><span class="line">    a = <span class="number">100</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>语法： while(条件){语句};</p>
-<p>包括一个循环条件和一段代码块，只要条件为真，就不断循环执行代码块。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i&lt;<span class="number">10</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'i当前为'</span> + i);</span><br><span class="line">    i = i+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">0.1</span></span><br><span class="line"><span class="keyword">while</span>(a ! == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">    a = a + <span class="number">0.1</span></span><br><span class="line">&#125;  <span class="comment">//  由于浮点数的问题，会死循环</span></span><br></pre></td></tr></table></figure>
-<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>for语句是循环命令的另一种形式（while循环的方便写法），可以指定循环的起点、终点和终止条件。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125; <span class="comment">// 打印出 1 2 3 4 5</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">101</span>; j&lt;<span class="number">100</span>; j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i===<span class="number">5</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;  <span class="comment">// 打印出0，1,2,3,4,5,6,7,8,9  break只会退出距离它最近的for循环，外面的for循环中的i会执行完</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ;i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// setTimeout是过一段时间执行，结果打印出5个5，在for循环结束后i的值为5，setTimeout作为循环体，会等到for循环执行完后，才会打印</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将var换成let，就会打印出0,1,2,3,4</span></span><br></pre></td></tr></table></figure>
-<h3 id="break和continue语句"><a href="#break和continue语句" class="headerlink" title="break和continue语句"></a>break和continue语句</h3><p>两者都具有跳转作用，可以让代码不按既有的顺序执行。</p>
-<p>break 是跳出离它最近的一个循环。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;  <span class="comment">// 执行到i等于3，就会跳出循环。 打印出0,1,2,3</span></span><br></pre></td></tr></table></figure></p>
-<p>continue 会立即跳出当前的一次循环，返回循环结构的头部，开始下一轮循环。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>)&#123;</span><br><span class="line">  i++;</span><br><span class="line">  <span class="keyword">if</span> (i % <span class="number">2</span> === <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'i 当前为：'</span> + i);</span><br><span class="line">&#125;  <span class="comment">// 打印出i为奇数的值，i为偶数时，直接进入下一轮循环</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="label标签"><a href="#label标签" class="headerlink" title="label标签"></a>label标签</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    a:<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一个代码块里有一个label，a是一个label，语句是1<strong>*它并不是一个对象</strong></p>
-<p>label标签通常与 break语句 和 continue语句 配合使用，跳出特定循环</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">foo: &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">break</span> foo;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'本行不会输出'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>);  <span class="comment">// 当执行到break foo就会跳出代码块，打印出1,2</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2249,7 +2210,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

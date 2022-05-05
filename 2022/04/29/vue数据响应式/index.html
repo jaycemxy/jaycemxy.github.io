@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joyce" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="问题引入：Vue对data做了什么data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样123456789101112131415161718192021222324const myData = &amp;#123;    n: 0&amp;#125;console.log(myData)  // 第一次log出的结果为 &amp;#123; n: 0 &amp;#125;const vm = new">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue数据响应式">
+<meta property="og:url" content="http://yoursite.com/2022/04/29/vue数据响应式/index.html">
+<meta property="og:site_name" content="Joyce">
+<meta property="og:description" content="问题引入：Vue对data做了什么data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样123456789101112131415161718192021222324const myData = &amp;#123;    n: 0&amp;#125;console.log(myData)  // 第一次log出的结果为 &amp;#123; n: 0 &amp;#125;const vm = new">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/04/29/1f06e0e511399430.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/04/29/fb62a7959d5ff0ff.png">
+<meta property="og:updated_time" content="2022-05-05T02:42:10.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue数据响应式">
+<meta name="twitter:description" content="问题引入：Vue对data做了什么data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样123456789101112131415161718192021222324const myData = &amp;#123;    n: 0&amp;#125;console.log(myData)  // 第一次log出的结果为 &amp;#123; n: 0 &amp;#125;const vm = new">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/04/29/1f06e0e511399430.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/29/vue数据响应式/">
+
+
+
+
+
+  <title>vue数据响应式 | Joyce</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?42153a091eecc0aaa77d053b24b7dabe";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/jaycemxy" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joyce</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/29/vue数据响应式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue数据响应式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-29T12:34:34+08:00">
+                2022-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,050
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="问题引入：Vue对data做了什么"><a href="#问题引入：Vue对data做了什么" class="headerlink" title="问题引入：Vue对data做了什么"></a>问题引入：Vue对data做了什么</h2><h4 id="data值变了，例子中-myData-在传入前和传入后，两次log出的结果不一样"><a href="#data值变了，例子中-myData-在传入前和传入后，两次log出的结果不一样" class="headerlink" title="data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样"></a>data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myData = &#123;</span><br><span class="line">    n: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(myData)  <span class="comment">// 第一次log出的结果为 &#123; n: 0 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">    data: myData,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123; n &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="add"&gt; +10 &lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        add() &#123;</span><br><span class="line">            <span class="keyword">this</span>.n += <span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    myData.n += <span class="number">10</span></span><br><span class="line">    <span class="built_in">console</span>.log(myData)  <span class="comment">// 第二次log出的结果为 &#123; n:(...) &#125;</span></span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter"><a href="#为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter" class="headerlink" title="为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter"></a>为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj0 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求一：拿到姓名</span></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名;</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1.姓名());  <span class="comment">// 姓名() 是一个函数，后面的括号不能省略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求二：函数后面的括号如何去掉</span></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    <span class="keyword">get</span> 姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj2.姓名);  <span class="comment">// 在函数名前加上get，在调用时函数可以不加括号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求三：函数可以被“写”</span></span><br><span class="line"><span class="keyword">let</span> obj3 = &#123;</span><br><span class="line">    姓: <span class="string">"高"</span>,</span><br><span class="line">    名: <span class="string">"圆圆"</span>,</span><br><span class="line">    <span class="keyword">get</span> 姓名() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.姓 + <span class="keyword">this</span>.名;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> 姓名(xxx) &#123;</span><br><span class="line">        <span class="keyword">this</span>.姓 = xxx[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">this</span>.名 = xxx.slice(<span class="number">1</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line">obj3.姓名 = <span class="string">"高媛媛"</span>  <span class="comment">// set的用法</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`姓 <span class="subst">$&#123;obj3.姓&#125;</span>，名 <span class="subst">$&#123;obj3.名&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(obj3)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s3.bmp.ovh/imgs/2022/04/29/1f06e0e511399430.png" alt></p>
+<ul>
+<li>虽然在声明obj3时并未声明 姓名 这样的属性，但你确实可以对它进行读、写的操作，打印出的结果为 <strong><em>姓名: (…)</em></strong></li>
+<li>n: (…) 的意思就是并不存在n这样的属性，但是它身上有一个 get n 和 set n 来模拟对n的读写操作</li>
+</ul>
+<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h2><ul>
+<li>定义完一个对象后，想要在它身上再添加额外的getter和setter时使用Object.defineProperty()</li>
+<li>可以给对象添加属性value，也可以添加getter、setter</li>
+<li>getter、setter用于对属性的读写进行监控<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _xxx = <span class="number">0</span>  <span class="comment">// 声明一个容器，用来存放 xxx 的值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj1, <span class="string">'xxx'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> _xxx</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value) &#123;</span><br><span class="line">        _xxx = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)  <span class="comment">// 给obj1增加了一个名为 xxx 的属性，值为0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用Object-defineProperty-完成几个需求"><a href="#使用Object-defineProperty-完成几个需求" class="headerlink" title="使用Object.defineProperty()完成几个需求"></a>使用Object.defineProperty()完成几个需求</h3><h4 id="需求一：用Object-defineProperty-定义n的值"><a href="#需求一：用Object-defineProperty-定义n的值" class="headerlink" title="需求一：用Object.defineProperty()定义n的值"></a>需求一：用Object.defineProperty()定义n的值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data0 = &#123;</span><br><span class="line">    n: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data1 = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data1, <span class="string">'n'</span>, &#123;</span><br><span class="line">    value: <span class="number">0</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求1：<span class="subst">$&#123;data1.n&#125;</span>`</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="需求二：n不能小于0，即data2-n-1-无效，data2-n-1有效"><a href="#需求二：n不能小于0，即data2-n-1-无效，data2-n-1有效" class="headerlink" title="需求二：n不能小于0，即data2.n = -1 无效，data2.n = 1有效"></a>需求二：n不能小于0，即data2.n = -1 无效，data2.n = 1有效</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data2 = &#123;&#125;</span><br><span class="line"></span><br><span class="line">data2._n = <span class="number">0</span>  <span class="comment">// 用来存储 n 的值</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data2, <span class="string">'n'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._n</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(value &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">this</span>._n = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line">data2.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span> 设置为-1 失败`</span>)</span><br><span class="line"></span><br><span class="line">data2.n = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求2：<span class="subst">$&#123;data2.n&#125;</span> 设置为 1 成功`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 问题：虽然这样可以满足需求，但如果有人直接修改data2._n的值怎么办？</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用代理，解决上述问题"><a href="#使用代理，解决上述问题" class="headerlink" title="使用代理，解决上述问题"></a>使用代理，解决上述问题</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data3 = proxy(&#123;  <span class="comment">// 括号里是匿名对象，无法访问</span></span><br><span class="line">    data: &#123;<span class="attr">n</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy</span>(<span class="params">&#123;data&#125;</span>)</span>&#123;  <span class="comment">/* 解构赋值 */</span></span><br><span class="line">    <span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj,<span class="string">'n'</span>, &#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">            <span class="keyword">return</span> data.n</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            <span class="keyword">if</span>(value &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">            data.n = value</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> obj  <span class="comment">// obj就是代理：对obj做什么，就会同样作用在 data3 身上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// data3 就是 obj</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3： <span class="subst">$&#123;data3.n&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">data3.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3 ： <span class="subst">$&#123;data3.n&#125;</span> 设置为-1 失败`</span>);</span><br><span class="line"></span><br><span class="line">data3.n = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求3 ： <span class="subst">$&#123;data3.n&#125;</span> 设置为1 成功`</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他"><a href="#需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他" class="headerlink" title="需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他"></a>需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他</h4><p>下面是可以被用户修改的myData<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myData = &#123; <span class="attr">n</span>:<span class="number">0</span> &#125;  <span class="comment">// 声明一个引用，这样就可以绕过代理，直接修改myData</span></span><br><span class="line"><span class="keyword">let</span> data4 = proxy(&#123; <span class="attr">data</span>: myData &#125;)  <span class="comment">// 括号里是匿名对象，无法访问</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`杠精：<span class="subst">$&#123;data4.n&#125;</span>`</span>)</span><br><span class="line">myData.n = <span class="number">-1</span>  <span class="comment">// 绕过代理，成功修改了myData</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`杠精：<span class="subst">$&#123;data4.n&#125;</span>, 设置为-1成功了`</span>)</span><br></pre></td></tr></table></figure></p>
+<p>解决绕过代理的问题，不要让用户擅自修改myData<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myData5 = &#123;<span class="attr">n</span>:<span class="number">0</span>&#125;</span><br><span class="line"><span class="keyword">let</span> data5 = proxy2(&#123; <span class="attr">data</span>:myData5 &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy2</span>(<span class="params">&#123;data&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = data.n</span><br><span class="line">    <span class="comment">// 省略了delete.data.n，使用Object.defineProperty时会覆盖掉</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, <span class="string">'n'</span>, &#123;</span><br><span class="line">        <span class="keyword">get</span>() &#123;</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue)&#123;</span><br><span class="line">            <span class="keyword">if</span>(newValue &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">            value = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;  <span class="comment">// 上面几句，可以监听 data</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'n'</span>, &#123;</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> data.n</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(value&lt;<span class="number">0</span>)<span class="keyword">return</span></span><br><span class="line">        data.n = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> obj  <span class="comment">// 用 obj 对 data 进行代理</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line">myData5.n = <span class="number">-1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span> 设置为 -1 失败`</span>)</span><br><span class="line"></span><br><span class="line">myData5.n = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`需求4：<span class="subst">$&#123;data4.n&#125;</span> 设置为 1 成功`</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="什么是代理"><a href="#什么是代理" class="headerlink" title="什么是代理"></a>什么是代理</h4><ul>
+<li>对 myData 对象的属性进行读写，全权由另一个对象vm来负责</li>
+<li>那么，vm 就是 myData 的代理</li>
+<li><p>不用 myData.n 偏偏用 this.n 或 vm.n</p>
+<h3 id="new-Vue做了什么"><a href="#new-Vue做了什么" class="headerlink" title="new Vue做了什么"></a>new Vue做了什么</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 看着很相似的两行代码</span></span><br><span class="line"><span class="keyword">let</span> data4 = proxy(&#123;<span class="attr">data</span>: myData4&#125;)</span><br><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;<span class="attr">data</span>: myData&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会让vm成为myData的代理，可以通过 this.myData 访问到 myData</p>
+</li>
+<li>会监听 myData 的所有属性（赋值给value，再通过getter、setter添加虚拟属性）</li>
+<li>监听的目的是防止 myData 属性改变，vm不知道</li>
+<li>当vm监测到myData发生改变，就调用render(data)，刷新视图<br><img src="https://s3.bmp.ovh/imgs/2022/04/29/fb62a7959d5ff0ff.png" alt></li>
+</ul>
+<h2 id="Vue的数据响应式"><a href="#Vue的数据响应式" class="headerlink" title="Vue的数据响应式"></a>Vue的数据响应式</h2><h3 id="Vue-的-data-是响应式的"><a href="#Vue-的-data-是响应式的" class="headerlink" title="Vue 的 data 是响应式的"></a>Vue 的 data 是响应式的</h3><ul>
+<li>const vm = new Vue({data: {n:0}})</li>
+<li>如果修改 vm.n ，那么UI中的n就会进行响应</li>
+<li>Vue是通过 Object.defineProperty 来实现数据响应式的<h3 id="Vue-的-data-的bug"><a href="#Vue-的-data-的bug" class="headerlink" title="Vue 的 data 的bug"></a>Vue 的 data 的bug</h3>问题：如果一开始在data中并未对 b 进行赋值，Vue就不能对它进行代理或监听<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        obj: &#123;</span><br><span class="line">            a: <span class="number">0</span>  <span class="comment">// obj.a 会被Vue监听和代理</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123; obj.b &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="setB"&gt;set b&lt;/button&gt;</span></span><br><span class="line"><span class="string">            &lt;button @click="addB"&gt;b+1&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        setB()&#123;</span><br><span class="line">            <span class="keyword">this</span>.obj.b = <span class="number">1</span>  <span class="comment">// 这种写法页面中不会显示b的值，因为Vue没办法监听一开始就未设置在data中的obj.b</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 解决方法，使用Vue.set 或 this.$set</span></span><br><span class="line">            <span class="built_in">console</span>.log(Vue.set === <span class="keyword">this</span>.$<span class="keyword">set</span>)  // 下面两种写法等价</span><br><span class="line">            Vue.<span class="keyword">set</span>(this.obj, 'b', 1)  </span><br><span class="line">            this.$<span class="keyword">set</span>(this.obj, 'b', 1)</span><br><span class="line">        &#125;,</span><br><span class="line">        addB() &#123;</span><br><span class="line">            <span class="keyword">this</span>.obj.b += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>解决方法：使用 Vue.set 或 this.$set，作用是：</p>
+<ul>
+<li>新增key</li>
+<li>自动创建监听和代理</li>
+<li>触发ui进行更新(但并不是立即更新)</li>
+</ul>
+<p>eg：this.$set(this.object, ‘m’, 10)</p>
+<h3 id="如果data是一个数组呢？"><a href="#如果data是一个数组呢？" class="headerlink" title="如果data是一个数组呢？"></a>如果data是一个数组呢？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        array: [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]  <span class="comment">// array: &#123;0:'a', 1:'b', 2:'c'&#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">            &#123;&#123;array&#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;button @click="setD"&gt;setD&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        setD() &#123;  <span class="comment">// 3种 setD 的方法</span></span><br><span class="line">            <span class="keyword">this</span>.array[<span class="number">3</span>] = <span class="string">'d'</span>  <span class="comment">// 页面中不会出现'd' Vue不能监测到新增的d</span></span><br><span class="line">            <span class="keyword">this</span>.$<span class="keyword">set</span>(this.array, 3, 'd')  // 可以用$<span class="keyword">set</span>的方法，但每次都用<span class="keyword">set</span>会不会很麻烦</span><br><span class="line">            this.array.push('d')  // 这个push方法被尤雨溪篡改了，有两个作用：一是调用以前的push方法，二是增加代理和监听</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当你将一个数组传给Vue的data，Vue会对这个数组进行篡改，它会在原来数组对象中间增加一层原型，这个原型上有7个方法</p>
+<p>来看看push是如何被篡改的？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VueArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123;</span><br><span class="line">    push(...args) &#123;</span><br><span class="line">        <span class="keyword">const</span> oldLength = <span class="keyword">this</span>.length  <span class="comment">// this就是当前数组</span></span><br><span class="line">        <span class="keyword">super</span>.push(...args)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'你 push 了'</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = oldLength; i&lt;<span class="keyword">this</span>.length; i++)&#123;  <span class="comment">// i为所有push的元素的下标，遍历旧数组到新数组的下标</span></span><br><span class="line">            Vue.set(<span class="keyword">this</span>, i, <span class="keyword">this</span>[i])  <span class="comment">// 在当前数组this上，添加i项，每项i的值为this[i]，并将每个新增的key通过Vue.set告知给Vue</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="对象中新增的key"><a href="#对象中新增的key" class="headerlink" title="对象中新增的key"></a>对象中新增的key</h3><ul>
+<li>Vue没办法事先监听和代理</li>
+<li>要使用 Vue.set / this.$set 来新增key，创建监听和代理、更新ui</li>
+<li>最好的方式是将属性都写出来，不要新增key。但数组没办法做到不新增key<h3 id="数组中新增的key"><a href="#数组中新增的key" class="headerlink" title="数组中新增的key"></a>数组中新增的key</h3></li>
+<li>可以用 Vue.set / this.$set 来新增key，创建监听和代理、更新ui</li>
+<li>但尤玉溪篡改了数组的7个API方便对数组进行增删</li>
+<li>这7个API会自动处理监听和代理、更新ui</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/25/vue起步/" rel="next" title="vue起步">
+                <i class="fa fa-chevron-left"></i> vue起步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODUzOC8xNTA2Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+            <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/mypic.png" alt="Joyce">
+            </a>
+            
+              <p class="site-author-name" itemprop="name">Joyce</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=71498163" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+              </ul>
+              <div id="days"></div>
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("08/02/2018 13:43:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+            </div>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题引入：Vue对data做了什么"><span class="nav-number">1.</span> <span class="nav-text">问题引入：Vue对data做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data值变了，例子中-myData-在传入前和传入后，两次log出的结果不一样"><span class="nav-number">1.0.1.</span> <span class="nav-text">data值变了，例子中 myData 在传入前和传入后，两次log出的结果不一样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter"><span class="nav-number">1.0.2.</span> <span class="nav-text">为什么两次log出的myData会不一致？需要先了解一下ES6中的getter和setter</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-defineProperty"><span class="nav-number">2.</span> <span class="nav-text">Object.defineProperty()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Object-defineProperty-完成几个需求"><span class="nav-number">2.1.</span> <span class="nav-text">使用Object.defineProperty()完成几个需求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#需求一：用Object-defineProperty-定义n的值"><span class="nav-number">2.1.1.</span> <span class="nav-text">需求一：用Object.defineProperty()定义n的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需求二：n不能小于0，即data2-n-1-无效，data2-n-1有效"><span class="nav-number">2.1.2.</span> <span class="nav-text">需求二：n不能小于0，即data2.n = -1 无效，data2.n = 1有效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用代理，解决上述问题"><span class="nav-number">2.1.3.</span> <span class="nav-text">使用代理，解决上述问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他"><span class="nav-number">2.1.4.</span> <span class="nav-text">需求四：解决绕过代理的问题，就算有人修改myData，也要拦截他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是代理"><span class="nav-number">2.1.5.</span> <span class="nav-text">什么是代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-Vue做了什么"><span class="nav-number">2.2.</span> <span class="nav-text">new Vue做了什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue的数据响应式"><span class="nav-number">3.</span> <span class="nav-text">Vue的数据响应式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-的-data-是响应式的"><span class="nav-number">3.1.</span> <span class="nav-text">Vue 的 data 是响应式的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-的-data-的bug"><span class="nav-number">3.2.</span> <span class="nav-text">Vue 的 data 的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果data是一个数组呢？"><span class="nav-number">3.3.</span> <span class="nav-text">如果data是一个数组呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象中新增的key"><span class="nav-number">4.1.</span> <span class="nav-text">对象中新增的key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组中新增的key"><span class="nav-number">4.2.</span> <span class="nav-text">数组中新增的key</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joyce</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
