@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-05-05T02:42:10.783Z</updated>
+  <updated>2022-05-08T03:48:56.505Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue中的computed和watch</title>
+    <link href="http://yoursite.com/2022/05/05/vue%E4%B8%AD%E7%9A%84computed%E5%92%8Cwatch/"/>
+    <id>http://yoursite.com/2022/05/05/vue中的computed和watch/</id>
+    <published>2022-05-05T05:10:23.000Z</published>
+    <updated>2022-05-08T03:48:56.505Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>vue数据响应式</title>
@@ -174,25 +193,6 @@
     <id>http://yoursite.com/2022/03/14/JS对象分类/</id>
     <published>2022-03-14T11:39:29.000Z</published>
     <updated>2022-03-15T07:20:28.759Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JS对象基本用法</title>
-    <link href="http://yoursite.com/2022/03/14/JS%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"/>
-    <id>http://yoursite.com/2022/03/14/JS对象基本用法/</id>
-    <published>2022-03-14T06:21:17.000Z</published>
-    <updated>2022-03-14T11:17:53.227Z</updated>
     
     <summary type="html">
     

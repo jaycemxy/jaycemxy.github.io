@@ -339,6 +339,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/JS对象基本用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/JS对象基本用法/" itemprop="url">JS对象基本用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-14T14:21:17+08:00">
+                2022-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  499
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="如何声明对象"><a href="#如何声明对象" class="headerlink" title="如何声明对象"></a>如何声明对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123; <span class="string">'name'</span>: <span class="string">'frank'</span>, <span class="string">'age'</span>: <span class="number">18</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123; <span class="string">'name'</span>:<span class="string">'frank'</span>, <span class="string">'age'</span>: <span class="number">18</span>&#125;)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>键名是字符串，不是标识符，可以包含任意字符</li>
+<li>引号可以省略，省略之后就只能写标识符</li>
+<li>就算引号省略，键名key永远都是字符串</li>
+</ol>
+<h2 id="删除对象的属性"><a href="#删除对象的属性" class="headerlink" title="删除对象的属性"></a>删除对象的属性</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> obj[<span class="string">'name'</span>]  <span class="comment">// 新手推荐写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> obj.name</span><br></pre></td></tr></table></figure>
+<p>注意区分’不含属性名’和’属性值为undefined’<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;  <span class="comment">// 不含属性xxx</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="string">'xxx'</span>: <span class="literal">undefined</span>&#125;  <span class="comment">// 含属性xxx，但值为undefined</span></span><br><span class="line"></span><br><span class="line">obj.xxx === <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line">obj2.xxx === <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="string">'xxx'</span> <span class="keyword">in</span> obj  <span class="comment">// false</span></span><br><span class="line"><span class="string">'xxx'</span> <span class="keyword">in</span> obj2  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">obj.xxx === <span class="literal">undefined</span> 不能断定 <span class="string">'xxx'</span> 是否为obj的属性</span><br><span class="line"></span><br><span class="line">应该使用<span class="string">'xxx'</span> <span class="keyword">in</span> obj</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看对象属性"><a href="#查看对象属性" class="headerlink" title="查看对象属性"></a>查看对象属性</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看自身属性</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj)  <span class="comment">// 自身属性</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj)  <span class="comment">// 自身属性值</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj)  <span class="comment">// 查看所有属性及属性值，返回键值对数组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看自身属性+共有属性</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.dir(obj)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断一个属性是否是自身属性</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="string">'name'</span>: <span class="string">'joyce'</span>, <span class="string">'age'</span>: <span class="number">25</span>, <span class="string">'gender'</span>: <span class="string">'women'</span>&#125;</span><br><span class="line"></span><br><span class="line">obj.hasOwnProperty(<span class="string">'toString'</span>)  <span class="comment">// false</span></span><br><span class="line">obj.hasOwnProperty(<span class="string">'name'</span>)  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看'name'属性是否在obj中，但不能断定是obj的自身属性还是共有属性</span></span><br><span class="line"><span class="string">'name'</span> <span class="keyword">in</span> obj <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看obj的一个属性</span></span><br><span class="line"></span><br><span class="line">obj.name</span><br><span class="line">obj[<span class="string">'name'</span>]  <span class="comment">// 两种写法均可，新手推荐第二种，键名是字符串而不是变量，新手容易与obj[name]混淆</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改或增加对象属性"><a href="#修改或增加对象属性" class="headerlink" title="修改或增加对象属性"></a>修改或增加对象属性</h2><ul>
+<li><p>修改或增加自身属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单个赋值</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;<span class="string">'name'</span>: <span class="string">'joyce'</span>&#125;</span><br><span class="line">obj.age = <span class="number">25</span></span><br><span class="line">obj[<span class="string">'hobby'</span>] = cooking</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量赋值</span></span><br><span class="line"><span class="built_in">Object</span>.assign(obj, &#123;<span class="string">'age'</span>: <span class="number">25</span>, <span class="string">'hobby'</span>: <span class="string">'cooking'</span>&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改或增加共有属性(原型)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> common = &#123;<span class="string">'nation'</span>:<span class="string">'China'</span>, <span class="string">'hair'</span>:<span class="string">'brown'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(common)  <span class="comment">// 以common为原型创建person</span></span><br><span class="line"><span class="built_in">Object</span>.assign(person, &#123;  <span class="comment">// 批量给person增加属性</span></span><br><span class="line">    <span class="string">'name'</span> :<span class="string">'joyce'</span>,</span><br><span class="line">    <span class="string">'age'</span> : <span class="number">25</span>,</span><br><span class="line">    <span class="string">'hobby'</span> : <span class="string">'cooking'</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改或增加共有属性（原型）的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.__proto__.toString = <span class="string">'yyy'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString = <span class="string">'yyy'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/13/JS基本语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1897,156 +2060,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/27/环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/27/环境配置/" itemprop="url">环境配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-27T20:18:32+08:00">
-                2018-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  521
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>mac环境配置<br>
-
-
-        
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/27/环境配置/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2103,7 +2116,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
