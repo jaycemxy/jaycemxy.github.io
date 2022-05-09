@@ -339,6 +339,232 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/vue模板、指令与修饰符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/vue模板、指令与修饰符/" itemprop="url">vue模板、指令与修饰符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-09T10:25:19+08:00">
+                2022-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,615
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vue模板语法"><a href="#Vue模板语法" class="headerlink" title="Vue模板语法"></a>Vue模板语法</h2><ol>
+<li>Vue完整版，写在HTML里<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"xxx"</span>&gt;</span></span><br><span class="line">    &#123;&#123;n&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"add"</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#xxx'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        n: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        add()&#123;</span><br><span class="line">            <span class="keyword">this</span>.n += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>Vue完整版，写在选项里</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">new Vue(&#123;</span></span><br><span class="line"><span class="regexp">    data: &#123;</span></span><br><span class="line"><span class="regexp">        n: 0</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    template: `</span></span><br><span class="line"><span class="regexp">        &lt;div&gt;</span></span><br><span class="line"><span class="regexp">            &#123;&#123; n &#125;&#125;</span></span><br><span class="line"><span class="regexp">            &lt;button @click="add"&gt;+1&lt;/</span>button&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    `,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">        add()&#123;</span></span><br><span class="line"><span class="regexp">            this.n += 1</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;).$mount('#app')</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Vue非完整版，配合xxx.vue文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">-- .vue文件 --</span><br><span class="line">&lt;template&gt;  // template标签里不是html而是xml（xml必须是闭合标签）</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &#123;&#123;n&#125;&#125;</span><br><span class="line">        &lt;button @click=&quot;add&quot;&gt;+1&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data()&#123;  &lt;!--- vue组件里的data必须是函数 --&gt;</span><br><span class="line">            return &#123;n: 0&#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            add() &#123;</span><br><span class="line">                this.n += 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- main.js文件 --</span><br><span class="line"><span class="keyword">import</span> Xxx <span class="keyword">from</span> <span class="string">'./xxx.vue'</span>  <span class="comment">// Xxx是一个导出的options对象，一般规定首字母大写</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    render: <span class="function"><span class="params">h</span> =&gt;</span> h(Xxx)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="模板里有哪些语法"><a href="#模板里有哪些语法" class="headerlink" title="模板里有哪些语法"></a>模板里有哪些语法</h2><p>我们把html模板叫做template</p>
+<h3 id="一、展示内容："><a href="#一、展示内容：" class="headerlink" title="一、展示内容："></a>一、展示内容：</h3><h4 id="1-表达式"><a href="#1-表达式" class="headerlink" title="1. 表达式"></a>1. 表达式</h4><ul>
+<li> 该表达式意为 把构造选项里data的 object.a 显示到HTML里</li>
+<li>NaN 可以写任何运算</li>
+<li> 可以调用函数，会在methods里找</li>
+<li>若值为 null、undefined 就不显示</li>
+</ul>
+<h4 id="2-html内容"><a href="#2-html内容" class="headerlink" title="2. html内容"></a>2. html内容</h4><ul>
+<li>假设 data.x 值为 <strong> hi </strong>，默认显示的时候就是<strong> hi </strong></li>
+<li>若想展示粗体的 hi ，使用<div v-html="x"></div></li>
+</ul>
+<h4 id="3-单纯想展示"><a href="#3-单纯想展示" class="headerlink" title="3. 单纯想展示"></a>3. 单纯想展示</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-pre</span>&gt;</span> &#123;&#123; n &#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>v-pre 不会对模板进行编译，就只是单纯展示字符</li>
+</ul>
+<h3 id="二、绑定属性："><a href="#二、绑定属性：" class="headerlink" title="二、绑定属性："></a>二、绑定属性：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--绑定src--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"xxx"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--缩写--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"xxx"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--绑定对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"&#123; border: '1px solid red', height: 100&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="三、绑定事件："><a href="#三、绑定事件：" class="headerlink" title="三、绑定事件："></a>三、绑定事件：</h3><h4 id="v-on-事件名"><a href="#v-on-事件名" class="headerlink" title="v-on:事件名"></a>v-on:事件名</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"add"</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  <span class="comment">&lt;!-- 点击后 运行add()--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"xxx(1)"</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  <span class="comment">&lt;!-- 点击后运行xxx(1)--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"n+=1"</span>&gt;</span>yyy<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  <span class="comment">&lt;!--- 点击后运行 n+=1 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 即发现函数就加括号调用它，否则将直接运行代码 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--缩写--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"add"</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="四、条件判断：什么时候出现在DOM数中"><a href="#四、条件判断：什么时候出现在DOM数中" class="headerlink" title="四、条件判断：什么时候出现在DOM数中"></a>四、条件判断：什么时候出现在DOM数中</h3><h4 id="if…else"><a href="#if…else" class="headerlink" title="if…else"></a>if…else</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"x&gt;0"</span>&gt;</span> 若x大于0，显示这个div <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">"x === 0"</span>&gt;</span> x为0 <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span> x小于0 <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>for(value,key) in 数组或对象<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--数组例子--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(u,index) in users"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 将users里的每一项以u和index代替，u表示数组里的值value，index表示下标</span></span><br><span class="line"><span class="comment">    使用时: 索引: &#123;&#123; index &#125;&#125;、值: &#123;&#123; u.name &#125;&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 对象例子 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(value,name) in obj"</span> <span class="attr">:key</span>=<span class="string">"name"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 一般来说使用了v-for，就必须有一个:key=""，且key须用一个不会重复的值 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="显示、隐藏："><a href="#显示、隐藏：" class="headerlink" title="显示、隐藏："></a>显示、隐藏：</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-show</span>=<span class="string">"n%2 === 0"</span>&gt;</span> n为偶数 <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 若v-show里的条件满足则展示这个div，下面与上面的写法等价 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"&#123; display: n%2 === 0 ? 'block' : 'none' &#125;"</span>&gt;</span> n为偶数 <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="指令Directive"><a href="#指令Directive" class="headerlink" title="指令Directive"></a>指令Directive</h2><h3 id="什么是指令"><a href="#什么是指令" class="headerlink" title="什么是指令"></a>什么是指令</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--以 v- 开头的就是指令--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-text</span>=<span class="string">"x"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"x"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
+<li>v-指令名:参数=值，如 v-on:click=’add’</li>
+<li>如果值里没有特殊字符，则可以不加引号</li>
+<li>有些指令没有参数和值，如 v-pre</li>
+<li>有些指令没有值，如 v-on:click.prevent 阻止默认事件<br><a @click.prevent href="https://google.com" target="_blank" rel="noopener">google</a></li>
+</ul>
+<hr>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><h3 id="一些指令支持修饰符"><a href="#一些指令支持修饰符" class="headerlink" title="一些指令支持修饰符"></a>一些指令支持修饰符</h3><ul>
+<li>@click.stop=”add” 阻止事件传播/冒泡</li>
+<li>@click.prevent=”add” 阻止默认动作</li>
+<li>@click.stop.prevent=”add” 既阻止事件传播，也阻止默认动作<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data:&#123;</span><br><span class="line">        n:<span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">        &#123;&#123;n&#125;&#125;</span></span><br><span class="line"><span class="string">        &lt;a @click.prevent="x" href="https://google.com"&gt;google&lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;input @input="y"/&gt;</span></span><br><span class="line"><span class="string">        &lt;input @keypress="z" /&gt;</span></span><br><span class="line"><span class="string">        &lt;button @click=add&gt;+1&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        add()&#123;</span><br><span class="line">            <span class="keyword">this</span>.n += <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        x()&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'xxx'</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        y(e)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(e.target.value)</span><br><span class="line">        &#125;,</span><br><span class="line">        z(e)&#123;</span><br><span class="line">            <span class="keyword">if</span>(e.keyCode === <span class="number">13</span>)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'用户打了回车'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述例子用修饰符的简单写法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">        &lt;input @keypress.13 === "y" /&gt; </span></span><br><span class="line"><span class="string">        &lt;input @keypress.enter === "y" /&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        y(e)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'用户打了回车'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// keyCode很难记，比如 13是回车，1是49，所以使用 alias别名，如 @keypress.enter</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>具体可参考官方文档：</p>
+<p><a href="https://cn.vuejs.org/v2/guide/events.html?#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/events.html?#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6</a></p>
+<h3 id="有多少修饰符呢？"><a href="#有多少修饰符呢？" class="headerlink" title="有多少修饰符呢？"></a>有多少修饰符呢？</h3><ul>
+<li>v-on 支持的有 .{keyCode | keyAlias} .stop .prevent .capture(在捕获阶段监听) .self .once（只会触发一次的事件） .passive .native</li>
+<li>快捷键相关 .ctrl .alt .shift .meta .exact</li>
+<li>鼠标相关 .left .right .middle</li>
+<li>v-bind 支持的有 .prop .camel .sync</li>
+<li>v-model 支持的有 .lazy .number .trim</li>
+</ul>
+<h3 id="Vue需要重点了解的修饰符"><a href="#Vue需要重点了解的修饰符" class="headerlink" title="Vue需要重点了解的修饰符"></a>Vue需要重点了解的修饰符</h3><h4 id="click-stop-”xxx”-阻止事件冒泡"><a href="#click-stop-”xxx”-阻止事件冒泡" class="headerlink" title="@click.stop=”xxx” 阻止事件冒泡"></a>@click.stop=”xxx” 阻止事件冒泡</h4><ul>
+<li><p>由于冒泡机制，给元素绑定点击事件的时候，也会触发父级元素的绑定事件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"shout(2)"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"shout(1)"</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">shout(e)&#123;</span><br><span class="line">    console.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 1</span><br><span class="line">// 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@click.stop 可以阻止事件冒泡，相当于调用了 event.stopPropagation()</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"shout(2)"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.stop</span>=<span class="string">"shout(1)"</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">// 只输出1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="click-prevent-”xxx”-阻止默认事件"><a href="#click-prevent-”xxx”-阻止默认事件" class="headerlink" title="@click.prevent=”xxx” 阻止默认事件"></a>@click.prevent=”xxx” 阻止默认事件</h4><ul>
+<li>@click.prevent用于阻止默认事件，相当于写 event.preventDefault()<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click.prevent</span> <span class="attr">href</span>=<span class="string">"https://google.com"</span>&gt;</span>google<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">//  点击链接不会跳转</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="sync-修饰符"><a href="#sync-修饰符" class="headerlink" title=".sync 修饰符"></a>.sync 修饰符</h2><p>场景描述:</p>
+<ul>
+<li>爸爸给儿子钱，儿子要花钱怎么办？ 儿子打电话(触发事件)，向爸爸要钱</li>
+</ul>
+<p>Vue规则:</p>
+<ul>
+<li>组件不能修改 props 外部数据</li>
+<li>this.$emit 可以触发事件，并传参</li>
+<li>$event 可以获取 $emit 传来的参数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 父组件 App.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;app&quot;&gt;</span><br><span class="line">        App.vue 我现在有 &#123;&#123;total&#125;&#125;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;Child :money=&quot;total&quot; v-on:update:money=&quot;total = $event&quot;/&gt;</span><br><span class="line">        // 等价于 &lt;Child :money.sync=&quot;total&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import Child from &apos;./Child.vue&apos;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;total:10000&#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        components: &#123;Child&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    .app&#123;</span><br><span class="line">        border: 3px solid red;</span><br><span class="line">        padding: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 子组件Child.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;</span><br><span class="line">        &#123;&#123;money&#125;&#125;</span><br><span class="line">        &lt;button @click=&quot;$emit(&apos;update:money&apos;,money - 100)&quot;&gt;</span><br><span class="line">            &lt;span&gt;花钱&lt;/span&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        props:[&quot;money&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    .child &#123;</span><br><span class="line">        border:3px solid green</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;$emit(&apos;update:money&apos;, money - 100)&quot;&gt;&lt;/button&gt;</span><br><span class="line">第一步： 儿子用 $emit 触发&apos;update:money&apos;事件，并传入参数 &apos;money - 100&apos;, 告诉父亲钱还剩 money - 100</span><br><span class="line"></span><br><span class="line">&lt;Child :money=&quot;total&quot; v-on:update:money=&quot;total = $event&quot;/&gt;</span><br><span class="line">第二步： 父亲用 v-on:&apos;update:money&apos; 绑定事件，监听 update:money, 并用 $event 获取参数</span><br><span class="line"></span><br><span class="line">由于这样的代码场景非常常见，为了简化，便有了语法糖 .sync</span><br><span class="line">&lt;Child :money.sync=&quot;total&quot; /&gt; 等价于 &lt;Child :money=&quot;total&quot; v-on:update:money=&quot;total = $event&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/05/vue中的computed和watch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1954,217 +2180,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/JS对象分类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/14/JS对象分类/" itemprop="url">JS对象分类</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-14T19:39:29+08:00">
-                2022-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1,148
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Square</span>(<span class="params">width</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.width = width;</span><br><span class="line">&#125;</span><br><span class="line">Square.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="keyword">this</span>.width;</span><br><span class="line">&#125;</span><br><span class="line">Square.prototype.getLength = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = <span class="keyword">new</span> Square(<span class="number">5</span>)  <span class="comment">// 使用new操作调用构造函数，创建一个对象</span></span><br></pre></td></tr></table></figure>
-<h4 id="构造函数Square"><a href="#构造函数Square" class="headerlink" title="构造函数Square"></a>构造函数Square</h4><ul>
-<li>Square函数本身负责给对象本身增加自身属性</li>
-<li>Square.prototype负责创建对象的共有属性</li>
-</ul>
-<h4 id="new-Square-自动帮你做了四件事"><a href="#new-Square-自动帮你做了四件事" class="headerlink" title="new Square 自动帮你做了四件事"></a>new Square 自动帮你做了四件事</h4><ol>
-<li>自动创建了一个空对象</li>
-<li>自动为这个空对象关联原型，原型地址为Square.prototype</li>
-<li>自动将空对象作为 this关键字 运行构造函数</li>
-<li>自动 return this</li>
-</ol>
-<h4 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h4><ul>
-<li>构造函数，首字母大写</li>
-<li>被构造出来的对象，首字母小写</li>
-<li>new 后面的函数，使用名词形式 eg: new Person()、new Circle()</li>
-</ul>
-<h4 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Circle</span>(<span class="params">radius</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.radius = radius;</span><br><span class="line">&#125;</span><br><span class="line">Circle.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius, <span class="number">2</span>) * <span class="built_in">Math</span>.PI;</span><br><span class="line">&#125;</span><br><span class="line">Circle.prototype.getLength = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.radius * <span class="number">2</span> * <span class="built_in">Math</span>.PI;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> Circle(<span class="number">5</span>);</span><br><span class="line">circle.radius</span><br><span class="line">circle.getArea();</span><br><span class="line">circle.getLength();</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="原型公式-JS里唯一的一个公式"><a href="#原型公式-JS里唯一的一个公式" class="headerlink" title="原型公式(JS里唯一的一个公式)"></a>原型公式(JS里唯一的一个公式)</h2><h4 id="规律"><a href="#规律" class="headerlink" title="规律"></a>规律</h4><ul>
-<li>let obj = new Object() 原型是 Object.prototype</li>
-<li>let arr = new Array() 原型是 Array.prototype</li>
-<li>let square = new Square() 原型是 Square.prototype</li>
-<li>let fn = new Function() 原型是 Function.prototype<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4></li>
-<li>你是谁构造的，你的原型就是谁的 prototype属性所对应的对象<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4></li>
-<li>对象.<strong>proto</strong> === 其构造函数.prototype</li>
-</ul>
-<hr>
-<h2 id="JS中的类"><a href="#JS中的类" class="headerlink" title="JS中的类"></a>JS中的类</h2><h4 id="类型-VS-类"><a href="#类型-VS-类" class="headerlink" title="类型 VS 类"></a>类型 VS 类</h4><ul>
-<li>类型是JS数据的分类，包含7种数据类型（string、number、bool、symbol、undefined、null、object）</li>
-<li>类是针对对象的分类，常见的有（Array、Function、Date）<h4 id="为什么对象需要分类"><a href="#为什么对象需要分类" class="headerlink" title="为什么对象需要分类"></a>为什么对象需要分类</h4></li>
-<li>有很多对象拥有一样的属性和行为（函数），需要把他们归为一类，如 square1 和 square2，这样创建类似对象的时候就很方便</li>
-<li>还有很多对象拥有其他的属性和行为，所以就需要不同的分类。比如 Square / Circle / Rect 就是不同的分类，Array / Function 也是不同的分类</li>
-</ul>
-<h4 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h4><ul>
-<li><p>定义一个数组</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">// 数组包含元素1,2,3</span></span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);  <span class="comment">// 数组长度为3</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组对象的自身属性<br>‘0’ ‘1’ ‘2’ ‘length’，属性名没有数字，只有字符串</p>
-</li>
-<li>数组对象的共用属性<br>‘push’ ‘pop’ ‘join’ ‘shift’ ‘unshift’</li>
-</ul>
-<h4 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h4><ul>
-<li><p>定义一个函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br><span class="line"><span class="keyword">let</span> fn2 = <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function">(<span class="params">x,y</span>) =&gt;</span> x+y</span><br><span class="line"><span class="keyword">let</span> fn = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x+y'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数对象的自身属性<br>‘name’ ‘length’</p>
-</li>
-<li>函数对象的共用属性<br>‘call’ ‘apply’ ‘bind’</li>
-</ul>
-<hr>
-<h2 id="ES6-class新语法"><a href="#ES6-class新语法" class="headerlink" title="ES6 class新语法"></a>ES6 class新语法</h2><p>用class重写circle<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(radius)&#123;</span><br><span class="line">        <span class="keyword">this</span>.radius = radius</span><br><span class="line">    &#125;</span><br><span class="line">    getArea()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius,<span class="number">2</span>) * <span class="built_in">Math</span>.PI</span><br><span class="line">    &#125;</span><br><span class="line">    getLength()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.radius * <span class="number">2</span> * <span class="built_in">Math</span>.PI</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> Circle(<span class="number">5</span>)</span><br><span class="line">circle.radius</span><br><span class="line">circle.getArea</span><br><span class="line">circle.getLength</span><br></pre></td></tr></table></figure></p>
-<h2 id="JS终极一问"><a href="#JS终极一问" class="headerlink" title="JS终极一问"></a>JS终极一问</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. window 是谁构造的</span><br><span class="line"></span><br><span class="line">Window</span><br><span class="line">可通过 constructor属性 查看构造者</span><br><span class="line">window.__proto__ === Window.prototype</span><br><span class="line"></span><br><span class="line">2.window.Object 是谁构造的</span><br><span class="line"></span><br><span class="line">window.Function</span><br><span class="line">因为所有函数都是由 window.Function 构造出来的</span><br><span class="line">window.Object.constructor === window.Function</span><br><span class="line"></span><br><span class="line">3. window.Function 是谁构造的</span><br><span class="line"></span><br><span class="line">window.Function</span><br><span class="line">因为所有函数都是由window.function构造的</span><br><span class="line">自己构造自己？</span><br><span class="line">浏览器构造了Function，然后指定它的构造者是自己</span><br></pre></td></tr></table></figure>
-<h2 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h2><ol>
-<li>关于 「原型」 ，正确的是</li>
-</ol>
-<ul>
-<li>「x 的原型」等价于「x.<strong>proto</strong> 所指的对象」 ，有时为了方便，我们可以认为「x 的原型」等价于「x.<strong>proto</strong> 」</li>
-<li>一个对象的原型指的是这个对象与其他同类对象的公有属性的集合，比如 obj1 和 ob2 同时拥有 toString / valueOf，那么 toString / valueOf 等属性组成的对象，就是 obj1 和 obj2 的原型，这个原型的地址一般储存在构造函数的 prototype 里</li>
-<li>x.<strong>proto</strong>和 Object.prototype 存储着同一个对象的地址，这个对象就是 x 的原型</li>
-<li>每个对象都有原型，但除了「根对象 Object.prototype」比较特殊，Object.prototype 这个对象的原型为空 null</li>
-</ul>
-<ol start="2">
-<li>关于 prototype 属性，正确的有</li>
-</ol>
-<ul>
-<li>所有函数一出生就有一个 prototype 属性（除了箭头函数）</li>
-<li>所有 prototype 一出生就有一个 constructor 属性</li>
-<li>所有 constructor 属性一出生就保存了对应的函数的地址</li>
-<li>如果一个函数不是构造函数，它依然拥有 prototype 属性，只不过这个属性暂时没什么用</li>
-<li>如果一个对象不是函数，那么这个对象一般来说没有 prototype 属性，但这个对象一般一定会有 <strong>proto</strong> 属性</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2221,7 +2236,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

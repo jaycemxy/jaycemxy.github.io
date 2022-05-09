@@ -339,6 +339,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/JS对象分类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/JS对象分类/" itemprop="url">JS对象分类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-14T19:39:29+08:00">
+                2022-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,148
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Square</span>(<span class="params">width</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.width = width;</span><br><span class="line">&#125;</span><br><span class="line">Square.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="keyword">this</span>.width;</span><br><span class="line">&#125;</span><br><span class="line">Square.prototype.getLength = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = <span class="keyword">new</span> Square(<span class="number">5</span>)  <span class="comment">// 使用new操作调用构造函数，创建一个对象</span></span><br></pre></td></tr></table></figure>
+<h4 id="构造函数Square"><a href="#构造函数Square" class="headerlink" title="构造函数Square"></a>构造函数Square</h4><ul>
+<li>Square函数本身负责给对象本身增加自身属性</li>
+<li>Square.prototype负责创建对象的共有属性</li>
+</ul>
+<h4 id="new-Square-自动帮你做了四件事"><a href="#new-Square-自动帮你做了四件事" class="headerlink" title="new Square 自动帮你做了四件事"></a>new Square 自动帮你做了四件事</h4><ol>
+<li>自动创建了一个空对象</li>
+<li>自动为这个空对象关联原型，原型地址为Square.prototype</li>
+<li>自动将空对象作为 this关键字 运行构造函数</li>
+<li>自动 return this</li>
+</ol>
+<h4 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h4><ul>
+<li>构造函数，首字母大写</li>
+<li>被构造出来的对象，首字母小写</li>
+<li>new 后面的函数，使用名词形式 eg: new Person()、new Circle()</li>
+</ul>
+<h4 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Circle</span>(<span class="params">radius</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.radius = radius;</span><br><span class="line">&#125;</span><br><span class="line">Circle.prototype.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius, <span class="number">2</span>) * <span class="built_in">Math</span>.PI;</span><br><span class="line">&#125;</span><br><span class="line">Circle.prototype.getLength = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.radius * <span class="number">2</span> * <span class="built_in">Math</span>.PI;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> Circle(<span class="number">5</span>);</span><br><span class="line">circle.radius</span><br><span class="line">circle.getArea();</span><br><span class="line">circle.getLength();</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="原型公式-JS里唯一的一个公式"><a href="#原型公式-JS里唯一的一个公式" class="headerlink" title="原型公式(JS里唯一的一个公式)"></a>原型公式(JS里唯一的一个公式)</h2><h4 id="规律"><a href="#规律" class="headerlink" title="规律"></a>规律</h4><ul>
+<li>let obj = new Object() 原型是 Object.prototype</li>
+<li>let arr = new Array() 原型是 Array.prototype</li>
+<li>let square = new Square() 原型是 Square.prototype</li>
+<li>let fn = new Function() 原型是 Function.prototype<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4></li>
+<li>你是谁构造的，你的原型就是谁的 prototype属性所对应的对象<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4></li>
+<li>对象.<strong>proto</strong> === 其构造函数.prototype</li>
+</ul>
+<hr>
+<h2 id="JS中的类"><a href="#JS中的类" class="headerlink" title="JS中的类"></a>JS中的类</h2><h4 id="类型-VS-类"><a href="#类型-VS-类" class="headerlink" title="类型 VS 类"></a>类型 VS 类</h4><ul>
+<li>类型是JS数据的分类，包含7种数据类型（string、number、bool、symbol、undefined、null、object）</li>
+<li>类是针对对象的分类，常见的有（Array、Function、Date）<h4 id="为什么对象需要分类"><a href="#为什么对象需要分类" class="headerlink" title="为什么对象需要分类"></a>为什么对象需要分类</h4></li>
+<li>有很多对象拥有一样的属性和行为（函数），需要把他们归为一类，如 square1 和 square2，这样创建类似对象的时候就很方便</li>
+<li>还有很多对象拥有其他的属性和行为，所以就需要不同的分类。比如 Square / Circle / Rect 就是不同的分类，Array / Function 也是不同的分类</li>
+</ul>
+<h4 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h4><ul>
+<li><p>定义一个数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">// 数组包含元素1,2,3</span></span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);  <span class="comment">// 数组长度为3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组对象的自身属性<br>‘0’ ‘1’ ‘2’ ‘length’，属性名没有数字，只有字符串</p>
+</li>
+<li>数组对象的共用属性<br>‘push’ ‘pop’ ‘join’ ‘shift’ ‘unshift’</li>
+</ul>
+<h4 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h4><ul>
+<li><p>定义一个函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br><span class="line"><span class="keyword">let</span> fn2 = <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function">(<span class="params">x,y</span>) =&gt;</span> x+y</span><br><span class="line"><span class="keyword">let</span> fn = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x+y'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数对象的自身属性<br>‘name’ ‘length’</p>
+</li>
+<li>函数对象的共用属性<br>‘call’ ‘apply’ ‘bind’</li>
+</ul>
+<hr>
+<h2 id="ES6-class新语法"><a href="#ES6-class新语法" class="headerlink" title="ES6 class新语法"></a>ES6 class新语法</h2><p>用class重写circle<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(radius)&#123;</span><br><span class="line">        <span class="keyword">this</span>.radius = radius</span><br><span class="line">    &#125;</span><br><span class="line">    getArea()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius,<span class="number">2</span>) * <span class="built_in">Math</span>.PI</span><br><span class="line">    &#125;</span><br><span class="line">    getLength()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.radius * <span class="number">2</span> * <span class="built_in">Math</span>.PI</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> circle = <span class="keyword">new</span> Circle(<span class="number">5</span>)</span><br><span class="line">circle.radius</span><br><span class="line">circle.getArea</span><br><span class="line">circle.getLength</span><br></pre></td></tr></table></figure></p>
+<h2 id="JS终极一问"><a href="#JS终极一问" class="headerlink" title="JS终极一问"></a>JS终极一问</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. window 是谁构造的</span><br><span class="line"></span><br><span class="line">Window</span><br><span class="line">可通过 constructor属性 查看构造者</span><br><span class="line">window.__proto__ === Window.prototype</span><br><span class="line"></span><br><span class="line">2.window.Object 是谁构造的</span><br><span class="line"></span><br><span class="line">window.Function</span><br><span class="line">因为所有函数都是由 window.Function 构造出来的</span><br><span class="line">window.Object.constructor === window.Function</span><br><span class="line"></span><br><span class="line">3. window.Function 是谁构造的</span><br><span class="line"></span><br><span class="line">window.Function</span><br><span class="line">因为所有函数都是由window.function构造的</span><br><span class="line">自己构造自己？</span><br><span class="line">浏览器构造了Function，然后指定它的构造者是自己</span><br></pre></td></tr></table></figure>
+<h2 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h2><ol>
+<li>关于 「原型」 ，正确的是</li>
+</ol>
+<ul>
+<li>「x 的原型」等价于「x.<strong>proto</strong> 所指的对象」 ，有时为了方便，我们可以认为「x 的原型」等价于「x.<strong>proto</strong> 」</li>
+<li>一个对象的原型指的是这个对象与其他同类对象的公有属性的集合，比如 obj1 和 ob2 同时拥有 toString / valueOf，那么 toString / valueOf 等属性组成的对象，就是 obj1 和 obj2 的原型，这个原型的地址一般储存在构造函数的 prototype 里</li>
+<li>x.<strong>proto</strong>和 Object.prototype 存储着同一个对象的地址，这个对象就是 x 的原型</li>
+<li>每个对象都有原型，但除了「根对象 Object.prototype」比较特殊，Object.prototype 这个对象的原型为空 null</li>
+</ul>
+<ol start="2">
+<li>关于 prototype 属性，正确的有</li>
+</ol>
+<ul>
+<li>所有函数一出生就有一个 prototype 属性（除了箭头函数）</li>
+<li>所有 prototype 一出生就有一个 constructor 属性</li>
+<li>所有 constructor 属性一出生就保存了对应的函数的地址</li>
+<li>如果一个函数不是构造函数，它依然拥有 prototype 属性，只不过这个属性暂时没什么用</li>
+<li>如果一个对象不是函数，那么这个对象一般来说没有 prototype 属性，但这个对象一般一定会有 <strong>proto</strong> 属性</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/JS对象基本用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,7 +1592,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">    <span class="selector-tag">table</span> &#123; </span><br><span class="line">        <span class="attribute">width</span>:<span class="number">500px</span>;</span><br><span class="line">        <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">        table-layout:auto;  //自动调整表格布局，表头信息多就宽一些</span><br><span class="line">        <span class="selector-tag">border-collapse</span>: <span class="selector-tag">collapse</span>;  </span><br><span class="line">        border-spacing: 0;  //修改border默认样式，即合并border并使border间距为0</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">tr</span>,<span class="selector-tag">td</span>,<span class="selector-tag">th</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>:<span class="number">2px</span> solid pink;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/03/03/4TvReQAsSqaHnEp.png" alt="WX20220303-211724@2x.png"></p>
 <hr>
-<h2 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h2><p>作用：发出get请求，展示一张图片<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"ccc"</span> <span class="attr">src</span>=<span class="string">"/brown-cat.jpeg"</span> <span class="attr">alt</span>=<span class="string">"棕色小猫"</span> <span class="attr">width</span>=<span class="string">"800"</span>&gt;</span>  //width和height是img标签的属性，！！切记只需设置一项，另外一个会自适应</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    ccc.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"恭喜加载成功啦~"</span>)</span></span><br><span class="line"><span class="javascript">    &#125;   <span class="comment">//监听图片是否加载成功</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    ccc.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"抱歉图片不见啦~"</span>);</span></span><br><span class="line"><span class="javascript">        ccc.src= <span class="string">"/404.png"</span>;</span></span><br><span class="line"><span class="javascript">    &#125;  <span class="comment">//监听图片是否加载失败</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="img标签"><a href="#img标签" class="headerlink" title="img标签"></a>img标签</h2><p>作用：发出get请求，展示一张图片<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"ccc"</span> <span class="attr">src</span>=<span class="string">"/brown-cat.jpeg"</span> <span class="attr">alt</span>=<span class="string">"棕色小猫"</span> <span class="attr">width</span>=<span class="string">"800"</span>&gt;</span>  //width和height是img标签的属性，！！切记只需设置一项，另外一个会自适应</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    ccc.onload = function()&#123;</span><br><span class="line">        console.log("恭喜加载成功啦~")</span><br><span class="line">    &#125;   //监听图片是否加载成功</span><br><span class="line"></span><br><span class="line">    ccc.onerror = function()&#123;</span><br><span class="line">        console.log("抱歉图片不见啦~");</span><br><span class="line">        ccc.src= "/404.png";</span><br><span class="line">    &#125;  //监听图片是否加载失败</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">        box-sizing: border-box;  //重置默认样式</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">img</span> &#123;</span><br><span class="line">        max-width: 100%;  //自适应宽度</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="form标签"><a href="#form标签" class="headerlink" title="form标签"></a>form标签</h2><p>作用：发出一个get或post请求，然后刷新页面<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/yyy"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">autocomplete</span>&gt;</span>  </span><br><span class="line">    //action用于控制请求哪个页面，method控制是POST还是GET</span><br><span class="line">    //autocomplete的用法：在form标签上加autocomplete，在input标签上加name=""</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>  //默认是提交，给value赋值改变默认</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span>  //form标签里必须含有一个type=submit的标签，这样表单才能提交</span><br></pre></td></tr></table></figure></p>
@@ -1910,156 +2121,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/深拷贝-浅拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joyce">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/mypic.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joyce">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/02/深拷贝-浅拷贝/" itemprop="url">深拷贝&&浅拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-02T18:36:40+08:00">
-                2019-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  547
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>浅拷贝和深拷贝的几种常见方法<br>
-
-
-        
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/02/深拷贝-浅拷贝/" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2116,7 +2177,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
