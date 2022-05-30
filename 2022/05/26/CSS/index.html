@@ -113,7 +113,7 @@
 
 
 
-  <meta name="keywords" content="闭包,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -126,18 +126,17 @@
 
 
 
-<meta name="description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
-<meta name="keywords" content="闭包">
+<meta name="description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你不知道的JS——闭包再理解">
-<meta property="og:url" content="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/index.html">
+<meta property="og:title" content="CSS">
+<meta property="og:url" content="http://yoursite.com/2022/05/26/CSS/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
+<meta property="og:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.231Z">
+<meta property="og:updated_time" content="2022-05-26T15:00:33.774Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你不知道的JS——闭包再理解">
-<meta name="twitter:description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
+<meta name="twitter:title" content="CSS">
+<meta name="twitter:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
 
 
 
@@ -167,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/">
+  <link rel="canonical" href="http://yoursite.com/2022/05/26/CSS/">
 
 
 
 
 
-  <title>你不知道的JS——闭包再理解 | Joyce</title>
+  <title>CSS | Joyce</title>
   
 
 
@@ -343,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/26/CSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joyce">
@@ -360,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">你不知道的JS——闭包再理解</h1>
+          <h1 class="post-title" itemprop="name headline">CSS</h1>
         
 
         <div class="post-meta">
@@ -372,8 +371,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T13:15:44+08:00">
-                2018-08-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-26T16:04:05+08:00">
+                2022-05-26
               </time>
             
 
@@ -406,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,095
+                  1,079
                 </span>
               
 
@@ -431,35 +430,62 @@
       
 
       
-        <p>你不知道的Javascript上卷中再次回顾闭包的概念<br><a id="more"></a><br>当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数当前是在词法作用域之外执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    function bar()&#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var baz = foo();</span><br><span class="line">baz();  // 2  这就是闭包的效果</span><br></pre></td></tr></table></figure>
-<p>函数bar的词法作用域能够访问foo的内部作用域，然后将bar函数本身当作一个值类型传递，在上面代码中，我们将bar所引用的函数对象本身当作返回值。</p>
-<p>在foo()执行后，其返回值（也就是内部的bar函数）赋值给变量baz并调用baz()，实质上只是通过不同的标识符引用调用了内部的函数bar()</p>
-<p>在foo()执行后通常会认为它的整个内部作用域会被销毁，因为JS引擎有垃圾回收释放内存的机制。然而，闭包的神奇之处就在于可以阻止作用域被销毁，因为bar函数仍在使用这个内部作用域，这个引用就叫闭包。</p>
-<p>总结：</p>
-<ul>
-<li>函数在定义时的词法作用域之外的地方被调用，而闭包使得函数可以继续访问定义时的词法作用域</li>
-<li>只要是对函数类型的值进行传递，在函数被调用的时候，都可以看到闭包的身影</li>
+        <h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h2><ul>
+<li>BFC(Block formatting context)，即块级格式化上下文</li>
+<li>一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素</li>
+<li>有时会有副作用，可以使用最新的<figure class="highlight plain"><figcaption><span>flow-root```来触发BFC</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">### 触发条件</span><br><span class="line">- float不为none（浮动元素）</span><br><span class="line">- overflow不为visible</span><br><span class="line">- position: absolute/fixed</span><br><span class="line">- display: inline-block/table-cell/flex/inline-flex</span><br><span class="line">- display: flex/inline-flex（弹性元素的直接子元素）</span><br><span class="line">### 用途</span><br><span class="line">- 防止margin合并</span><br><span class="line">- 清除浮动（用BFC可以包住它内部的浮动元素）</span><br><span class="line">- float+div 左右自适应布局</span><br><span class="line">eg.1 创建BFC包住内部浮动元素</span><br><span class="line">```html</span><br><span class="line">&lt;div id=&quot;demo1&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    #demo1 &#123;</span><br><span class="line">        border: 5px solid red;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">    .child &#123;</span><br><span class="line">        background: green;</span><br><span class="line">        float: left;</span><br><span class="line">        height: 100px;</span><br><span class="line">        width: 100px;</span><br><span class="line">        margin-top: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="setTimeout延时函数"><a href="#setTimeout延时函数" class="headerlink" title="setTimeout延时函数"></a>setTimeout延时函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function wait(message)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(message);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait(&quot;Hello, closure!&quot;);</span><br></pre></td></tr></table></figure>
-<p>将一个内部函数timer传递给setTimeout()，timer函数具有涵盖wait函数作用域的闭包，所以在函数外部，仍可以保有对message变量的引用</p>
-<h3 id="for循环和闭包"><a href="#for循环和闭包" class="headerlink" title="for循环和闭包"></a>for循环和闭包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;, i*1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对这段代码的预期是分别输出数字1～5，每秒一次，每次一个。当执行后发现，实际输出的效果是每秒一次的频率输出了5个6</p>
-<p>因为 setTimeout 是个异步函数，所以会先把循环全部执行完毕，这时候 i 就是 6 了，所以会输出一堆 6。（这段代码的循环终止条件是i不再&lt;=5，这时i首次成立的条件是i=6，而for循环中声明的i变量是全局变量，当打印事件发生的时候，i已经完成了赋值操作，即i=6，所以控制台打印的结果总是6）</p>
-<p>这里没有达到我们预期效果的原因在于，我们试图假设循环中每次迭代在运行时都会给自己捕获一个i的副本，但根据作用域的工作原理，虽然循环中的五个函数是在各个迭代中分别定义的，但它们都被封闭在一个共享的全局作用域中，因此实际上只有一个i</p>
-<p>在循环的过程中每个迭代都需要一个闭包作用域，下面有两种解决办法：</p>
-<ul>
-<li>创建一个变量用来在每次迭代中储存i的值（闭包的方式）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        var j = i;</span><br><span class="line">        setTimeout(function timer()&#123;</span><br><span class="line">            console.log(j);</span><br><span class="line">        &#125;, j*1000);</span><br><span class="line">    &#125;)();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>eg.2 做左右自适应布局<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    #demo2 .left&#123;</span><br><span class="line">        border: 5px solid green;</span><br><span class="line">        min-height: 300px;</span><br><span class="line">        width: 400px;</span><br><span class="line">        float: left;</span><br><span class="line">        margin-right: 20px;</span><br><span class="line">        &#125;</span><br><span class="line">    #demo2 .right&#123;</span><br><span class="line">        border: 5px solid pink;</span><br><span class="line">        min-height: 300px;</span><br><span class="line">        overflow: auto;  /*触发BFC*/</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2><ul>
+<li>若父元素的 height 没写死，只需padding: 10px 0; 就可将子元素垂直居中</li>
+<li>若父元素的高度写死，则需要其他方式来实现垂直居中</li>
+<li>一般建议能不写死height就不写死<h3 id="实现垂直居中的方式"><a href="#实现垂直居中的方式" class="headerlink" title="实现垂直居中的方式"></a>实现垂直居中的方式</h3></li>
+</ul>
+<ol>
+<li><p>flex布局</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">      一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">.parent&#123;</span><br><span class="line">    height: 600px;</span><br><span class="line">    border: 3px solid red;</span><br><span class="line">    </span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">&#125;</span><br><span class="line">.child&#123;</span><br><span class="line">    border: 3px solid green;</span><br><span class="line">    width: 300px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>translate -50%</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>margin-top -50%</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">150px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绝对定位 + margin: auto + 上下左右 0</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>table自带功能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">            一些内容一些内容</span><br><span class="line">        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line">        border: 2px solid green;</span><br><span class="line"><span class="css">        <span class="selector-tag">height</span>: 600<span class="selector-tag">px</span>;  <span class="comment">/* 父元素写死高度 */</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line">        border: 2px solid pink;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>让div变成table</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"table"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"td"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">            一些文字一些文字一些文字</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.table</span> &#123;</span></span><br><span class="line">        display: table;</span><br><span class="line">        height: 600px;</span><br><span class="line">        border: 2px solid green;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.td</span> &#123;</span></span><br><span class="line">        display: table-cell;</span><br><span class="line">        border: 2px solid yellow;</span><br><span class="line">        vertical-align: middle;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.child</span> &#123;</span></span><br><span class="line">        border: 1px solid pink;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用父元素的伪类（100%高度的伪类 + inline block）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">        一些内容一些内容一些内容一些内容一些内容一些内容一些内容一些内容一些内容一些内容</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line">        border: 2px solid green;</span><br><span class="line">        height: 600px;</span><br><span class="line">        text-align: center;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line">        border: 2px solid pink;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        width: 200px;</span><br><span class="line">        vertical-align: middle;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.parent</span><span class="selector-pseudo">:before</span> &#123;</span></span><br><span class="line">        content: '';</span><br><span class="line">        outline: 1px solid blue;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        height: 100%;</span><br><span class="line">        vertical-align: middle;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.parent</span><span class="selector-pseudo">:after</span> &#123;</span></span><br><span class="line">        content: '';</span><br><span class="line">        outline: 1px solid blue;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        height: 100%;</span><br><span class="line">        vertical-align: middle;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="css优先级"><a href="#css优先级" class="headerlink" title="css优先级"></a>css优先级</h2><ul>
+<li>选择器越具体，优先级越高</li>
+<li>相同优先级，出现在后面的覆盖前面的</li>
+<li>属性后加 !important 优先级最高，但要少用</li>
+<li><a href="http://www.ayqy.net/doc/css2-1/cascade.html#specificity" target="_blank" rel="noopener">加权算法</a></li>
+</ul>
+<hr>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul>
+<li><p>给父元素加.clearfix</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">" "</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给父元素加 overflow: hidden;（触发BFC）</p>
 </li>
 </ul>
-<p>用立即执行函数，创造一个函数作用域。在每次i值改变的时候，都把i的值保存给内部函数作用域的变量j，因为立即执行函数跟i赋值的时候可以说是同步执行的，然后控制台的时候，就会拿到函数作用域中的i。</p>
-<ul>
-<li>let声明可以劫持块作用域，并在这个块作用域中声明一个变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;, i*1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h2><ul>
+<li><p>content-box，width指定的是content（仅内容）区域宽度，而非实际宽度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- border-box，width指定的是左右边框外侧距离。</span><br><span class="line">```实际宽度 = width（包含了padding和border）</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<p>将let声明在for循环头部同样可以解决问题，它还有一个特殊的行为，这个行为指出变量在循环过程中不止被声明一次，每次迭代都会声明，随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量。</p>
-<ul>
-<li>使用 setTimeout 的第三个参数，这个参数会被当成 timer 函数的参数传入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer(j)&#123;</span><br><span class="line">        console.log(j);</span><br><span class="line">    &#125;, i*1000, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>通常来说设置<code>box-sizing: border-box</code>更好用，这样能将border和padding包含进元素的宽度中，例如设置元素宽度300px，那就是300px，里面再怎么折腾都可以</p>
 </li>
 </ul>
 
@@ -477,12 +503,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/闭包/" rel="tag"># 闭包</a>
-          
-        </div>
-      
 
       
       
@@ -492,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/05/作用域及闭包/" rel="next" title="作用域及闭包">
-                <i class="fa fa-chevron-left"></i> 作用域及闭包
+              <a href="/2022/05/09/vue模板、指令与修饰符/" rel="next" title="vue模板、指令与修饰符">
+                <i class="fa fa-chevron-left"></i> vue模板、指令与修饰符
               </a>
             
           </div>
@@ -502,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/10/异步编程的方式/" rel="prev" title="异步编程的方式">
-                异步编程的方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/05/26/JS/" rel="prev" title="JS">
+                JS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -684,7 +704,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout延时函数"><span class="nav-number">1.1.</span> <span class="nav-text">setTimeout延时函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环和闭包"><span class="nav-number">1.2.</span> <span class="nav-text">for循环和闭包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">1.</span> <span class="nav-text">BFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直居中"><span class="nav-number">2.</span> <span class="nav-text">垂直居中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现垂直居中的方式"><span class="nav-number">2.1.</span> <span class="nav-text">实现垂直居中的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css优先级"><span class="nav-number">3.</span> <span class="nav-text">css优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除浮动"><span class="nav-number">4.</span> <span class="nav-text">清除浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS盒模型"><span class="nav-number">5.</span> <span class="nav-text">CSS盒模型</span></a></li></ol></div>
             
 
           </div>

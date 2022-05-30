@@ -113,7 +113,7 @@
 
 
 
-  <meta name="keywords" content="闭包,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -126,18 +126,17 @@
 
 
 
-<meta name="description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
-<meta name="keywords" content="闭包">
+<meta name="description" content="一、8种数据类型1234567891011121314- null vs.undefinednull在设置对象为空时使用，undefined在设置非对象为空时用- number vs. bigint(大整数)当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数***## 二、原型链**答题思路**- 什么是原型    假设有一个普通对象 x=&amp;#123; &amp;#1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你不知道的JS——闭包再理解">
-<meta property="og:url" content="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/index.html">
+<meta property="og:title" content="JS">
+<meta property="og:url" content="http://yoursite.com/2022/05/26/JS/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
+<meta property="og:description" content="一、8种数据类型1234567891011121314- null vs.undefinednull在设置对象为空时使用，undefined在设置非对象为空时用- number vs. bigint(大整数)当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数***## 二、原型链**答题思路**- 什么是原型    假设有一个普通对象 x=&amp;#123; &amp;#1">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.231Z">
+<meta property="og:updated_time" content="2022-05-30T06:13:55.254Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你不知道的JS——闭包再理解">
-<meta name="twitter:description" content="你不知道的Javascript上卷中再次回顾闭包的概念">
+<meta name="twitter:title" content="JS">
+<meta name="twitter:description" content="一、8种数据类型1234567891011121314- null vs.undefinednull在设置对象为空时使用，undefined在设置非对象为空时用- number vs. bigint(大整数)当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数***## 二、原型链**答题思路**- 什么是原型    假设有一个普通对象 x=&amp;#123; &amp;#1">
 
 
 
@@ -167,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/">
+  <link rel="canonical" href="http://yoursite.com/2022/05/26/JS/">
 
 
 
 
 
-  <title>你不知道的JS——闭包再理解 | Joyce</title>
+  <title>JS | Joyce</title>
   
 
 
@@ -343,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/你不知道的JS——闭包再理解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/26/JS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joyce">
@@ -360,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">你不知道的JS——闭包再理解</h1>
+          <h1 class="post-title" itemprop="name headline">JS</h1>
         
 
         <div class="post-meta">
@@ -372,8 +371,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T13:15:44+08:00">
-                2018-08-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-26T22:39:17+08:00">
+                2022-05-26
               </time>
             
 
@@ -406,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,095
+                  1,539
                 </span>
               
 
@@ -431,37 +430,49 @@
       
 
       
-        <p>你不知道的Javascript上卷中再次回顾闭包的概念<br><a id="more"></a><br>当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数当前是在词法作用域之外执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    function bar()&#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var baz = foo();</span><br><span class="line">baz();  // 2  这就是闭包的效果</span><br></pre></td></tr></table></figure>
-<p>函数bar的词法作用域能够访问foo的内部作用域，然后将bar函数本身当作一个值类型传递，在上面代码中，我们将bar所引用的函数对象本身当作返回值。</p>
-<p>在foo()执行后，其返回值（也就是内部的bar函数）赋值给变量baz并调用baz()，实质上只是通过不同的标识符引用调用了内部的函数bar()</p>
-<p>在foo()执行后通常会认为它的整个内部作用域会被销毁，因为JS引擎有垃圾回收释放内存的机制。然而，闭包的神奇之处就在于可以阻止作用域被销毁，因为bar函数仍在使用这个内部作用域，这个引用就叫闭包。</p>
-<p>总结：</p>
+        <h2 id="一、8种数据类型"><a href="#一、8种数据类型" class="headerlink" title="一、8种数据类型"></a>一、8种数据类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- null vs.undefined</span><br><span class="line">null在设置对象为空时使用，undefined在设置非对象为空时用</span><br><span class="line">- number vs. bigint(大整数)</span><br><span class="line">当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数</span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">## 二、原型链</span><br><span class="line">**答题思路**</span><br><span class="line">- 什么是原型</span><br><span class="line">  </span><br><span class="line">  假设有一个普通对象 x=&#123; &#125;，x会拥有一个隐藏属性__proto__，这个属性会指向Object.prototype，即 ``` x.__proto__ = Object.prototype``` 此时可以说 ```x的原型```是 ```Object.prototype```，而 ```__proto__```属性的作用就是指向x的原型</span><br><span class="line">- 举例说明原型链</span><br><span class="line">  </span><br><span class="line">  比方有一个数组对象 a=[ ]，a有一个隐藏属性__proto__指向Array.prototype，Array.prototype也有一个隐藏属性指向Object.prototype，于是a就有了两层原型，中间通过__proto__形成一个链条，即 ```a ===&gt; Array.prototype ===&gt; Object.prototype</span><br></pre></td></tr></table></figure>
 <ul>
-<li>函数在定义时的词法作用域之外的地方被调用，而闭包使得函数可以继续访问定义时的词法作用域</li>
-<li>只要是对函数类型的值进行传递，在函数被调用的时候，都可以看到闭包的身影</li>
+<li>如何改变原型（链）</li>
 </ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="setTimeout延时函数"><a href="#setTimeout延时函数" class="headerlink" title="setTimeout延时函数"></a>setTimeout延时函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function wait(message)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(message);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait(&quot;Hello, closure!&quot;);</span><br></pre></td></tr></table></figure>
-<p>将一个内部函数timer传递给setTimeout()，timer函数具有涵盖wait函数作用域的闭包，所以在函数外部，仍可以保有对message变量的引用</p>
-<h3 id="for循环和闭包"><a href="#for循环和闭包" class="headerlink" title="for循环和闭包"></a>for循环和闭包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;, i*1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对这段代码的预期是分别输出数字1～5，每秒一次，每次一个。当执行后发现，实际输出的效果是每秒一次的频率输出了5个6</p>
-<p>因为 setTimeout 是个异步函数，所以会先把循环全部执行完毕，这时候 i 就是 6 了，所以会输出一堆 6。（这段代码的循环终止条件是i不再&lt;=5，这时i首次成立的条件是i=6，而for循环中声明的i变量是全局变量，当打印事件发生的时候，i已经完成了赋值操作，即i=6，所以控制台打印的结果总是6）</p>
-<p>这里没有达到我们预期效果的原因在于，我们试图假设循环中每次迭代在运行时都会给自己捕获一个i的副本，但根据作用域的工作原理，虽然循环中的五个函数是在各个迭代中分别定义的，但它们都被封闭在一个共享的全局作用域中，因此实际上只有一个i</p>
-<p>在循环的过程中每个迭代都需要一个闭包作用域，下面有两种解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const x = Object.create</span><br><span class="line">// 或</span><br><span class="line">const x = new 构造函数()  // 会导致 x.__proto = 构造函数.prototype</span><br></pre></td></tr></table></figure>
 <ul>
-<li>创建一个变量用来在每次迭代中储存i的值（闭包的方式）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    (function()&#123;</span><br><span class="line">        var j = i;</span><br><span class="line">        setTimeout(function timer()&#123;</span><br><span class="line">            console.log(j);</span><br><span class="line">        &#125;, j*1000);</span><br><span class="line">    &#125;)();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>解决了什么问题</p>
+<p>在没有class的情况下实现了<strong>继承</strong>，以<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  1. a是Array的实例，a拥有Array.prototype里的属性（实例化）</span><br><span class="line">  2. Array继承了Object</span><br><span class="line">  3. a是Object的间接实例，a拥有Object里的属性（继承）</span><br><span class="line"></span><br><span class="line">- 缺点</span><br><span class="line">  不支持私有属性，若要支持私有属性需使用class</span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">## 三、this的指向</span><br><span class="line">详见我的另一篇博客[this指向及绑定方法](https://jaycemxy.github.io/2022/04/11/this%E6%8C%87%E5%90%91%E5%8F%8A%E7%BB%91%E5%AE%9A%E6%96%B9%E6%B3%95/)</span><br><span class="line"></span><br><span class="line">## 四、new的过程</span><br><span class="line">1. 创建临时对象/空对象/新对象，作为要返回的对象实例</span><br><span class="line">2. 绑定原型（绑定共有属性），将临时对象的原型指向构造函数的prototype属性</span><br><span class="line">3. 指定this = 临时对象</span><br><span class="line">4. 执行构造函数（绑定私有属性），将私有属性绑在临时对象上</span><br><span class="line">5. 返回这个临时对象</span><br><span class="line">```js</span><br><span class="line">// 直观上理解</span><br><span class="line">let Foo = function(name) &#123;</span><br><span class="line">  let this = Object.create(Foo.prototype)</span><br><span class="line">  this.name = name</span><br><span class="line">  return this</span><br><span class="line">&#125;</span><br><span class="line">Foo()</span><br><span class="line"></span><br><span class="line">// 代码底层上理解</span><br><span class="line">let objectFactory() &#123;</span><br><span class="line">  let obj = &#123;&#125;, // 从 Object.prototype 上克隆一个空的对象</span><br><span class="line">    Constructor = [].shift.call(arguments) // 取得外部传入的构造器</span><br><span class="line">  obj.__proto__ = Constructor.prototype // 指向正确的原型</span><br><span class="line">  let ret = Constructor.apply(obj, arguments) // 借用外部传入的构造器给 obj 设置属性</span><br><span class="line">  return typeof ret === &apos;object&apos; ? ret : obj // 确保构造器总是会返回一个对象</span><br><span class="line">&#125;</span><br><span class="line">let a = objectFactory(Person, &apos;seven&apos;)</span><br><span class="line">console.log(Object.getPrototypeOf(a) === Person.prototype) // true</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
-<p>用立即执行函数，创造一个函数作用域。在每次i值改变的时候，都把i的值保存给内部函数作用域的变量j，因为立即执行函数跟i赋值的时候可以说是同步执行的，然后控制台的时候，就会拿到函数作用域中的i。</p>
-<ul>
-<li>let声明可以劫持块作用域，并在这个块作用域中声明一个变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;, i*1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五、立即执行函数"><a href="#五、立即执行函数" class="headerlink" title="五、立即执行函数"></a>五、立即执行函数</h2><ul>
+<li><p>声明一个匿名函数，然后立即执行它，写法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;())  <span class="comment">// 括号包住整个表达式</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()) ()  <span class="comment">// 括号包住函数</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line"><span class="keyword">new</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'我是匿名函数'</span>)&#125;()</span><br><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">'我是匿名函数'</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在ES6之前，只能通过立即执行函数来<strong>创建局部作用域</strong>，且兼容性好</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建局部变量 ES5</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6的 block+let 语法 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a</span><br><span class="line">    <span class="built_in">console</span>.log(a)  <span class="comment">// 可读取到a</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 不能读取到a</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>将let声明在for循环头部同样可以解决问题，它还有一个特殊的行为，这个行为指出变量在循环过程中不止被声明一次，每次迭代都会声明，随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量。</p>
-<ul>
-<li>使用 setTimeout 的第三个参数，这个参数会被当成 timer 函数的参数传入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;=5;i++)&#123;</span><br><span class="line">    setTimeout(function timer(j)&#123;</span><br><span class="line">        console.log(j);</span><br><span class="line">    &#125;, i*1000, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="六、闭包"><a href="#六、闭包" class="headerlink" title="六、闭包"></a>六、闭包</h2><ul>
+<li>闭包是JS的一种<strong>语法特性</strong>，JS里的函数都支持闭包</li>
+<li>闭包 = 函数 + 自由变量（非全局、局部变量的变量）</li>
+<li><p>下面的代码放在了一个非全局环境中（通过立即执行函数可以制造一个非全局环境），这样就是一个闭包的应用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> count</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;  <span class="comment">// 访问了外部变量的函数</span></span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line">add()  <span class="comment">// 相当于 count += 1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>闭包的作用在于：</p>
 </li>
 </ul>
+<ol>
+<li>避免污染全局环境</li>
+<li>提供对局部变量的间接访问</li>
+<li>维持变量，不被垃圾回收</li>
+</ol>
+<ul>
+<li>闭包<strong>使用不当</strong>可能造成内存泄漏<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = &#123;<span class="attr">name</span>: <span class="string">'x'</span>&#125;;</span><br><span class="line">    <span class="keyword">var</span> y = &#123;<span class="attr">name</span>: <span class="string">'y'</span>, <span class="attr">content</span>: <span class="string">"-- -- -- --这里有很长很长很长的代码-- -- --"</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myFn = test()  <span class="comment">// myFn 就是 fn 了</span></span><br><span class="line"><span class="keyword">const</span> myX = myFn()  <span class="comment">// myX 就是 x 了</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对于一个正常的浏览器来说，y会在一段时间后自动消失（被垃圾回收掉）</p>
+<p>但旧版本的IE浏览器不会回收，这是IE的问题</p>
+<h2 id="七、JS如何实现类"><a href="#七、JS如何实现类" class="headerlink" title="七、JS如何实现类"></a>七、JS如何实现类</h2><h3 id="方法一：使用原型"><a href="#方法一：使用原型" class="headerlink" title="方法一：使用原型"></a>方法一：使用原型</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">    <span class="keyword">this</span>.legsNumber = <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype.kind = <span class="string">'狗子'</span></span><br><span class="line">Dog.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`汪汪~ 我是<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>，我有<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿。`</span>)</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿跑起来。`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d1 = <span class="keyword">new</span> Dog(<span class="string">'哮天犬'</span>)  <span class="comment">// Dog函数 就是一个类</span></span><br><span class="line">d1.say()</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：使用class"><a href="#方法二：使用class" class="headerlink" title="方法二：使用class"></a>方法二：使用class</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">    kind = <span class="string">'狗子'</span>  <span class="comment">// 等价于在 constructor 里写 this.kind = '狗子'</span></span><br><span class="line">                <span class="comment">// class未提供在原型上添加非函数属性的方法</span></span><br><span class="line">    <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        <span class="keyword">this</span>.legsNumber = <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">    say()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`汪汪~ 我是<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>，我有<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿。`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    run()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿跑起来。`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d1 = <span class="keyword">new</span> Dog(<span class="string">'哮天犬'</span>)</span><br><span class="line">d1.say()</span><br></pre></td></tr></table></figure>
+<h2 id="八、如何实现继承-子类如何继承父类"><a href="#八、如何实现继承-子类如何继承父类" class="headerlink" title="八、如何实现继承(子类如何继承父类)"></a>八、如何实现继承(子类如何继承父类)</h2><h3 id="使用原型链"><a href="#使用原型链" class="headerlink" title="使用原型链"></a>使用原型链</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明父类Animal</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">legsNumber</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.legsNumber = legsNumber</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.kind = <span class="string">'动物'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明子类Dog</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">    Animal.call(<span class="keyword">this</span>, <span class="number">4</span>)  <span class="comment">// 关键代码1：继承父类的私有属性</span></span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype.__proto__ = Animal.prototype  <span class="comment">// 关键代码2：继承父类的原型，但如果这句被禁用了怎么办</span></span><br><span class="line"></span><br><span class="line">Dog.prototype.kind = <span class="string">'狗'</span></span><br><span class="line">Dog.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`汪汪汪~ 我是<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>，我有<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿。`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d1 = <span class="keyword">new</span> Dog(<span class="string">'哮天犬'</span>)</span><br><span class="line"><span class="built_in">console</span>.dir(d1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可替换 关键代码2</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f.prototype = Animal.prototype</span><br><span class="line">Dog.prototype = <span class="keyword">new</span> f()</span><br></pre></td></tr></table></figure>
+<h3 id="使用class"><a href="#使用class" class="headerlink" title="使用class"></a>使用class</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(legsNumber)&#123;</span><br><span class="line">        <span class="keyword">this</span>.legsNumber = legsNumber</span><br><span class="line">    &#125;</span><br><span class="line">    run()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    say()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`汪汪汪~ 我是<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>，我有<span class="subst">$&#123;<span class="keyword">this</span>.legsNumber&#125;</span>条腿。`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -477,12 +488,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/闭包/" rel="tag"># 闭包</a>
-          
-        </div>
-      
 
       
       
@@ -492,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/05/作用域及闭包/" rel="next" title="作用域及闭包">
-                <i class="fa fa-chevron-left"></i> 作用域及闭包
+              <a href="/2022/05/26/CSS/" rel="next" title="CSS">
+                <i class="fa fa-chevron-left"></i> CSS
               </a>
             
           </div>
@@ -501,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/10/异步编程的方式/" rel="prev" title="异步编程的方式">
-                异步编程的方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -684,7 +685,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout延时函数"><span class="nav-number">1.1.</span> <span class="nav-text">setTimeout延时函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环和闭包"><span class="nav-number">1.2.</span> <span class="nav-text">for循环和闭包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、8种数据类型"><span class="nav-number">1.</span> <span class="nav-text">一、8种数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、立即执行函数"><span class="nav-number">2.</span> <span class="nav-text">五、立即执行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、闭包"><span class="nav-number">3.</span> <span class="nav-text">六、闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、JS如何实现类"><span class="nav-number">4.</span> <span class="nav-text">七、JS如何实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：使用原型"><span class="nav-number">4.1.</span> <span class="nav-text">方法一：使用原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：使用class"><span class="nav-number">4.2.</span> <span class="nav-text">方法二：使用class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、如何实现继承-子类如何继承父类"><span class="nav-number">5.</span> <span class="nav-text">八、如何实现继承(子类如何继承父类)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用原型链"><span class="nav-number">5.1.</span> <span class="nav-text">使用原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用class"><span class="nav-number">5.2.</span> <span class="nav-text">使用class</span></a></li></ol></li></ol></div>
             
 
           </div>
