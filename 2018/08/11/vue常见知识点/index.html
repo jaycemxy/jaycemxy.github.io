@@ -134,7 +134,7 @@
 <meta property="og:site_name" content="Joyce">
 <meta property="og:description" content="梳理知识点">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-03-14T11:17:53.229Z">
+<meta property="og:updated_time" content="2022-06-15T06:00:35.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue常见知识点">
 <meta name="twitter:description" content="梳理知识点">
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,425
+                  2,411
                 </span>
               
 
@@ -434,8 +434,8 @@
         <p>梳理知识点<br><a id="more"></a></p>
 <h2 id="vue框架与jQuery的区别"><a href="#vue框架与jQuery的区别" class="headerlink" title="vue框架与jQuery的区别"></a>vue框架与jQuery的区别</h2><p>jQuery是使用选择器（$）选取DOM对象，对其进行赋值、取值、事件绑定等操作，和原生的HTML的区别只在于可以更方便的选取和操作DOM对象，而数据和界面是在一起的。比如需要获取label标签的内容：$(“lable”).val(); 它还是依赖DOM元素的值。</p>
 <p>Vue使用MVVM模式，通过数据来显示视图层而不是节点操作，主要业务逻辑都放在viewModel中，视图和数据不直接进行数据交流</p>
-<h2 id="一个组件实例"><a href="#一个组件实例" class="headerlink" title="一个组件实例"></a>一个组件实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;定义一个组件名,组件名最好是带小横线的写法，尽量不要使用驼峰命名法button-counter&apos;, &#123;</span><br><span class="line">    data: function() &#123;  // data必须返回一个函数</span><br><span class="line">        return &#123;</span><br><span class="line">            count: 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: `  // 模版下只能有一个根元素</span><br><span class="line">    &lt;button @click=&quot;count++&quot;&gt;You clicked me &#123;&#123; count &#125;&#125;times.&lt;/button&gt;</span><br><span class="line">    `</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>将这个组件作为自定义元素使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">&lt;div id=&quot;components-demo&quot;&gt;</span><br><span class="line">  &lt;button-counter&gt;&lt;/button-counter&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">JS:</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#components-demo&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="一个组件实例"><a href="#一个组件实例" class="headerlink" title="一个组件实例"></a>一个组件实例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'定义一个组件名,组件名最好是带小横线的写法，尽量不要使用驼峰命名法button-counter'</span>, &#123;</span><br><span class="line">    data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  <span class="comment">// data必须返回一个函数</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            count: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`  // 模版下只能有一个根元素</span></span><br><span class="line"><span class="string">    &lt;button @click="count++"&gt;You clicked me &#123;&#123; count &#125;&#125;times.&lt;/button&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>将这个组件作为自定义元素使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"components-demo"</span>&gt;</span><br><span class="line">  &lt;button-counter&gt;&lt;<span class="regexp">/button-counter&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#components-demo'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <h2 id="实例生命周期钩子"><a href="#实例生命周期钩子" class="headerlink" title="实例生命周期钩子"></a>实例生命周期钩子</h2><p>1、什么是生命周期</p>
 <p>每个Vue实例从创建到销毁的过程就是生命周期，它的经历包括开始创建、初始化数据、编译模版、挂载到DOM、渲染更新、卸载。可以分为10个阶段：创建前/后（create），挂载前/后（mount）、更新前/后（update）、启动前/后（active）、销毁前/后（destroy）</p>
 <p>2、生命周期函数的作用</p>
@@ -448,15 +448,15 @@
 <p>3、第一次页面加载会触发哪几个钩子？DOM渲染在哪个周期就完成了？</p>
 <p>第一次页面加载会触发beforeCreate、created、beforeMount、mounted这四个钩子</p>
 <p>DOM渲染在mounted中就已完成</p>
-<h2 id="computed计算属性的用法？与methods的区别"><a href="#computed计算属性的用法？与methods的区别" class="headerlink" title="computed计算属性的用法？与methods的区别"></a>computed计算属性的用法？与methods的区别</h2><p>官方解释：对于复杂的逻辑我们应该用计算属性，例如想多次引用一个翻转字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">&lt;div id=&quot;demo&quot;&gt;</span><br><span class="line">  &lt;p&gt;Original message: &quot;&#123;&#123; message &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">  &lt;p&gt;Reversed message: &quot;&#123;&#123; reversedMessage &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">JS:</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;demo&apos;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: &apos;Hello&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    reversedMessage: function()&#123;</span><br><span class="line">      return this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="computed计算属性的用法？与methods的区别"><a href="#computed计算属性的用法？与methods的区别" class="headerlink" title="computed计算属性的用法？与methods的区别"></a>computed计算属性的用法？与methods的区别</h2><p>官方解释：对于复杂的逻辑我们应该用计算属性，例如想多次引用一个翻转字符<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"demo"</span>&gt;</span><br><span class="line">  &lt;p&gt;Original message: <span class="string">"&#123;&#123; message &#125;&#125;"</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;p&gt;Reversed message: "&#123;&#123; reversedMessage &#125;&#125;"&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var vm = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">  el: 'demo',</span></span><br><span class="line"><span class="regexp">  data: &#123;</span></span><br><span class="line"><span class="regexp">    message: 'Hello'</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  computed: &#123;</span></span><br><span class="line"><span class="regexp">    reversedMessage: function()&#123;</span></span><br><span class="line"><span class="regexp">      return this.message.split('').reverse().join('')</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure></p>
 <p>与methods的区别：</p>
 <ul>
 <li>两种方式的最终结果是一致的，但唯一不同的是计算属性是基于它们的依赖进行缓存的，也就是说只有在他的相关依赖发生改变时才会重新求值，而调用方法总是会在触发重新渲染时再次执行函数</li>
-<li><p>当有一个性能开销巨大的项目时，它需要计算属性A，它需要遍历一个巨大的数组并且进行大量的运算，也有可能一些其他的计算属性依赖于属性A，假如没有缓存，每次调用属性都会重新对A进行一次计算，如果不希望有这些缓存，那么就可以用methods来代替</p>
+<li>当有一个性能开销巨大的项目时，它需要计算属性A，它需要遍历一个巨大的数组并且进行大量的运算，也有可能一些其他的计算属性依赖于属性A，假如没有缓存，每次调用属性都会重新对A进行一次计算，如果不希望有这些缓存，那么就可以用methods来代替</li>
+</ul>
 <h2 id="v-if与v-show"><a href="#v-if与v-show" class="headerlink" title="v-if与v-show"></a>v-if与v-show</h2><p>1、区别</p>
-</li>
-<li><p>手段：v-if是动态的向DOM树内添加或者删除DOM元素；v-show是通过设置DOM元素的display样式属性控制显隐；</p>
-</li>
+<ul>
+<li>手段：v-if是动态的向DOM树内添加或者删除DOM元素；v-show是通过设置DOM元素的display样式属性控制显隐；</li>
 <li>编译条件：v-if是惰性的，如果初始条件为假，则什么也不做，直到条件第一次变为真时，才会开始渲染条件块; v-show不管初始条件是什么，元素总是会被渲染，然后被缓存，而且DOM元素保留；</li>
 <li>编译过程：v-if切换有一个局部编译/卸载的过程，它会在切换过程中合适地销毁和重建内部的事件监听和子组件；v-show只是简单的基于css切换；</li>
 <li>性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；</li>
@@ -473,17 +473,30 @@
 <p>2、Vuex解决了什么问题</p>
 <ul>
 <li>组件之间的数据通信</li>
-<li>使用单向数据流的方式进行数据的中心化管理（所谓的单向数据流，就是当用户进行操作的时候，会从组件发出一个 action，这个 action 流到 store 里面，触发 store 对状态进行改动，然后 store 又触发组件基于新的状态重新渲染）对于复杂的应用来说，Vuex实施统一管理，方便维护和跟踪</li>
+<li>使用<strong>单向数据流</strong>的方式进行数据的中心化管理（所谓的单向数据流，就是当用户进行操作的时候，会从组件发出一个 action，这个 action 流到 store 里面，触发 store 对状态进行改动，然后 store 又触发组件基于新的状态重新渲染）对于复杂的应用来说，Vuex实施统一管理，方便维护和跟踪</li>
 </ul>
 <p>3、举例说明Vuex的好处（反证法）</p>
-<p>我们不好说为什么使用Vuex，但是如果在下面这种情况下不使用Vuex，将会带来很多弊端</p>
-<p>假设在一个app里有四个tab，每个tab都需要获取用户的资料，如果数据在每个tab组件里都保存了一份，那么用户在手动更新了资料后，这四个tab都需要更新一遍用户资料来保证用户在每个地方看到的数据永远都是最新的。如果说每进一次tab都重新请求一下：</p>
-<p>对于服务器来说，频繁请求数据会耗用很多资源，如果该app的用户数量足够多，那么每多出来的一次请求，对于公司来说都是一笔巨大的开支，但是如果数据都储存在store中，并且这四个tab读取的都是同一份数据，那么在用户更新了资料时，只需要更新store中的数据，这样在进这四个不同的tab时，就减少了四次请求</p>
-<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><p>1、什么是路由</p>
+<ul>
+<li>如果在下面这种情况下不使用Vuex，将会带来很多弊端</li>
+<li>假设在一个app里有四个tab，每个tab都需要获取用户的资料，如果数据在每个tab组件里都保存了一份，那么用户在手动更新了资料后，这四个tab都需要更新一遍用户资料来保证用户在每个地方看到的数据永远都是最新的。</li>
+<li>如果说每进一次tab都重新请求一下：</li>
+</ul>
+<ol>
+<li>对于服务器来说，频繁请求数据会耗用很多资源</li>
+<li>如果该app的用户数量足够多，那么每多出来的一次请求，对于公司来说都是一笔巨大的开支</li>
+<li>但如果数据都储存在store中，并且这四个tab读取的都是同一份数据，那么在用户更新了资料时，只需要更新store中的数据，这样在进这四个不同的tab时，就减少了四次请求</li>
+</ol>
+<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><ol>
+<li>什么是路由</li>
+</ol>
 <p>根据路径选择不同的页面展示给用户（所有东西都是页面，也可以说是一个个组件，用路由在之间来回切换）</p>
-<p>2、为什么使用路由</p>
+<ol start="2">
+<li>为什么使用路由</li>
+</ol>
 <p>一般来说，每次请求一个地址都会发送给服务器进行处理，但是有些用户操作不需要请求服务器，直接在页面下修改逻辑就能达到目的，这种时候用路由就可以了。</p>
-<p>3、前端路由是什么？如何实现</p>
+<ol start="3">
+<li>前端路由是什么？如何实现</li>
+</ol>
 <p>前端路由是找到与地址相匹配的组件并将它渲染出来，本质是：改变浏览器地址（更新视图）但不向服务器发出请求，有两种方法可以做到：</p>
 <ul>
 <li>hash模式 利用URL中的hash（“#”）</li>
@@ -495,12 +508,14 @@
 <li>History 模式可以通过 API 添加任意类型的数据到历史记录中，Hash 模式只能更改哈希值，也就是字符串</li>
 <li>Hash 模式无需后端配置且兼容性好。History 模式在用户手动输入地址或者刷新页面的时候会发起 URL 请求，后端需要配置 index.html 页面用于匹配不到静态资源的时候</li>
 </ul>
-<p>4、vue-router实现步骤</p>
-<p><1> 在首页中添加两个script标签导入vue和vue-router<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/vue.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;js/vue-router.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;!-- 用 router-link 组件来导航、传入 to 属性来指定链接、&lt;router-link&gt; 默认会被渲染成一个 a 标签 --&gt;</span><br><span class="line">    &lt;router-link to=&quot;/&quot;&gt;Go to home&lt;/router-link&gt;</span><br><span class="line">    &lt;router-link to=&quot;/topic&quot;&gt;Go to topic&lt;/router-link&gt;</span><br><span class="line">    &lt;router-link to=&quot;/content&quot;&gt;Go to content&lt;/router-link&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 路由出口，路由匹配到的组件将在这里被渲染出来 --&gt;</span><br><span class="line">  &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></1></p>
-<p><2> 定义vue组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const home = &#123; template: &apos;&lt;div&gt;this is home page&lt;/div&gt;&apos; &#125;</span><br><span class="line">const topic = &#123; template: &apos;&lt;div&gt;this is topic page&lt;/div&gt;&apos; &#125;</span><br><span class="line">const content = &#123; template: &apos;&lt;div&gt;this is content page&lt;/div&gt;&apos; &#125;</span><br></pre></td></tr></table></figure></2></p>
-<p><3> 定义路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const routes = [</span><br><span class="line">  &#123; path:&apos;/&apos;, component: home&#125;,</span><br><span class="line">  &#123; path:&apos;/topic&apos;, component: topic&#125;,</span><br><span class="line">  &#123; path:&apos;/content&apos;, component: content&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></3></p>
-<p><4> 创建router实例，并将定义的路由传入 const router = new VueRouter({ routes: routes })</4></p>
-<p><5> 创建和挂载根实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">  router: router</span><br><span class="line">&#125;).$mount(&apos;#app&apos;)</span><br></pre></td></tr></table></figure></5></p>
+<ol start="4">
+<li>vue-router实现步骤<br>a. 在首页中添加两个script标签导入vue和vue-router<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script src="js/</span>vue-router.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;!-- 用 router-link 组件来导航、传入 to 属性来指定链接、&lt;router-link&gt; 默认会被渲染成一个 a 标签 --&gt;</span></span><br><span class="line"><span class="string">    &lt;router-link to="</span>/<span class="string">"&gt;Go to home&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">    &lt;router-link to="</span>/topic<span class="string">"&gt;Go to topic&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">    &lt;router-link to="</span>/content<span class="string">"&gt;Go to content&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  &lt;!-- 路由出口，路由匹配到的组件将在这里被渲染出来 --&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>b. 定义vue组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> home = &#123; <span class="attr">template</span>: <span class="string">'&lt;div&gt;this is home page&lt;/div&gt;'</span> &#125;</span><br><span class="line"><span class="keyword">const</span> topic = &#123; <span class="attr">template</span>: <span class="string">'&lt;div&gt;this is topic page&lt;/div&gt;'</span> &#125;</span><br><span class="line"><span class="keyword">const</span> content = &#123; <span class="attr">template</span>: <span class="string">'&lt;div&gt;this is content page&lt;/div&gt;'</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>c. 定义路由<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123; <span class="attr">path</span>:<span class="string">'/'</span>, <span class="attr">component</span>: home&#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>:<span class="string">'/topic'</span>, <span class="attr">component</span>: topic&#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>:<span class="string">'/content'</span>, <span class="attr">component</span>: content&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>d. 创建router实例，并将定义的路由传入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123; <span class="attr">routes</span>: routes &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>e. 创建和挂载根实例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router: router</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -631,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
