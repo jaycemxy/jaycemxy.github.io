@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="Joyce">
 <meta property="og:description" content="Vue2 的生命周期钩子有哪些？数据请求放在哪 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed activated、deactivated、errorCaptured 数据请求一般放在 mounted 里面 如果放在created里，会在后端SSR（Server-Side R">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-06-16T09:13:50.998Z">
+<meta property="og:updated_time" content="2022-06-17T06:37:46.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2">
 <meta name="twitter:description" content="Vue2 的生命周期钩子有哪些？数据请求放在哪 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed activated、deactivated、errorCaptured 数据请求一般放在 mounted 里面 如果放在created里，会在后端SSR（Server-Side R">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,246
+                  1,317
                 </span>
               
 
@@ -493,6 +493,7 @@
 </li>
 </ol>
 <p>参考文章<a href="https://blog.csdn.net/sinat_36521655/article/details/106125910" target="_blank" rel="noopener">巧用Vue-Router路由守卫实现路由权限控制和加载进度</a></p>
+<h3 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h3><p>将不同路由对应的不同组件分割成不同的代码块，然后当路由被访问时才加载对应的组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用动态导入代替静态导入</span></span><br><span class="line"><span class="comment">// 将 import UserDetails from './views/UserDetails' 替换成</span></span><br><span class="line"><span class="keyword">const</span> UserDetails = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./views/UserDetails'</span>)</span><br></pre></td></tr></table></figure></p>
 <h2 id="Vue2-如何实现双向绑定？"><a href="#Vue2-如何实现双向绑定？" class="headerlink" title="Vue2 如何实现双向绑定？"></a>Vue2 如何实现双向绑定？</h2><ol>
 <li>一般使用 v-model/.sync 实现，<code>v-model</code>实际上是<code>v-bind:value</code>和<code>v-on:input</code>的语法糖<br>a. v-bind:value =&gt; 绑定value，当data改变就去更新UI<br>b. v-on:input =&gt; 监听input事件，当input被触发就去更新data</li>
 <li>上面两个单向绑定如何实现<br>a. 前者通过 Object.defineProperty API 给data的每个属性创建 getter 和 setter，用于监听data的改变。当data发生改变，就会安排UI变<br>b. 后者通过 template compiler 给DOM添加事件监听，当DOM input的值变了就会去修改data</li>
@@ -622,7 +623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -714,7 +715,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-的生命周期钩子有哪些？数据请求放在哪"><span class="nav-number">1.</span> <span class="nav-text">Vue2 的生命周期钩子有哪些？数据请求放在哪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-组件间通信方式"><span class="nav-number">2.</span> <span class="nav-text">Vue2 组件间通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex用过吗？如何理解"><span class="nav-number">3.</span> <span class="nav-text">Vuex用过吗？如何理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VueRouter用过吗？如何理解"><span class="nav-number">4.</span> <span class="nav-text">VueRouter用过吗？如何理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#router-link"><span class="nav-number">4.1.</span> <span class="nav-text">router-link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#router-view"><span class="nav-number">4.2.</span> <span class="nav-text">router-view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套路由"><span class="nav-number">4.3.</span> <span class="nav-text">嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash模式-amp-amp-History模式"><span class="nav-number">4.4.</span> <span class="nav-text">Hash模式 &amp;&amp; History模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由守卫实现：权限控制-amp-加载进度"><span class="nav-number">4.5.</span> <span class="nav-text">路由守卫实现：权限控制 &amp; 加载进度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-如何实现双向绑定？"><span class="nav-number">5.</span> <span class="nav-text">Vue2 如何实现双向绑定？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-的生命周期钩子有哪些？数据请求放在哪"><span class="nav-number">1.</span> <span class="nav-text">Vue2 的生命周期钩子有哪些？数据请求放在哪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-组件间通信方式"><span class="nav-number">2.</span> <span class="nav-text">Vue2 组件间通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex用过吗？如何理解"><span class="nav-number">3.</span> <span class="nav-text">Vuex用过吗？如何理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VueRouter用过吗？如何理解"><span class="nav-number">4.</span> <span class="nav-text">VueRouter用过吗？如何理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#router-link"><span class="nav-number">4.1.</span> <span class="nav-text">router-link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#router-view"><span class="nav-number">4.2.</span> <span class="nav-text">router-view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套路由"><span class="nav-number">4.3.</span> <span class="nav-text">嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash模式-amp-amp-History模式"><span class="nav-number">4.4.</span> <span class="nav-text">Hash模式 &amp;&amp; History模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由守卫实现：权限控制-amp-加载进度"><span class="nav-number">4.5.</span> <span class="nav-text">路由守卫实现：权限控制 &amp; 加载进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由懒加载"><span class="nav-number">4.6.</span> <span class="nav-text">路由懒加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-如何实现双向绑定？"><span class="nav-number">5.</span> <span class="nav-text">Vue2 如何实现双向绑定？</span></a></li></ol></div>
             
 
           </div>

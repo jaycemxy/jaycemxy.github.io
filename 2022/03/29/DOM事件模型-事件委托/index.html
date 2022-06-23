@@ -126,18 +126,18 @@
 
 
 
-<meta name="description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
+<meta name="description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  从上到下的捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 从下到上的冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOM事件模型&amp;事件委托">
 <meta property="og:url" content="http://yoursite.com/2022/03/29/DOM事件模型-事件委托/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
+<meta property="og:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  从上到下的捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 从下到上的冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png">
-<meta property="og:updated_time" content="2022-03-29T09:12:08.140Z">
+<meta property="og:updated_time" content="2022-06-21T09:56:38.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM事件模型&amp;事件委托">
-<meta name="twitter:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）当一个事件发生在一个">
+<meta name="twitter:description" content="事件模型一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段  从上到下的捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层） 目标阶段（target phase）：在目标节点上触发 从下到上的冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）   冒泡（bubbling phase）">
 <meta name="twitter:image" content="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png">
 
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,172
+                  1,198
                 </span>
               
 
@@ -432,11 +432,11 @@
       
 
       
-        <h2 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h2><p>一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段</p>
+        <h1 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h1><p>一个事件发生后，会在子元素和父元素之间传播（propagation），这种传播分成三阶段</p>
 <ul>
-<li>捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层）</li>
+<li>从上到下的捕获阶段（capture phase）：从window对象传导到目标节点（上层传到底层）</li>
 <li>目标阶段（target phase）：在目标节点上触发</li>
-<li>冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）</li>
+<li>从下到上的冒泡阶段（bubbling phase）：从目标节点传导回window对象（从底层传回上层）</li>
 </ul>
 <p><img src="https://s2.loli.net/2022/03/29/iWs6lfUzHTeZC5v.png" alt="dom.png"></p>
 <h3 id="冒泡（bubbling-phase）"><a href="#冒泡（bubbling-phase）" class="headerlink" title="冒泡（bubbling phase）"></a>冒泡（bubbling phase）</h3><p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素的处理程序，一直向上到其他祖先</p>
@@ -452,9 +452,8 @@
 <p>点击 p标签，那么我们将看到 3 个 alert：p → div → form。</p>
 <p>这个过程称为冒泡，因为事件是从内部冒泡到所有父级元素，就像水里的气泡一样</p>
 <h3 id="event-target-与-event-currentTarget"><a href="#event-target-与-event-currentTarget" class="headerlink" title="event.target 与 event.currentTarget"></a>event.target 与 event.currentTarget</h3><ul>
-<li>引发事件的那个嵌套层级最深的元素被称为目标元素,可以通过 event.target 访问。</li>
-<li>event.target —— 是引发事件的“目标”元素，也就是用户操作的元素</li>
-<li>this(=event.currentTarget) —— 是“当前”元素，也就是程序员监听的元素</li>
+<li>event.target 是引发事件的嵌套层级最深的目标元素，也就是<strong>用户操作的元素</strong></li>
+<li>event.currentTarget 是<strong>程序员监听的元素</strong></li>
 </ul>
 <p>🌰举个例子🌰</p>
 <p>如果我们有一个处理程序 form.onclick，它可以“捕获”表单内的所有点击。无论用户点击发生在哪里，它都会冒泡到 form 并运行处理程序。</p>
@@ -472,7 +471,7 @@
 </ul>
 <p>在现实世界中，当事故发生时，当地警方会最先做出反应。他们最了解发生这件事的地方。然后，如果需要，上级主管部门再进行处理。</p>
 <p>事件处理程序也是如此。特定于 td元素 的处理程序可能恰好适合于该 td元素，这个处理程序知道关于该元素的所有信息。所以该处理程序应该首先获得机会。然后，它的直接父元素也了解相关上下文，但了解的内容会少一些，以此类推，直到处理一般性概念并运行最后一个处理程序的最顶部的元素为止。</p>
-<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><ul>
+<h1 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h1><ul>
 <li>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个处理程序 —— 而是将单个处理程序放在它们的共同祖先上</li>
 <li>这种方式是基于事件传播过程中，逐层冒泡总能被祖先节点捕获</li>
 <li>在处理程序中，我们获取 event.target 以查看事件实际发生的位置并进行处理</li>
@@ -485,6 +484,12 @@
 <li>可以动态监听元素</li>
 </ol>
 <p>当我们想要监听一个暂时还不存在的元素时，可以监听它的祖先，在用户点击了后看是不是我想要监听的元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> button = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>)</span><br><span class="line">    button.textContent = <span class="string">'click me'</span></span><br><span class="line">    div1.appendChild(button)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">div1.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> t = e.target</span><br><span class="line">    <span class="keyword">if</span>(t.targetName.toLowerCase() === <span class="string">'button'</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'button被click'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="手写可拖拽的-div"><a href="#手写可拖拽的-div" class="headerlink" title="手写可拖拽的 div"></a>手写可拖拽的 div</h2><p><a href="http://js.jirengu.com/tadapuxusu/2/edit?html,js,output" target="_blank" rel="noopener">预览</a><br>注意点：</p>
+<ol>
+<li>clientX 是鼠标在当前窗口下的水平坐标</li>
+<li>deltaX = 鼠标移动后的位置 - 初始位置</li>
+<li>css里要加上position</li>
+</ol>
 
       
     </div>
@@ -609,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -701,7 +706,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件模型"><span class="nav-number">1.</span> <span class="nav-text">事件模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡（bubbling-phase）"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡（bubbling phase）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-target-与-event-currentTarget"><span class="nav-number">1.2.</span> <span class="nav-text">event.target 与 event.currentTarget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止冒泡"><span class="nav-number">1.3.</span> <span class="nav-text">阻止冒泡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获（capture-phase）"><span class="nav-number">1.4.</span> <span class="nav-text">捕获（capture phase）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件委托"><span class="nav-number">2.</span> <span class="nav-text">事件委托</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件委托的优点"><span class="nav-number">2.1.</span> <span class="nav-text">事件委托的优点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件模型"><span class="nav-number">1.</span> <span class="nav-text">事件模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡（bubbling-phase）"><span class="nav-number">1.0.1.</span> <span class="nav-text">冒泡（bubbling phase）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-target-与-event-currentTarget"><span class="nav-number">1.0.2.</span> <span class="nav-text">event.target 与 event.currentTarget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止冒泡"><span class="nav-number">1.0.3.</span> <span class="nav-text">阻止冒泡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获（capture-phase）"><span class="nav-number">1.0.4.</span> <span class="nav-text">捕获（capture phase）</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#事件委托"><span class="nav-number">2.</span> <span class="nav-text">事件委托</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件委托的优点"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件委托的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手写可拖拽的-div"><span class="nav-number">2.1.</span> <span class="nav-text">手写可拖拽的 div</span></a></li></div>
             
 
           </div>

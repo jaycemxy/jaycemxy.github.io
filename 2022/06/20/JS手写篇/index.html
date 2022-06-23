@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Joyce" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="节流 &amp;amp; 防抖节流：用户频繁点击按钮，但只能3秒（timer）才执行一次123456789101112131415161718// 节流：技能冷却中const throttle = (f, time) =&amp;gt; &amp;#123;    let timer = null    return (...args) =&amp;gt; &amp;#123;        if(timer) &amp;#123;return">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS手写篇">
+<meta property="og:url" content="http://yoursite.com/2022/06/20/JS手写篇/index.html">
+<meta property="og:site_name" content="Joyce">
+<meta property="og:description" content="节流 &amp;amp; 防抖节流：用户频繁点击按钮，但只能3秒（timer）才执行一次123456789101112131415161718// 节流：技能冷却中const throttle = (f, time) =&amp;gt; &amp;#123;    let timer = null    return (...args) =&amp;gt; &amp;#123;        if(timer) &amp;#123;return">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2022-06-22T09:01:45.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS手写篇">
+<meta name="twitter:description" content="节流 &amp;amp; 防抖节流：用户频繁点击按钮，但只能3秒（timer）才执行一次123456789101112131415161718// 节流：技能冷却中const throttle = (f, time) =&amp;gt; &amp;#123;    let timer = null    return (...args) =&amp;gt; &amp;#123;        if(timer) &amp;#123;return">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/06/20/JS手写篇/">
+
+
+
+
+
+  <title>JS手写篇 | Joyce</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?42153a091eecc0aaa77d053b24b7dabe";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/jaycemxy" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joyce</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/20/JS手写篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joyce">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/mypic.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joyce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS手写篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-20T11:56:09+08:00">
+                2022-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,460
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="节流-amp-防抖"><a href="#节流-amp-防抖" class="headerlink" title="节流 &amp; 防抖"></a>节流 &amp; 防抖</h2><h3 id="节流：用户频繁点击按钮，但只能3秒（timer）才执行一次"><a href="#节流：用户频繁点击按钮，但只能3秒（timer）才执行一次" class="headerlink" title="节流：用户频繁点击按钮，但只能3秒（timer）才执行一次"></a>节流：用户频繁点击按钮，但只能3秒（timer）才执行一次</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 节流：技能冷却中</span></span><br><span class="line"><span class="keyword">const</span> throttle = <span class="function">(<span class="params">f, time</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(timer) &#123;<span class="keyword">return</span>&#125;</span><br><span class="line">        f.call(<span class="literal">undefined</span>, ...args)</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, time)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> f = throttle(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>)</span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br><span class="line"></span><br><span class="line">f()  <span class="comment">// 打印hello</span></span><br><span class="line">f()  <span class="comment">// 技能冷却中</span></span><br></pre></td></tr></table></figure>
+<h3 id="防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果"><a href="#防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果" class="headerlink" title="防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果"></a>防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回城被打断</span></span><br><span class="line"><span class="keyword">const</span> debounce = <span class="function">(<span class="params">fn, time</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span><span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(timer != <span class="literal">null</span>) &#123;</span><br><span class="line">            clearTimeout(timer)  <span class="comment">// 打断回城</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 重新回城</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            fn.call(<span class="literal">undefined</span>, ...args)  <span class="comment">// 回城后调用fn</span></span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, time)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> f = debounce(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'回城成功'</span>);</span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> eventHub = &#123;</span><br><span class="line">    map: &#123;</span><br><span class="line">        <span class="comment">// 事件队列</span></span><br><span class="line">        <span class="comment">// click: [f1, f2]</span></span><br><span class="line">        <span class="comment">// mouseDown: [f3, f4]</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 监听事件</span></span><br><span class="line">    on: <span class="function">(<span class="params">name, fn</span>) =&gt;</span> &#123;</span><br><span class="line">        eventHub.map[name] = eventHub.map[name] || []  <span class="comment">// 初始化</span></span><br><span class="line">        eventHub.map[name].push(fn)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 触发事件</span></span><br><span class="line">    emit: <span class="function">(<span class="params">name, data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> q = eventHub.map[name]</span><br><span class="line">        <span class="keyword">if</span>(!q) &#123;<span class="keyword">return</span>&#125;</span><br><span class="line">        q.map(<span class="function"><span class="params">f</span> =&gt;</span> f.call(<span class="literal">null</span>, data))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 取消监听</span></span><br><span class="line">    off: <span class="function">(<span class="params">name, fn</span>)=&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> q = eventHub.map[name]</span><br><span class="line">        <span class="keyword">if</span>(!q) &#123;<span class="keyword">return</span>&#125;</span><br><span class="line">        <span class="keyword">const</span> index = q.indexOf(fn)</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span>) &#123;<span class="keyword">return</span>&#125;</span><br><span class="line">        q.splice(index,<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventHub.on(<span class="string">'click'</span>, <span class="built_in">console</span>.log);</span><br><span class="line">eventHub.on(<span class="string">'click'</span>,<span class="built_in">console</span>.error);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    eventHub.emit(<span class="string">'click'</span>, <span class="string">'joyce'</span>)</span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="用class实现"><a href="#用class实现" class="headerlink" title="用class实现"></a>用class实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventHub</span> </span>&#123;</span><br><span class="line">    map = &#123;&#125;</span><br><span class="line">    on(name, fn) &#123;</span><br><span class="line">        <span class="keyword">this</span>.map[name] = <span class="keyword">this</span>.map[name] || []</span><br><span class="line">        <span class="keyword">this</span>.map[name].push(fn)</span><br><span class="line">    &#125;</span><br><span class="line">    emit(name, data) &#123;</span><br><span class="line">        <span class="keyword">const</span> fnList = <span class="keyword">this</span>.map[name] || []</span><br><span class="line">        fnList.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn.call(<span class="literal">undefined</span>, data))</span><br><span class="line">    &#125;</span><br><span class="line">    off(name, fn) &#123;</span><br><span class="line">        <span class="keyword">const</span> fnList = <span class="keyword">this</span>.map[name] || []</span><br><span class="line">        <span class="keyword">const</span> index = fnList.indexOf[fn]</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">        fn.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> EventHub()</span><br><span class="line">e.on(<span class="string">'click'</span>, (name) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hi'</span> + name)</span><br><span class="line">&#125;)</span><br><span class="line">e.on(<span class="string">'click'</span>, (name) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + name)</span><br><span class="line">&#125;)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    e.emit(<span class="string">'click'</span>, <span class="string">'joyce'</span>)</span><br><span class="line">&#125;,<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="手写AJAX"><a href="#手写AJAX" class="headerlink" title="手写AJAX"></a>手写AJAX</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">'GET'</span>,<span class="string">'/xxx'</span>)</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(request.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(request.status &gt;= <span class="number">200</span> || request.status === <span class="number">304</span>)&#123;</span><br><span class="line">            success(request)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            fail(request)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">request.send()</span><br></pre></td></tr></table></figure>
+<h2 id="简易版Promise"><a href="#简易版Promise" class="headerlink" title="简易版Promise"></a>简易版Promise</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Promise2</span> </span>&#123;</span><br><span class="line">    #status = 'pending'  // 私有属性，防止用户更改状态</span><br><span class="line">    <span class="keyword">constructor</span>(fn)&#123;</span><br><span class="line">        <span class="keyword">this</span>.q = []</span><br><span class="line">        <span class="keyword">const</span> resolve = <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">            this.#status = 'fulfilled'</span><br><span class="line">            <span class="keyword">const</span> f1f1 = <span class="keyword">this</span>.q.shift()</span><br><span class="line">            <span class="keyword">if</span>(!f1f2 || !f1f2[<span class="number">0</span>]) <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">const</span> x = f1f2[<span class="number">0</span>].call(<span class="literal">undefined</span>, data)</span><br><span class="line">            <span class="keyword">if</span>(x <span class="keyword">instanceof</span> Promise2)&#123;</span><br><span class="line">                x.then(<span class="function">(<span class="params">data</span>)=&gt;</span> &#123;</span><br><span class="line">                    resolve(data)</span><br><span class="line">                &#125;, (reason)=&gt; &#123;</span><br><span class="line">                    reject(reason)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(x)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> reject = <span class="function">(<span class="params">reason</span>)=&gt;</span>&#123;</span><br><span class="line">            this.#status = 'rejected'</span><br><span class="line">            <span class="keyword">const</span> f1f1 = <span class="keyword">this</span>.q.shift()</span><br><span class="line">            <span class="keyword">if</span>(!f1f2 || !f1f2[<span class="number">1</span>]) <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">const</span> x = f1f2[<span class="number">1</span>].call(<span class="literal">undefined</span>, reason)</span><br><span class="line">            <span class="keyword">if</span>(x <span class="keyword">instanceof</span> Promise2)&#123;</span><br><span class="line">                x.then(<span class="function">(<span class="params">data</span>)=&gt;</span> &#123;</span><br><span class="line">                    resolve(data)</span><br><span class="line">                &#125;, (reason)=&gt; &#123;</span><br><span class="line">                    reject(reason)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(x)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fn.call(<span class="literal">undefined</span>, resolve, reject)</span><br><span class="line">    &#125;</span><br><span class="line">    then(f1,f2)&#123;</span><br><span class="line">        <span class="keyword">this</span>.q.push([f1,f2])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        reject(<span class="string">'出错啦'</span>)  <span class="comment">// resolve('hello')</span></span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p.then( <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;<span class="built_in">console</span>.log(data)&#125;, (reason)=&gt;&#123;<span class="built_in">console</span>.error(reason)&#125; )</span><br></pre></td></tr></table></figure>
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h3><ul>
+<li>在Promise上写，而不是原型</li>
+<li>参数是一个Promise数组，返回值是一个新Promise对象</li>
+<li>用一个数组来记录结果</li>
+<li>只要有一个reject，就整体reject<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.myAll = <span class="function"><span class="keyword">function</span>(<span class="params">list</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> results = []</span><br><span class="line">    <span class="keyword">let</span> count = <span class="number">0</span>  <span class="comment">// 表示成功resolve的数量，当const等于list的长度时，说明全部成功</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span>&#123;</span><br><span class="line">        list.map(<span class="function">(<span class="params">promise,index</span>) =&gt;</span> &#123;</span><br><span class="line">            promise.then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">                results[index] = result  <span class="comment">// 将成功的结果记录在results里</span></span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span>(count === list.length) &#123;  <span class="comment">// 全部成功后调用resolve</span></span><br><span class="line">                    resolve(results)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, (reason) =&gt; &#123;</span><br><span class="line">                reject(reason)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><ul>
+<li>方法一：用JSON</li>
+</ul>
+<ol>
+<li>该方法不支持日期、正则、函数、undefined等数据</li>
+<li>不支持引用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>方法二：用递归</li>
+</ul>
+<ol>
+<li>检查环：a.self = a 造成的无法退出递归的问题，使用缓存cache</li>
+<li>不拷贝原型上的属性（hasOwnProperty）<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> deepClone = <span class="function">(<span class="params">a, cache</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!cache)&#123;</span><br><span class="line">        <span class="comment">// 只有第一次深拷贝时创建缓存，后面递归的不会再创建</span></span><br><span class="line">        <span class="comment">// 使用Map而不是Object，Map的键可以是对象、函数，而Object的键只能是string/symbol</span></span><br><span class="line">        cache = <span class="keyword">new</span> <span class="built_in">Map</span>() <span class="comment">// 使用Map做映射，只要曾经拷贝过，就不会重复拷贝</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(a <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">        <span class="comment">// 判断是对象的实例</span></span><br><span class="line">        <span class="keyword">if</span>(cache.get(a)) &#123; <span class="keyword">return</span> cache.get(a) &#125;  <span class="comment">// 检查环，因为a.self = a 无法退出递归</span></span><br><span class="line">        <span class="keyword">let</span> result</span><br><span class="line">        <span class="keyword">if</span>(a <span class="keyword">instanceof</span> <span class="built_in">Function</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a.prototype) &#123;  <span class="comment">// 有 prototype 就是普通函数</span></span><br><span class="line">                result = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> a.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>) &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 否则就是箭头函数</span></span><br><span class="line">                result = <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123; <span class="keyword">return</span> a.call(<span class="literal">undefined</span>, ...args) &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">            result = []</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</span><br><span class="line">            result = <span class="keyword">new</span> <span class="built_in">Date</span>(a<span class="number">-0</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a <span class="keyword">instanceof</span> <span class="built_in">RegExp</span>) &#123;</span><br><span class="line">            result = <span class="keyword">new</span> <span class="built_in">RegExp</span>(a.source, a.flags)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result = &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cache.set(a, result)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> a) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a.hasOwnProperty(key))&#123;  <span class="comment">// 只要自身属性，不拷贝原型上(继承)的属性</span></span><br><span class="line">                result[key] = deepClone(a[key], cache)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 其他基本类型</span></span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">    number:<span class="number">1</span>, <span class="attr">bool</span>:<span class="literal">false</span>, <span class="attr">str</span>:<span class="string">'1'</span>, <span class="attr">empty1</span>:<span class="literal">undefined</span>, <span class="attr">empty2</span>:<span class="literal">null</span>,</span><br><span class="line">    array: [</span><br><span class="line">        &#123;<span class="attr">name</span>:<span class="string">'tony'</span>, <span class="attr">age</span>: <span class="number">18</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">name</span>:<span class="string">'joyce'</span>, <span class="attr">age</span>: <span class="number">24</span>&#125;</span><br><span class="line">    ],</span><br><span class="line">    date: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2000</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">0</span>),</span><br><span class="line">    regex: <span class="regexp">/\.(j|t)sx/i</span>,</span><br><span class="line">    object: &#123;<span class="attr">name</span>:<span class="string">'joyce'</span>, <span class="attr">age</span>: <span class="number">24</span>&#125;,</span><br><span class="line">    f1: <span class="function">(<span class="params">a,b</span>) =&gt;</span> a+b,</span><br><span class="line">    f2: <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123; <span class="keyword">return</span> a+b &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.self = a</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = deepClone(a)</span><br><span class="line"></span><br><span class="line">b.self === b  <span class="comment">// true</span></span><br><span class="line">b.self = <span class="string">'hello'</span></span><br><span class="line">a.self !== <span class="string">'hello'</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><ol>
+<li><p>方法一：使用Set</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">var</span> unique = <span class="function"><span class="keyword">function</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a))  <span class="comment">// return [...new Set(a)]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">unique(a1)  <span class="comment">// 打印 [1,2,3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：使用计数排序，但只支持字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">var</span> unique = <span class="function"><span class="keyword">function</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> map = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;a.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> number = a[i]  <span class="comment">// 1 ~ 3</span></span><br><span class="line">        <span class="keyword">if</span>(number === <span class="literal">undefined</span>) &#123; <span class="keyword">continue</span> &#125;</span><br><span class="line">        <span class="keyword">if</span>(number <span class="keyword">in</span> map) &#123; <span class="keyword">continue</span> &#125;</span><br><span class="line">        map[number] = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// map = &#123;1:true, 2:true, 3:true&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(map)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不用Object.keys的写法</span></span><br><span class="line">    <span class="keyword">const</span> result = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> map) &#123;</span><br><span class="line">        result.push(key)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法三：使用Map，但兼容性稍微差点<br><code>`</code>js<br>var a1 = [‘1’,1,,2,,2,3,3,3,4,1,2]</p>
+</li>
+</ol>
+<p>var unique = function(a){<br>    var map = new Map()<br>    for(let i=0; i&lt;a.length; i++){<br>        let number = a[i]  // 1 ~ 3<br>        if(number === undefined) { continue }<br>        if(map.has(number)){<br>            continue<br>        }<br>        map.set(number, true)<br>    }<br>    return […map.keys()]<br>}<br><code>`</code> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/06/17/Vue3/" rel="next" title="Vue3">
+                <i class="fa fa-chevron-left"></i> Vue3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODUzOC8xNTA2Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+            <a href="/">
+              <img class="site-author-image" itemprop="image" src="/images/mypic.png" alt="Joyce">
+            </a>
+            
+              <p class="site-author-name" itemprop="name">Joyce</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=71498163" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+              </ul>
+              <div id="days"></div>
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("08/02/2018 13:43:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+            </div>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#节流-amp-防抖"><span class="nav-number">1.</span> <span class="nav-text">节流 &amp; 防抖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节流：用户频繁点击按钮，但只能3秒（timer）才执行一次"><span class="nav-number">1.1.</span> <span class="nav-text">节流：用户频繁点击按钮，但只能3秒（timer）才执行一次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果"><span class="nav-number">1.2.</span> <span class="nav-text">防抖：用户频繁拖动操作，希望拖动停止后再实现一个效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布订阅模式"><span class="nav-number">2.</span> <span class="nav-text">发布订阅模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用class实现"><span class="nav-number">2.1.</span> <span class="nav-text">用class实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手写AJAX"><span class="nav-number">3.</span> <span class="nav-text">手写AJAX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简易版Promise"><span class="nav-number">4.</span> <span class="nav-text">简易版Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-all"><span class="nav-number">4.1.</span> <span class="nav-text">Promise.all</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">5.</span> <span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组去重"><span class="nav-number">6.</span> <span class="nav-text">数组去重</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joyce</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
