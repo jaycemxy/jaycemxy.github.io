@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="Joyce">
 <meta property="og:description" content="一、8种数据类型1string、number、boolean、undefined、null、object、symbol、bigint  null vs.undefinednull在设置对象为空时使用，undefined在设置非对象为空时用 number vs. bigint(大整数)当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数 typeof用来检测数据类">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-06-17T07:00:23.938Z">
+<meta property="og:updated_time" content="2022-07-08T09:12:15.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS">
 <meta name="twitter:description" content="一、8种数据类型1string、number、boolean、undefined、null、object、symbol、bigint  null vs.undefinednull在设置对象为空时使用，undefined在设置非对象为空时用 number vs. bigint(大整数)当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数 typeof用来检测数据类">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,521
+                  1,524
                 </span>
               
 
@@ -431,12 +431,12 @@
 
       
         <h2 id="一、8种数据类型"><a href="#一、8种数据类型" class="headerlink" title="一、8种数据类型"></a>一、8种数据类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string、number、boolean、<span class="literal">undefined</span>、<span class="literal">null</span>、object、symbol、bigint</span><br></pre></td></tr></table></figure>
-<ul>
+<ol>
 <li>null vs.undefined<br>null在设置对象为空时使用，undefined在设置非对象为空时用</li>
 <li>number vs. bigint(大整数)<br>当数字非常大时使用bigint，用法：在数字后加 n，且bigint只支持整数不支持小数</li>
 <li>typeof用来检测数据类型（但有两个bug）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof 函数  // &apos;function&apos;</span><br><span class="line">typeof null  // &apos;object&apos;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+</ol>
 <h2 id="二、原型链"><a href="#二、原型链" class="headerlink" title="二、原型链"></a>二、原型链</h2><ul>
 <li>什么是原型<br>假设有一个普通对象 x={ }，x会拥有一个隐藏属性<strong>proto</strong>，这个属性会指向Object.prototype，即  x.<strong>proto</strong> = Object.prototype，此时可以说 x的原型 是 Object.prototype，而 <strong>proto</strong> 属性的作用就是指向x的原型</li>
 <li>举例说明原型链<br>比方有一个数组对象 a=[ ]，a有一个隐藏属性<strong>proto</strong>指向Array.prototype，Array.prototype也有一个隐藏属性指向Object.prototype，于是a就有了两层原型，中间通过<strong>proto</strong>形成一个链条，即<br>a ===&gt; Array.prototype ===&gt; Object.prototype</li>

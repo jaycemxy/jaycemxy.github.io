@@ -126,17 +126,17 @@
 
 
 
-<meta name="description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
+<meta name="description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的 display: flow-root 来触发BFC  触发条件 float不为none（浮动元素） overflow不为visible position: absolute/fixed display: i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS">
 <meta property="og:url" content="http://yoursite.com/2022/05/26/CSS/index.html">
 <meta property="og:site_name" content="Joyce">
-<meta property="og:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
+<meta property="og:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的 display: flow-root 来触发BFC  触发条件 float不为none（浮动元素） overflow不为visible position: absolute/fixed display: i">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-05-26T15:00:33.774Z">
+<meta property="og:updated_time" content="2022-07-08T09:11:29.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS">
-<meta name="twitter:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的flow-root```来触发BFC1234567891011121314151617181920212223242526272829### 触发条件- float不为none（浮动元素）- overflow">
+<meta name="twitter:description" content="BFC BFC(Block formatting context)，即块级格式化上下文 一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素 有时会有副作用，可以使用最新的 display: flow-root 来触发BFC  触发条件 float不为none（浮动元素） overflow不为visible position: absolute/fixed display: i">
 
 
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,079
+                  1,076
                 </span>
               
 
@@ -433,16 +433,29 @@
         <h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h2><ul>
 <li>BFC(Block formatting context)，即块级格式化上下文</li>
 <li>一个新创建的BFC盒子是独立布局的，盒子内元素的布局不会影响到盒子外元素</li>
-<li>有时会有副作用，可以使用最新的<figure class="highlight plain"><figcaption><span>flow-root```来触发BFC</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">### 触发条件</span><br><span class="line">- float不为none（浮动元素）</span><br><span class="line">- overflow不为visible</span><br><span class="line">- position: absolute/fixed</span><br><span class="line">- display: inline-block/table-cell/flex/inline-flex</span><br><span class="line">- display: flex/inline-flex（弹性元素的直接子元素）</span><br><span class="line">### 用途</span><br><span class="line">- 防止margin合并</span><br><span class="line">- 清除浮动（用BFC可以包住它内部的浮动元素）</span><br><span class="line">- float+div 左右自适应布局</span><br><span class="line">eg.1 创建BFC包住内部浮动元素</span><br><span class="line">```html</span><br><span class="line">&lt;div id=&quot;demo1&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    #demo1 &#123;</span><br><span class="line">        border: 5px solid red;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">    .child &#123;</span><br><span class="line">        background: green;</span><br><span class="line">        float: left;</span><br><span class="line">        height: 100px;</span><br><span class="line">        width: 100px;</span><br><span class="line">        margin-top: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></li>
+<li>有时会有副作用，可以使用最新的 display: flow-root 来触发BFC</li>
 </ul>
+<h3 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h3><ul>
+<li>float不为none（浮动元素）</li>
+<li>overflow不为visible</li>
+<li>position: absolute/fixed</li>
+<li>display: inline-block/table-cell/flex/inline-flex</li>
+<li>display: flex/inline-flex（弹性元素的直接子元素）</li>
+</ul>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><ul>
+<li>防止margin合并</li>
+<li>清除浮动（用BFC可以包住它内部的浮动元素）</li>
+<li>float+div 左右自适应布局</li>
+</ul>
+<p>eg.1 创建BFC包住内部浮动元素<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-id">#demo1</span> &#123;</span></span><br><span class="line">        border: 5px solid red;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line">        background: green;</span><br><span class="line">        float: left;</span><br><span class="line">        height: 100px;</span><br><span class="line">        width: 100px;</span><br><span class="line">        margin-top: 10px;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>eg.2 做左右自适应布局<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-id">#demo2</span> <span class="selector-class">.left</span>&#123;</span></span><br><span class="line">        border: 5px solid green;</span><br><span class="line">        min-height: 300px;</span><br><span class="line">        width: 400px;</span><br><span class="line">        float: left;</span><br><span class="line">        margin-right: 20px;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">    <span class="selector-id">#demo2</span> <span class="selector-class">.right</span>&#123;</span></span><br><span class="line">        border: 5px solid pink;</span><br><span class="line">        min-height: 300px;</span><br><span class="line"><span class="css">        <span class="selector-tag">overflow</span>: <span class="selector-tag">auto</span>;  <span class="comment">/*触发BFC*/</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2><ul>
 <li>若父元素的 height 没写死，只需padding: 10px 0; 就可将子元素垂直居中</li>
 <li>若父元素的高度写死，则需要其他方式来实现垂直居中</li>
-<li>一般建议能不写死height就不写死<h3 id="实现垂直居中的方式"><a href="#实现垂直居中的方式" class="headerlink" title="实现垂直居中的方式"></a>实现垂直居中的方式</h3></li>
+<li>一般建议能不写死height就不写死</li>
 </ul>
-<ol>
+<h3 id="实现垂直居中的方式"><a href="#实现垂直居中的方式" class="headerlink" title="实现垂直居中的方式"></a>实现垂直居中的方式</h3><ol>
 <li><p>flex布局</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">      一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字一串文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.parent</span>&#123;</span></span><br><span class="line">    height: 600px;</span><br><span class="line">    border: 3px solid red;</span><br><span class="line">    </span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.child</span>&#123;</span></span><br><span class="line">    border: 3px solid green;</span><br><span class="line">    width: 300px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -481,13 +494,21 @@
 </li>
 </ul>
 <hr>
-<h2 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h2><ul>
-<li><p>content-box，width指定的是content（仅内容）区域宽度，而非实际宽度。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- border-box，width指定的是左右边框外侧距离。</span><br><span class="line">```实际宽度 = width（包含了padding和border）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通常来说设置<code>box-sizing: border-box</code>更好用，这样能将border和padding包含进元素的宽度中，例如设置元素宽度300px，那就是300px，里面再怎么折腾都可以</p>
-</li>
+<h2 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h2><ol>
+<li>content-box，width指定的是content（仅内容）区域宽度，而非实际宽度。</li>
+</ol>
+<ul>
+<li>实际宽度 = width + padding + border</li>
 </ul>
+<ol start="2">
+<li>border-box，width指定的是左右边框外侧距离。</li>
+</ol>
+<ul>
+<li>实际宽度 = width（包含了padding和border）</li>
+</ul>
+<ol start="3">
+<li>通常来说设置<code>box-sizing: border-box</code>更好用，这样能将border和padding包含进元素的宽度中，例如设置元素宽度300px，那就是300px，里面再怎么折腾都可以</li>
+</ol>
 
       
     </div>
@@ -704,7 +725,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">1.</span> <span class="nav-text">BFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直居中"><span class="nav-number">2.</span> <span class="nav-text">垂直居中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现垂直居中的方式"><span class="nav-number">2.1.</span> <span class="nav-text">实现垂直居中的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css优先级"><span class="nav-number">3.</span> <span class="nav-text">css优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除浮动"><span class="nav-number">4.</span> <span class="nav-text">清除浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS盒模型"><span class="nav-number">5.</span> <span class="nav-text">CSS盒模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">1.</span> <span class="nav-text">BFC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#触发条件"><span class="nav-number">1.1.</span> <span class="nav-text">触发条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用途"><span class="nav-number">1.2.</span> <span class="nav-text">用途</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直居中"><span class="nav-number">2.</span> <span class="nav-text">垂直居中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现垂直居中的方式"><span class="nav-number">2.1.</span> <span class="nav-text">实现垂直居中的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css优先级"><span class="nav-number">3.</span> <span class="nav-text">css优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除浮动"><span class="nav-number">4.</span> <span class="nav-text">清除浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS盒模型"><span class="nav-number">5.</span> <span class="nav-text">CSS盒模型</span></a></li></ol></div>
             
 
           </div>
