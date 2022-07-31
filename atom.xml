@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-07-08T08:23:28.700Z</updated>
+  <updated>2022-07-30T07:00:13.697Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Canvas VS. SVG</title>
+    <link href="http://yoursite.com/2022/07/26/Canvas-VS-SVG/"/>
+    <id>http://yoursite.com/2022/07/26/Canvas-VS-SVG/</id>
+    <published>2022-07-26T06:33:12.000Z</published>
+    <updated>2022-07-30T07:00:13.697Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>JS手写篇</title>
@@ -59,7 +78,7 @@
     <link href="http://yoursite.com/2022/06/15/Vue2/"/>
     <id>http://yoursite.com/2022/06/15/Vue2/</id>
     <published>2022-06-15T05:07:17.000Z</published>
-    <updated>2022-06-17T06:37:46.560Z</updated>
+    <updated>2022-07-12T06:47:17.235Z</updated>
     
     <summary type="html">
     
@@ -116,7 +135,7 @@
     <link href="http://yoursite.com/2022/05/26/CSS/"/>
     <id>http://yoursite.com/2022/05/26/CSS/</id>
     <published>2022-05-26T08:04:05.000Z</published>
-    <updated>2022-07-08T09:11:29.761Z</updated>
+    <updated>2022-07-26T08:05:07.771Z</updated>
     
     <summary type="html">
     
@@ -174,25 +193,6 @@
     <id>http://yoursite.com/2022/04/29/vue数据响应式/</id>
     <published>2022-04-29T04:34:34.000Z</published>
     <updated>2022-05-05T02:42:10.783Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>vue起步</title>
-    <link href="http://yoursite.com/2022/04/25/vue%E8%B5%B7%E6%AD%A5/"/>
-    <id>http://yoursite.com/2022/04/25/vue起步/</id>
-    <published>2022-04-25T03:31:32.000Z</published>
-    <updated>2022-04-25T05:34:54.191Z</updated>
     
     <summary type="html">
     

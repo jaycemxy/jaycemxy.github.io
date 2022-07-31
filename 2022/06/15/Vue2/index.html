@@ -133,7 +133,7 @@
 <meta property="og:site_name" content="Joyce">
 <meta property="og:description" content="Vue2 的生命周期钩子有哪些？数据请求放在哪 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed activated、deactivated、errorCaptured 数据请求一般放在 mounted 里面 如果放在created里，会在后端SSR（Server-Side R">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-06-17T06:37:46.560Z">
+<meta property="og:updated_time" content="2022-07-12T06:47:17.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2">
 <meta name="twitter:description" content="Vue2 的生命周期钩子有哪些？数据请求放在哪 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed activated、deactivated、errorCaptured 数据请求一般放在 mounted 里面 如果放在created里，会在后端SSR（Server-Side R">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,317
+                  1,313
                 </span>
               
 
@@ -469,13 +469,12 @@
 <p>有两种方法可以做到：</p>
 <ul>
 <li>hash模式 利用URL中的hash（“#”）</li>
-<li>history模式 利用 history.pushState API 来完成URL跳转而无须重新加载页面</li>
+<li>history模式 利用 history.pushState() API来完成URL跳转而无须重新加载页面，但是需要后端将所有前端路由都渲染同一页面，且IE8以下的浏览器不支持</li>
 </ul>
 <p>两种模式的对比：</p>
 <ul>
-<li>Hash 模式只可以更改 # 后面的内容，History 模式可以通过 API 设置任意的同源 URL</li>
-<li>History 模式可以通过 API 添加任意类型的数据到历史记录中，Hash 模式只能更改哈希值，也就是字符串</li>
-<li>Hash 模式无需后端配置且兼容性好。History 模式在用户手动输入地址或者刷新页面的时候会发起 URL 请求，后端需要配置 index.html 页面用于匹配不到静态资源的时候</li>
+<li>Hash模式只可以更改 # 后面的内容（也就是字符串），History模式可以通过 API 设置任意的同源 URL</li>
+<li>Hash模式无需后端配置且兼容性好，History模式在用户手动输入地址或者刷新页面的时候会发起URL请求，后端需要配置 index.html页面 用于匹配不到静态资源的时候</li>
 </ul>
 <h3 id="路由守卫实现：权限控制-amp-加载进度"><a href="#路由守卫实现：权限控制-amp-加载进度" class="headerlink" title="路由守卫实现：权限控制 &amp; 加载进度"></a>路由守卫实现：权限控制 &amp; 加载进度</h3><ul>
 <li>在系统路由跳转前做权限校验</li>
@@ -623,7 +622,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
